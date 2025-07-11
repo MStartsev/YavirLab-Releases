@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html data-integrity="18234190f5aa352abc5b7fda6eec1878219722df858c3862469eb9aeacd2d330">
+<head>
+<title>YavirLab Software</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="IE=edge">
+<HTA:APPLICATION 
+    ID="YavirLabApp"
+    APPLICATIONNAME="YavirLab Software"
+    BORDER="thin"
+    BORDERSTYLE="normal"
+    CAPTION="yes"
+    ICON=""
+    SHOWINTASKBAR="yes"
+    SINGLEINSTANCE="yes"
+    SYSMENU="yes"
+    VERSION="1.1"
+    WINDOWSTATE="normal">
+
+<script language="JavaScript">
+function crypto_sha256(e){function t(e,t){var r=(65535&e)+(65535&t);return(e>>16)+(t>>16)+(r>>16)<<16|65535&r}function r(e,t){return e>>>t|e<<32-t}function n(e,t){return e>>>t}function s(e,t,r){return e&t^~e&r}function o(e,t,r){return e&t^e&r^t&r}function a(e){return r(e,2)^r(e,13)^r(e,22)}function l(e){return r(e,6)^r(e,11)^r(e,25)}function c(e){return r(e,7)^r(e,18)^n(e,3)}function d(e){return r(e,17)^r(e,19)^n(e,10)}return function(e){for(var t="0123456789abcdef",r="",n=0;n<4*e.length;n++)r+=t.charAt(e[n>>2]>>8*(3-n%4)+4&15)+t.charAt(e[n>>2]>>8*(3-n%4)&15);return r}(function(e,r){var n,i,u,m,g,y,h,f,v,p,w,E,I=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],U=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225],B=new Array(64);for(e[r>>5]|=128<<24-r%32,e[15+(r+64>>9<<4)]=r,v=0;v<e.length;v+=16){for(n=U[0],i=U[1],u=U[2],m=U[3],g=U[4],y=U[5],h=U[6],f=U[7],p=0;p<64;p++)B[p]=p<16?e[p+v]:t(t(t(d(B[p-2]),B[p-7]),c(B[p-15])),B[p-16]),w=t(t(t(t(f,l(g)),s(g,y,h)),I[p]),B[p]),E=t(a(n),o(n,i,u)),f=h,h=y,y=g,g=t(m,w),m=u,u=i,i=n,n=t(w,E);U[0]=t(n,U[0]),U[1]=t(i,U[1]),U[2]=t(u,U[2]),U[3]=t(m,U[3]),U[4]=t(g,U[4]),U[5]=t(y,U[5]),U[6]=t(h,U[6]),U[7]=t(f,U[7])}return U}(function(e){for(var t=Array(),r=0;r<8*e.length;r+=8)t[r>>5]|=(255&e.charCodeAt(r/8))<<24-r%32;return t}(e),8*e.length))}function generateSalt(){for(var e="",t=0;t<16;t++)e+="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".charAt(Math.floor(62*Math.random()));return e}function hashPassword(e,t){return crypto_sha256(t+e+t)}function checkPasswordStrength(e){var t=0;return e.length>=8&&t++,/[a-z]/.test(e)&&t++,/[A-Z]/.test(e)&&t++,/[0-9]/.test(e)&&t++,/[^A-Za-z0-9]/.test(e)&&t++,t}function xorEncrypt(e,t){if(!e||!t)throw new Error("Plaintext and key are required");for(var r=stringToUTF8Bytes(e),n=stringToUTF8Bytes(t),s=[],o=0;o<r.length;o++){var a=n[o%n.length];s.push(r[o]^a)}for(var l="",c=0;c<s.length;c++)l+=String.fromCharCode(s[c]);return base64Encode(l)}function xorDecrypt(e,t){if(!e||!t)throw new Error("Encrypted data and key are required");try{for(var r=base64Decode(e),n=[],s=0;s<r.length;s++)n.push(r.charCodeAt(s));for(var o=stringToUTF8Bytes(t),a=[],l=0;l<n.length;l++){var c=o[l%o.length];a.push(n[l]^c)}return utf8BytesToString(a)}catch(d){throw new Error("Decryption failed: "+d.message)}}function generateXORKey(e){e=e||32;for(var t="",r=0;r<e;r++)t+="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*".charAt(Math.floor(70*Math.random()));return t}function base64Encode(e){for(var t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",r="",n=0;n<e.length;){var s=e.charCodeAt(n++)<<16|(n<e.length?e.charCodeAt(n++):0)<<8|(n<e.length?e.charCodeAt(n++):0);r+=t.charAt(s>>18&63),r+=t.charAt(s>>12&63),r+=n-2<e.length?t.charAt(s>>6&63):"=",r+=n-1<e.length?t.charAt(63&s):"="}return r}function base64Decode(e){var t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",r="",n=0;for(e=e.replace(/[^A-Za-z0-9+/]/g,"");n<e.length;){var s=t.indexOf(e.charAt(n++)),o=t.indexOf(e.charAt(n++)),a=t.indexOf(e.charAt(n++)),l=t.indexOf(e.charAt(n++)),c=s<<18|o<<12|a<<6|l;r+=String.fromCharCode(c>>16&255),64!==a&&(r+=String.fromCharCode(c>>8&255)),64!==l&&(r+=String.fromCharCode(255&c))}return r}function stringToUTF8Bytes(e){for(var t=[],r=0;r<e.length;r++){var n=e.charCodeAt(r);n<128?t.push(n):n<2048?(t.push(192|n>>6),t.push(128|63&n)):(t.push(224|n>>12),t.push(128|n>>6&63),t.push(128|63&n))}return t}function utf8BytesToString(e){for(var t="",r=0;r<e.length;){var n=e[r++];if(n<128)t+=String.fromCharCode(n);else if(192==(224&n)){var s=e[r++];t+=String.fromCharCode((31&n)<<6|63&s)}else if(224==(240&n)){s=e[r++];var o=e[r++];t+=String.fromCharCode((15&n)<<12|(63&s)<<6|63&o)}}return t}var currentUser=null,currentUserRole=null,masterXORKey=null;function trimString(e){return e.replace(/^\s+|\s+$/g,"")}function testVBScriptFunctions(){for(var e=["saveUser","getUserDataString","userExistsCheck","CheckIfAdminExists","TestDatabaseConnection"],t=[],r=0;r<e.length;r++){var n=e[r];try{var s=window[n];"function"==typeof s?t.push(n+": ✅ Доступна"):void 0===s?t.push(n+": ❌ Не знайдена"):t.push(n+": ⚠️ Не функція ("+typeof s+")")}catch(o){t.push(n+": ❌ Помилка: "+o.message)}}alert("VBScript функції:\n"+t.join("\n"))}function registerAdmin(){var e=document.getElementById("adminPassword").value,t=document.getElementById("adminXORKey").value;if(e&&t)if(checkPasswordStrength(e)<3)alert("Пароль занадто слабкий! Використовуйте принаймні 8 символів, включаючи великі та малі літери, цифри.");else if(t.length<16)alert("XOR ключ повинен містити мінімум 16 символів!");else{if("undefined"==typeof saveUser)return alert("ПОМИЛКА: VBScript функція saveUser недоступна!"),void testVBScriptFunctions();try{var r=generateSalt(),n=hashPassword(e,r),s=xorEncrypt(t,e),o=xorDecrypt(s,e);saveUser("admin",n,r,"Administrator",s),alert("Адміністратор успішно створений!\nВикористовуйте ім'я користувача 'admin' та вказаний пароль для входу.Encrypted XOR preview:"+s+"\n\nDecrypted XOR preview: "+o+"\nЗбережіть цей XOR ключ для подальшого використання."),showLoginForm()}catch(a){alert("Помилка при створенні адміністратора: "+a.message)}}else alert("Будь ласка, заповніть усі поля!")}function loginUser(){var e=trimString(document.getElementById("username").value),t=document.getElementById("password").value;if(e&&t){var r=getUserDataString(e);if(r){var n=r.split(","),s=n[0],o=n[1],a=n[2],l=n[3];if(hashPassword(t,o)===s){if(currentUser=e,currentUserRole=a,l&&""!==l)try{masterXORKey=xorDecrypt(l,t)}catch(c){masterXORKey=null}updateLastLogin(e),showSecureContent(e,a)}else alert("Невірне ім'я користувача або пароль")}else alert("Невірне ім'я користувача або пароль")}else alert("Будь ласка, заповніть усі поля!")}function createNewUser(){if("Administrator"===currentUserRole){var e=trimString(document.getElementById("newUserName").value),t=document.getElementById("newUserPassword").value,r=document.getElementById("newUserRole").value;if(e&&t&&r)if(checkPasswordStrength(t)<2)alert("Пароль занадто слабкий! Використовуйте принаймні 6 символів.");else if(userExistsCheck(e))alert("Користувач з таким іменем вже існує!");else try{var n=generateSalt(),s=hashPassword(t,n),o="";"Guest"===r?o=masterXORKey?masterXORKey.substring(0,8):"":"User"!==r&&"Moderator"!==r||(o=masterXORKey||"");var a="";o&&(a=xorEncrypt(o,t)),saveUser(e,s,n,r,a),alert("Користувача "+e+" ("+r+") успішно створено!"),document.getElementById("newUserName").value="",document.getElementById("newUserPassword").value="",document.getElementById("newUserRole").selectedIndex=0}catch(l){alert("Помилка при створенні користувача: "+l.message)}else alert("Будь ласка, заповніть усі поля!")}else alert("Недостатньо прав доступу!")}function deleteUserById(){if("Administrator"===currentUserRole){var e=document.getElementById("deleteUserID").value;e&&"1"!==e?confirm("Ви впевнені, що хочете видалити користувача з ID: "+e+"?")&&(deleteUser(e),alert("Користувача видалено!"),document.getElementById("deleteUserID").value="",showUsersList()):alert("Неможливо видалити адміністратора або невірний ID!")}else alert("Недостатньо прав доступу!")}function showUsersList(){if("Administrator"===currentUserRole){var e=getAllUsers(),t=document.getElementById("usersList");if(e){var r=e.split("|"),n="<table border='1' style='width:100%; border-collapse:collapse;'>";n+="<tr><th>ID</th><th>Ім'я</th><th>Роль</th><th>Останній вхід</th></tr>";for(var s=0;s<r.length;s++)if(r[s]){var o=r[s].split(",");n+="<tr>",n+="<td>"+o[0]+"</td>",n+="<td>"+o[1]+"</td>",n+="<td>"+o[2]+"</td>",n+="<td>"+o[3]+"</td>",n+="</tr>"}n+="</table>",t.innerHTML=n}else t.innerHTML="<p>Користувачів не знайдено</p>"}else alert("Недостатньо прав доступу!")}function decryptAndShowXORKey(){if("Administrator"===currentUserRole){var e=document.getElementById("decryptPassword").value;if(e){var t=getUserDataString(currentUser);if(t){var r=t.split(","),n=r[0],s=r[1],o=r[3];if(hashPassword(e,s)!==n)return alert("Невірний пароль!"),void(document.getElementById("decryptPassword").value="");try{if(!o||""===o)return void alert("XOR ключ не знайдено в базі даних");var a=xorDecrypt(o,e);document.getElementById("xorKeyValue").value=a,document.getElementById("xorKeyDisplay").style.display="block",document.getElementById("decryptPassword").value=""}catch(l){alert("Помилка розшифрування XOR ключа: "+l.message),document.getElementById("decryptPassword").value=""}}else alert("Помилка доступу до даних користувача")}else alert("Введіть ваш пароль!")}else alert("Недостатньо прав доступу!")}function copyXORKeyToClipboard(){var e=document.getElementById("xorKeyValue");try{e.select(),e.setSelectionRange(0,99999),document.execCommand("copy")?alert("XOR ключ скопійовано в буфер обміну!"):alert("Не вдалося скопіювати. Виділіть текст вручну та скопіюйте (Ctrl+C).")}catch(t){alert("Помилка копіювання: "+t.message+"\nВиділіть текст вручну та скопіюйте (Ctrl+C).")}window.getSelection&&window.getSelection().removeAllRanges()}function changePassword(){var e=document.getElementById("currentPassword").value,t=document.getElementById("newPassword").value,r=document.getElementById("confirmPassword").value;if(e&&t&&r)if(t===r)if(checkPasswordStrength(t)<3)alert("Новий пароль занадто слабкий!");else{var n=getUserDataString(currentUser);if(n){var s=n.split(","),o=s[0];if(hashPassword(e,s[1])===o)try{var a=generateSalt(),l=hashPassword(t,a);changeUserPassword(currentUser,l,a),alert("Пароль успішно змінено!"),document.getElementById("currentPassword").value="",document.getElementById("newPassword").value="",document.getElementById("confirmPassword").value=""}catch(c){alert("Помилка при зміні паролю: "+c.message)}else alert("Невірний поточний пароль!")}else alert("Помилка доступу до даних користувача")}else alert("Нові паролі не співпадають!");else alert("Будь ласка, заповніть усі поля!")}function showAdminSetup(){hideAllForms(),document.getElementById("adminSetupForm").style.display="block"}function showSecureContent(e,t){hideAllForms(),document.getElementById("secureContent").style.display="block",document.getElementById("welcomeUser").innerText=e,document.getElementById("userRole").innerText=t,document.getElementById("adminMenu").style.display="Administrator"===t?"block":"none"}function logout(){currentUser=null,currentUserRole=null,masterXORKey=null,hideAllForms(),document.getElementById("loginForm").style.display="block",document.getElementById("username").value="",document.getElementById("password").value="",document.getElementById("username").focus()}function showLoginForm(){hideAllForms(),document.getElementById("loginForm").style.display="block",document.getElementById("username").focus()}function showCreateUserForm(){"Administrator"===currentUserRole?(hideAllForms(),document.getElementById("createUserForm").style.display="block",document.getElementById("newUserName").focus()):alert("Недостатньо прав доступу!")}function showDeleteUserForm(){"Administrator"===currentUserRole?(hideAllForms(),document.getElementById("deleteUserForm").style.display="block",document.getElementById("deleteUserID").focus()):alert("Недостатньо прав доступу!")}function showUsersListForm(){"Administrator"===currentUserRole?(hideAllForms(),document.getElementById("usersListForm").style.display="block",showUsersList()):alert("Недостатньо прав доступу!")}function showChangePasswordForm(){hideAllForms(),document.getElementById("changePasswordForm").style.display="block",document.getElementById("currentPassword").focus()}function returnToMainMenu(){currentUser&&currentUserRole?showSecureContent(currentUser,currentUserRole):showLoginForm()}function showMyXORKeyForm(){"Administrator"===currentUserRole?(hideAllForms(),document.getElementById("myXORKeyForm").style.display="block",document.getElementById("decryptPassword").focus(),document.getElementById("xorKeyDisplay").style.display="none",document.getElementById("decryptPassword").value=""):alert("Недостатньо прав доступу!")}function hideAllForms(){for(var e=["loginForm","adminSetupForm","secureContent","createUserForm","deleteUserForm","usersListForm","changePasswordForm","myXORKeyForm"],t=0;t<e.length;t++){var r=document.getElementById(e[t]);r&&(r.style.display="none")}}function normalizeContent(e){return e.replace(/\s*data-integrity="[^"]*"/g,"").replace(/<!--[\s\S]*?-->/g,"").replace(/<script[^>]*>\s*verifyIntegrity\(\)\s*<\/script>/gi,"").replace(/\r\n/g,"\n").replace(/\r/g,"\n").replace(/>\s+</g,"><").replace(/\s{2,}/g," ").replace(/^\s+|\s+$/gm,"").replace(/\n\s*\n/g,"\n")}function generateIntegrityHash(e){return crypto_sha256(normalizeContent(e).toLowerCase())}function verifyIntegrity(){try{var e=document.documentElement.getAttribute("data-integrity"),t=generateIntegrityHash(ReadHTAFile());return e&&t===e?(alert("Перевірка цілісності пройшла успішно!\nФайл не було змінено.\nОчікуваний хеш="+e.substring(0,16)+"...\\nПоточний хеш: "+t.substring(0,16)+"..."),!0):(alert("УВАГА: Файл було змінено!\nПрограма буде закрита з міркувань безпеки."),window.close(),!1)}catch(r){return alert("Критична помилка перевірки цілісності: "+r.message),window.close(),!1}} 
+</script>
+
+<script language="VBScript">
+Function GetTSVPath()
+Dim fso,path,dbFolder
+Set fso = CreateObject("Scripting.FileSystemObject")
+path = Replace(document.location, "file:///", "")
+path = Replace(path, "/", "\")
+Dim pos
+pos = InStr(path, "?")
+If pos > 0 Then path = Left(path, pos - 1)
+path = fso.GetParentFolderName(path)
+dbFolder = path & "\yavirlabdb"
+If Not fso.FolderExists(dbFolder) Then
+fso.CreateFolder dbFolder
+End If
+GetTSVPath = dbFolder
+End Function
+Function GetUsersFilePath()
+GetUsersFilePath = GetTSVPath() & "\users.tsv"
+End Function
+Function GetSettingsFilePath()
+GetSettingsFilePath = GetTSVPath() & "\settings.tsv"
+End Function
+Function CreateTSVFilesIfNotExists()
+Dim fso,usersFile,settingsFile
+Set fso = CreateObject("Scripting.FileSystemObject")
+CreateTSVFilesIfNotExists = True
+On Error Resume Next
+usersFile = GetUsersFilePath()
+If Not fso.FileExists(usersFile) Then
+Dim file
+Set file = fso.CreateTextFile(usersFile, True, True)
+file.WriteLine "ID" & vbTab & "Username" & vbTab & "PasswordHash" & vbTab & "Salt" & vbTab & "Role" & vbTab & "XORKey" & vbTab & "CreatedDate" & vbTab & "LastLogin"
+file.Close
+Set file = Nothing
+End If
+settingsFile = GetSettingsFilePath()
+If Not fso.FileExists(settingsFile) Then
+Set file = fso.CreateTextFile(settingsFile, True, True)
+file.WriteLine "Key" & vbTab & "Value" & vbTab & "UpdatedDate"
+file.Close
+Set file = Nothing
+End If
+If Err.Number <> 0 Then
+MsgBox "Помилка створення TSV файлів: " & Err.Description, vbCritical
+CreateTSVFilesIfNotExists = False
+End If
+On Error GoTo 0
+End Function
+Function CheckIfAdminExists()
+Dim fso,usersFile,file, line, fields
+CheckIfAdminExists = False
+If Not CreateTSVFilesIfNotExists() Then Exit Function
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+On Error Resume Next
+If fso.FileExists(usersFile) Then
+Set file = fso.OpenTextFile(usersFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 4 Then
+If Trim(fields(4)) = "Administrator" Then
+CheckIfAdminExists = True
+Exit Do
+End If
+End If
+End If
+Loop
+file.Close
+Set file = Nothing
+End If
+On Error GoTo 0
+End Function
+Function getUserDataString(username)
+Dim fso,usersFile,file, line, fields
+getUserDataString = ""
+If Not CreateTSVFilesIfNotExists() Then Exit Function
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+On Error Resume Next
+If fso.FileExists(usersFile) Then
+Set file = fso.OpenTextFile(usersFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 7 Then
+If Trim(fields(1)) = username Then
+getUserDataString = Trim(fields(2)) & "," & _
+Trim(fields(3)) & "," & _
+Trim(fields(4)) & "," & _
+Trim(fields(5))
+Exit Do
+End If
+End If
+End If
+Loop
+file.Close
+Set file = Nothing
+End If
+On Error GoTo 0
+End Function
+Function userExistsCheck(username)
+userExistsCheck = (getUserDataString(username) <> "")
+End Function
+Function GetNextUserID()
+Dim fso,usersFile,file, line, fields, maxID
+maxID = 0
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+On Error Resume Next
+If fso.FileExists(usersFile) Then
+Set file = fso.OpenTextFile(usersFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 0 Then
+Dim currentID
+currentID = CInt(Trim(fields(0)))
+If currentID > maxID Then
+maxID = currentID
+End If
+End If
+End If
+Loop
+file.Close
+Set file = Nothing
+End If
+GetNextUserID = maxID + 1
+On Error GoTo 0
+End Function
+Sub saveUser(username, hash, salt, role, xorkey)
+Dim fso,usersFile,file, userID, currentDate
+If Not CreateTSVFilesIfNotExists() Then Exit Sub
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+On Error Resume Next
+userID = GetNextUserID()
+currentDate = Now()
+If role = "" Then role = "Guest"
+If xorkey = "" Then xorkey = "-"
+Set file = fso.OpenTextFile(usersFile, 8, True, -1)
+file.WriteLine userID & vbTab & username & vbTab & hash & vbTab & salt & vbTab & role & vbTab & xorkey & vbTab & currentDate & vbTab & "-"
+file.Close
+Set file = Nothing
+If Err.Number <> 0 Then
+MsgBox "Помилка створення користувача: " & Err.Description, vbCritical
+End If
+On Error GoTo 0
+End Sub
+Sub updateLastLogin(username)
+Dim fso,usersFile,tempFile, file, tempFilePath, line, fields, currentDate
+If Not CreateTSVFilesIfNotExists() Then Exit Sub
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+tempFilePath = GetTSVPath() & "\users_temp.tsv"
+currentDate = Now()
+On Error Resume Next
+If fso.FileExists(usersFile) Then
+Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
+Set file = fso.OpenTextFile(usersFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+tempFile.WriteLine file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 7 Then
+If Trim(fields(1)) = username Then
+fields(7) = currentDate
+End If
+tempFile.WriteLine Join(fields, vbTab)
+End If
+End If
+Loop
+file.Close
+tempFile.Close
+Set file = Nothing
+Set tempFile = Nothing
+fso.DeleteFile usersFile
+fso.MoveFile tempFilePath, usersFile
+End If
+On Error GoTo 0
+End Sub
+Function getAllUsers()
+Dim fso,usersFile,file, line, fields, userList
+getAllUsers = ""
+If Not CreateTSVFilesIfNotExists() Then Exit Function
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+userList = ""
+On Error Resume Next
+If fso.FileExists(usersFile) Then
+Set file = fso.OpenTextFile(usersFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 7 Then
+If userList <> "" Then userList = userList & "|"
+Dim lastLogin
+lastLogin = Trim(fields(7))
+If lastLogin = "-" Or lastLogin = "" Then
+lastLogin = "Ніколи"
+End If
+userList = userList & Trim(fields(0)) & "," & _
+Trim(fields(1)) & "," & _
+Trim(fields(4)) & "," & _
+lastLogin
+End If
+End If
+Loop
+file.Close
+Set file = Nothing
+getAllUsers = userList
+End If
+On Error GoTo 0
+End Function
+Sub deleteUser(userID)
+Dim fso,usersFile,tempFile, file, tempFilePath, line, fields
+If Not CreateTSVFilesIfNotExists() Then Exit Sub
+If userID = 1 Then Exit Sub ' Не можна видалити адміністратора
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+tempFilePath = GetTSVPath() & "\users_temp.tsv"
+On Error Resume Next
+If fso.FileExists(usersFile) Then
+Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
+Set file = fso.OpenTextFile(usersFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+tempFile.WriteLine file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 0 Then
+If CInt(Trim(fields(0))) <> CInt(userID) Then
+tempFile.WriteLine line
+End If
+End If
+End If
+Loop
+file.Close
+tempFile.Close
+Set file = Nothing
+Set tempFile = Nothing
+fso.DeleteFile usersFile
+fso.MoveFile tempFilePath, usersFile
+End If
+On Error GoTo 0
+End Sub
+Sub changeUserPassword(username, newHash, newSalt)
+Dim fso,usersFile,tempFile, file, tempFilePath, line, fields
+If Not CreateTSVFilesIfNotExists() Then Exit Sub
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+tempFilePath = GetTSVPath() & "\users_temp.tsv"
+On Error Resume Next
+If fso.FileExists(usersFile) Then
+Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
+Set file = fso.OpenTextFile(usersFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+tempFile.WriteLine file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 7 Then
+If Trim(fields(1)) = username Then
+fields(2) = newHash
+fields(3) = newSalt
+End If
+tempFile.WriteLine Join(fields, vbTab)
+End If
+End If
+Loop
+file.Close
+tempFile.Close
+Set file = Nothing
+Set tempFile = Nothing
+fso.DeleteFile usersFile
+fso.MoveFile tempFilePath, usersFile
+End If
+On Error GoTo 0
+End Sub
+Function ReadHTAFile()
+Dim fso,file,content, path
+Set fso = CreateObject("Scripting.FileSystemObject")
+On Error Resume Next
+path = Replace(document.location, "file:///", "")
+path = Replace(path, "/", "\")
+Dim pos
+pos = InStr(path, "?")
+If pos > 0 Then path = Left(path, pos - 1)
+If fso.FileExists(path) Then
+Set file = fso.OpenTextFile(path, 1, False, -1)
+content = file.ReadAll
+file.Close
+Set file = Nothing
+content = Replace(content, vbCrLf, vbLf)
+content = Replace(content, vbCr, vbLf)
+ReadHTAFile = content
+Else
+ReadHTAFile = ""
+End If
+If Err.Number <> 0 Then
+Err.Clear
+If fso.FileExists(path) Then
+Set file = fso.OpenTextFile(path, 1, False, 0)
+content = file.ReadAll
+file.Close
+Set file = Nothing
+content = Replace(content, vbCrLf, vbLf)
+content = Replace(content, vbCr, vbLf)
+ReadHTAFile = content
+Else
+ReadHTAFile = ""
+End If
+End If
+Set fso = Nothing
+On Error GoTo 0
+End Function
+Function TestDatabaseConnection()
+Dim fso,usersFile,userCount
+TestDatabaseConnection = ""
+userCount = 0
+Set fso = CreateObject("Scripting.FileSystemObject")
+usersFile = GetUsersFilePath()
+On Error Resume Next
+If Not CreateTSVFilesIfNotExists() Then
+TestDatabaseConnection = "Помилка створення TSV файлів"
+Exit Function
+End If
+If fso.FileExists(usersFile) Then
+Dim file,line
+Set file = fso.OpenTextFile(usersFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+userCount = userCount + 1
+End If
+Loop
+file.Close
+Set file = Nothing
+TestDatabaseConnection = "TSV база працює. Користувачів: " & userCount
+Else
+TestDatabaseConnection = "TSV файли не знайдено"
+End If
+If Err.Number <> 0 Then
+TestDatabaseConnection = "Помилка роботи з TSV: " & Err.Description
+End If
+On Error GoTo 0
+End Function
+Sub Window_OnLoad
+Dim dbTest
+dbTest = TestDatabaseConnection()
+If Not CheckIfAdminExists() Then
+Call showAdminSetup()
+Else
+Call showLoginForm()
+document.getElementById("username").focus
+End If
+End Sub
+</script>
+
+<style>
+body {
+  font-family: "Segoe UI",Arial,sans-serif;
+  background: -ms-linear-gradient(top,#2c3e50,#34495e);
+  background: -webkit-linear-gradient(135deg,#2c3e50,#34495e);
+  background: linear-gradient(135deg,#2c3e50,#34495e);
+  margin: 0;
+  padding: 20px;
+  color: #333;
+  height: 100vh;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center
+}
+.container {
+  background-color: rgba(255,255,255,.95);
+  border-radius: 12px;
+  -webkit-box-shadow: 0 8px 32px rgba(0,0,0,.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,.3);
+  padding: 35px;
+  width: 380px;
+  max-width: 90%
+}
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 25px
+}
+.form-group {
+  margin-bottom: 20px
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555
+}
+input[type=password],
+input[type=text] {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  -webkit-transition: border-color .3s;
+  transition: border-color .3s
+}
+input[type=password]:focus,
+input[type=text]:focus {
+  border-color: #3498db;
+  outline: 0
+}
+button {
+  background: -ms-linear-gradient(top,#3498db,#2980b9);
+  background: -webkit-linear-gradient(135deg,#3498db,#2980b9);
+  background: linear-gradient(135deg,#3498db,#2980b9);
+  color: #fff;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  transition: .3s
+}
+button:hover {
+  background: -ms-linear-gradient(top,#2980b9,#1f618d);
+  background: -webkit-linear-gradient(135deg,#2980b9,#1f618d);
+  background: linear-gradient(135deg,#2980b9,#1f618d);
+  -webkit-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.secondary-btn {
+  background: 0 0;
+  color: #3498db;
+  border: 2px solid #3498db;
+  margin-top: 15px
+}
+.secondary-btn:hover {
+  background: rgba(52,152,219,.1);
+  -webkit-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.form-toggle {
+  text-align: center;
+  margin-top: 20px
+}
+.form-toggle a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer
+}
+.form-toggle a:hover {
+  text-decoration: underline
+}
+#registerForm,
+#secureContent {
+  display: none
+}
+.success-message {
+  text-align: center;
+  font-size: 18px;
+  color: #27ae60;
+  margin-top: 20px
+}
+.info-note {
+  font-size: 12px;
+  color: #7f8c8d;
+  margin-top: 8px;
+  text-align: center
+}
+.security-info {
+  background: #ecf0f1;
+  padding: 15px;
+  border-radius: 6px;
+  margin-top: 15px;
+  font-size: 13px;
+  color: #555
+}
+
+/* Додаткові стилі для нових форм */
+.admin-menu {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.admin-menu h3 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+.menu-button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.menu-button:hover {
+  background: #2980b9;
+}
+
+.role-badge {
+  background: #27ae60;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.role-badge.Administrator {
+  background: #e74c3c;
+}
+
+.role-badge.Moderator {
+  background: #f39c12;
+}
+
+.role-badge.User {
+  background: #3498db;
+}
+
+.role-badge.Guest {
+  background: #95a5a6;
+}
+
+select {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table th, table td {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #ddd;
+}
+
+table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.back-button {
+  background: #95a5a6;
+  margin-top: 10px;
+}
+
+.back-button:hover {
+  background: #7f8c8d;
+}
+
+.danger-button {
+  background: #e74c3c;
+}
+
+.danger-button:hover {
+  background: #c0392b;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <!-- Форма входу -->
+        <div id="loginForm">
+            <h1>🔐 Безпечний вхід</h1>
+            <div class="form-group">
+                <label for="username">Ім'я користувача:</label>
+                <input type="text" id="username" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" autocomplete="off">
+            </div>
+            <button onclick="loginUser()">Увійти</button>
+            <div class="info-note">SHA-256 хешування з XOR шифруванням</div>
+        </div>
+        
+        <!-- Форма налаштування адміністратора -->
+        <div id="adminSetupForm">
+            <h1>⚙️ Налаштування адміністратора</h1>
+            <p>База даних порожня. Створіть обліковий запис адміністратора:</p>
+            <div class="form-group">
+                <label for="adminPassword">Пароль адміністратора:</label>
+                <input type="password" id="adminPassword" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="adminXORKey">Головний XOR ключ:</label>
+                <input type="text" id="adminXORKey" autocomplete="off">
+            </div>
+            <button onclick="registerAdmin()">Створити адміністратора</button>
+            <div class="security-info">
+                <strong>Важливо:</strong><br>
+                • Пароль: мінімум 8 символів<br>
+                • XOR ключ: мінімум 16 символів<br>
+                • Збережіть ці дані в надійному місці!
+            </div>
+        </div>
+        
+        <!-- Захищений вміст -->
+        <div id="secureContent">
+            <h1>✅ Успішний вхід!</h1>
+            <p class="success-message">Ласкаво просимо, <span id="welcomeUser"></span>!</p>
+            <p>Роль: <span class="role-badge" id="userRole"></span></p>
+            
+            <!-- Меню адміністратора -->
+            <div id="adminMenu" class="admin-menu">
+                <h3>🛠️ Панель адміністратора</h3>
+                <button class="menu-button" onclick="showCreateUserForm()">Створити користувача</button>
+                <button class="menu-button" onclick="showDeleteUserForm()">Видалити користувача</button>
+                <button class="menu-button" onclick="showUsersListForm()">Список користувачів</button>
+                <button class="menu-button" onclick="showMyXORKeyForm()">Мій XORKey</button>
+            </div>
+            
+            <div class="security-info">
+                <strong>Рівень безпеки:</strong><br>
+                • SHA-256 хешування<br>
+                • XOR шифрування даних<br>
+                • Система ролей користувачів<br>
+                • MDB база даних
+            </div>
+            
+            <button onclick="showChangePasswordForm()" class="secondary-btn">Змінити пароль</button>
+            <button onclick="logout()" class="secondary-btn">Вийти з системи</button>
+        </div>
+        
+        <!-- Форма створення користувача -->
+        <div id="createUserForm">
+            <h1>👤 Створити користувача</h1>
+            <div class="form-group">
+                <label for="newUserName">Ім'я користувача:</label>
+                <input type="text" id="newUserName" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="newUserPassword">Пароль:</label>
+                <input type="password" id="newUserPassword" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="newUserRole">Роль:</label>
+                <select id="newUserRole">
+                    <option value="Guest">Guest (обмежений доступ)</option>
+                    <option value="User">User (повний доступ)</option>
+                    <option value="Moderator">Moderator (розширений доступ)</option>
+                </select>
+            </div>
+            <button onclick="createNewUser()">Створити користувача</button>
+            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+            
+            <div class="security-info">
+                <strong>XOR ключі:</strong><br>
+                • Guest: перші 8 символів головного ключа<br>
+                • User/Moderator: повний головний ключ
+            </div>
+        </div>
+        
+        <!-- Форма видалення користувача -->
+        <div id="deleteUserForm">
+            <h1>🗑️ Видалити користувача</h1>
+            <div class="form-group">
+                <label for="deleteUserID">ID користувача для видалення:</label>
+                <input type="number" id="deleteUserID" min="2" autocomplete="off">
+            </div>
+            <button onclick="deleteUserById()" class="danger-button">Видалити користувача</button>
+            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+            
+            <div class="security-info">
+                <strong>Увага:</strong><br>
+                • Неможливо видалити адміністратора (ID=1)<br>
+                • Дія незворотна!
+            </div>
+        </div>
+        
+        <!-- Форма списку користувачів -->
+        <div id="usersListForm">
+            <h1>📋 Список користувачів</h1>
+            <div id="usersList">
+                <p>Завантаження...</p>
+            </div>
+            <button onclick="showUsersList()">Оновити список</button>
+            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+        </div>
+        
+        <!-- Форма перегляду XOR ключа адміністратора -->
+        <div id="myXORKeyForm">
+            <h1>🔑 Мій XORKey</h1>
+            <div class="form-group">
+                <label for="decryptPassword">Введіть ваш пароль для розшифрування:</label>
+                <input type="password" id="decryptPassword" autocomplete="off">
+            </div>
+            <button onclick="decryptAndShowXORKey()">Показати XORKey</button>
+            
+            <div id="xorKeyDisplay" style="display:none; margin-top:20px;">
+                <div class="security-info">
+                    <strong>Ваш головний XORKey:</strong><br>
+                    <textarea id="xorKeyValue" readonly style="width:100%; height:80px; margin-top:10px; font-family:monospace; font-size:12px;"></textarea>
+                </div>
+                <button onclick="copyXORKeyToClipboard()" style="margin-top:10px;">Копіювати в буфер</button>
+            </div>
+            
+            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+            
+            <div class="security-info">
+                <strong>Безпека:</strong><br>
+                • XORKey зберігається в зашифрованому вигляді<br>
+                • Для розшифрування потрібен ваш пароль<br>
+                • Не передавайте цей ключ сторонім особам
+            </div>
+        </div>     
+        
+        <!-- Форма зміни паролю -->
+        <div id="changePasswordForm">
+            <h1>🔑 Зміна паролю</h1>
+            <div class="form-group">
+                <label for="currentPassword">Поточний пароль:</label>
+                <input type="password" id="currentPassword" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="newPassword">Новий пароль:</label>
+                <input type="password" id="newPassword" autocomplete="off">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Підтвердіть новий пароль:</label>
+                <input type="password" id="confirmPassword" autocomplete="off">
+            </div>
+            <button onclick="changePassword()">Змінити пароль</button>
+            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+            
+            <div class="security-info">
+                <strong>Вимоги до паролю:</strong><br>
+                • Мінімум 8 символів<br>
+                • Великі та малі літери<br>
+                • Цифри та спеціальні символи
+            </div>
+        </div>
+    </div>
+</body>
+</html>
