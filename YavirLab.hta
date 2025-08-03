@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html data-integrity="18234190f5aa352abc5b7fda6eec1878219722df858c3862469eb9aeacd2d330">
+<html data-integrity="">
 <head>
-<title>YavirLab Software</title>
+<title>YavirLab</title>
+<meta http-equiv="X-UA-Compatible" content="IE=10">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta content="IE=edge">
 <HTA:APPLICATION 
     ID="YavirLabApp"
-    APPLICATIONNAME="YavirLab Software"
+    APPLICATIONNAME="YavirLab"
     BORDER="thin"
     BORDERSTYLE="normal"
     CAPTION="yes"
@@ -14,11 +14,12 @@
     SHOWINTASKBAR="yes"
     SINGLEINSTANCE="yes"
     SYSMENU="yes"
-    VERSION="1.1"
-    WINDOWSTATE="normal">
+    VERSION="1.0"
+    WINDOWSTATE="normal"
+    SCROLL="auto">
 
 <script language="JavaScript">
-function crypto_sha256(e){function t(e,t){var r=(65535&e)+(65535&t);return(e>>16)+(t>>16)+(r>>16)<<16|65535&r}function r(e,t){return e>>>t|e<<32-t}function n(e,t){return e>>>t}function s(e,t,r){return e&t^~e&r}function o(e,t,r){return e&t^e&r^t&r}function a(e){return r(e,2)^r(e,13)^r(e,22)}function l(e){return r(e,6)^r(e,11)^r(e,25)}function c(e){return r(e,7)^r(e,18)^n(e,3)}function d(e){return r(e,17)^r(e,19)^n(e,10)}return function(e){for(var t="0123456789abcdef",r="",n=0;n<4*e.length;n++)r+=t.charAt(e[n>>2]>>8*(3-n%4)+4&15)+t.charAt(e[n>>2]>>8*(3-n%4)&15);return r}(function(e,r){var n,i,u,m,g,y,h,f,v,p,w,E,I=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],U=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225],B=new Array(64);for(e[r>>5]|=128<<24-r%32,e[15+(r+64>>9<<4)]=r,v=0;v<e.length;v+=16){for(n=U[0],i=U[1],u=U[2],m=U[3],g=U[4],y=U[5],h=U[6],f=U[7],p=0;p<64;p++)B[p]=p<16?e[p+v]:t(t(t(d(B[p-2]),B[p-7]),c(B[p-15])),B[p-16]),w=t(t(t(t(f,l(g)),s(g,y,h)),I[p]),B[p]),E=t(a(n),o(n,i,u)),f=h,h=y,y=g,g=t(m,w),m=u,u=i,i=n,n=t(w,E);U[0]=t(n,U[0]),U[1]=t(i,U[1]),U[2]=t(u,U[2]),U[3]=t(m,U[3]),U[4]=t(g,U[4]),U[5]=t(y,U[5]),U[6]=t(h,U[6]),U[7]=t(f,U[7])}return U}(function(e){for(var t=Array(),r=0;r<8*e.length;r+=8)t[r>>5]|=(255&e.charCodeAt(r/8))<<24-r%32;return t}(e),8*e.length))}function generateSalt(){for(var e="",t=0;t<16;t++)e+="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".charAt(Math.floor(62*Math.random()));return e}function hashPassword(e,t){return crypto_sha256(t+e+t)}function checkPasswordStrength(e){var t=0;return e.length>=8&&t++,/[a-z]/.test(e)&&t++,/[A-Z]/.test(e)&&t++,/[0-9]/.test(e)&&t++,/[^A-Za-z0-9]/.test(e)&&t++,t}function xorEncrypt(e,t){if(!e||!t)throw new Error("Plaintext and key are required");for(var r=stringToUTF8Bytes(e),n=stringToUTF8Bytes(t),s=[],o=0;o<r.length;o++){var a=n[o%n.length];s.push(r[o]^a)}for(var l="",c=0;c<s.length;c++)l+=String.fromCharCode(s[c]);return base64Encode(l)}function xorDecrypt(e,t){if(!e||!t)throw new Error("Encrypted data and key are required");try{for(var r=base64Decode(e),n=[],s=0;s<r.length;s++)n.push(r.charCodeAt(s));for(var o=stringToUTF8Bytes(t),a=[],l=0;l<n.length;l++){var c=o[l%o.length];a.push(n[l]^c)}return utf8BytesToString(a)}catch(d){throw new Error("Decryption failed: "+d.message)}}function generateXORKey(e){e=e||32;for(var t="",r=0;r<e;r++)t+="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*".charAt(Math.floor(70*Math.random()));return t}function base64Encode(e){for(var t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",r="",n=0;n<e.length;){var s=e.charCodeAt(n++)<<16|(n<e.length?e.charCodeAt(n++):0)<<8|(n<e.length?e.charCodeAt(n++):0);r+=t.charAt(s>>18&63),r+=t.charAt(s>>12&63),r+=n-2<e.length?t.charAt(s>>6&63):"=",r+=n-1<e.length?t.charAt(63&s):"="}return r}function base64Decode(e){var t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",r="",n=0;for(e=e.replace(/[^A-Za-z0-9+/]/g,"");n<e.length;){var s=t.indexOf(e.charAt(n++)),o=t.indexOf(e.charAt(n++)),a=t.indexOf(e.charAt(n++)),l=t.indexOf(e.charAt(n++)),c=s<<18|o<<12|a<<6|l;r+=String.fromCharCode(c>>16&255),64!==a&&(r+=String.fromCharCode(c>>8&255)),64!==l&&(r+=String.fromCharCode(255&c))}return r}function stringToUTF8Bytes(e){for(var t=[],r=0;r<e.length;r++){var n=e.charCodeAt(r);n<128?t.push(n):n<2048?(t.push(192|n>>6),t.push(128|63&n)):(t.push(224|n>>12),t.push(128|n>>6&63),t.push(128|63&n))}return t}function utf8BytesToString(e){for(var t="",r=0;r<e.length;){var n=e[r++];if(n<128)t+=String.fromCharCode(n);else if(192==(224&n)){var s=e[r++];t+=String.fromCharCode((31&n)<<6|63&s)}else if(224==(240&n)){s=e[r++];var o=e[r++];t+=String.fromCharCode((15&n)<<12|(63&s)<<6|63&o)}}return t}var currentUser=null,currentUserRole=null,masterXORKey=null;function trimString(e){return e.replace(/^\s+|\s+$/g,"")}function testVBScriptFunctions(){for(var e=["saveUser","getUserDataString","userExistsCheck","CheckIfAdminExists","TestDatabaseConnection"],t=[],r=0;r<e.length;r++){var n=e[r];try{var s=window[n];"function"==typeof s?t.push(n+": ✅ Доступна"):void 0===s?t.push(n+": ❌ Не знайдена"):t.push(n+": ⚠️ Не функція ("+typeof s+")")}catch(o){t.push(n+": ❌ Помилка: "+o.message)}}alert("VBScript функції:\n"+t.join("\n"))}function registerAdmin(){var e=document.getElementById("adminPassword").value,t=document.getElementById("adminXORKey").value;if(e&&t)if(checkPasswordStrength(e)<3)alert("Пароль занадто слабкий! Використовуйте принаймні 8 символів, включаючи великі та малі літери, цифри.");else if(t.length<16)alert("XOR ключ повинен містити мінімум 16 символів!");else{if("undefined"==typeof saveUser)return alert("ПОМИЛКА: VBScript функція saveUser недоступна!"),void testVBScriptFunctions();try{var r=generateSalt(),n=hashPassword(e,r),s=xorEncrypt(t,e),o=xorDecrypt(s,e);saveUser("admin",n,r,"Administrator",s),alert("Адміністратор успішно створений!\nВикористовуйте ім'я користувача 'admin' та вказаний пароль для входу.Encrypted XOR preview:"+s+"\n\nDecrypted XOR preview: "+o+"\nЗбережіть цей XOR ключ для подальшого використання."),showLoginForm()}catch(a){alert("Помилка при створенні адміністратора: "+a.message)}}else alert("Будь ласка, заповніть усі поля!")}function loginUser(){var e=trimString(document.getElementById("username").value),t=document.getElementById("password").value;if(e&&t){var r=getUserDataString(e);if(r){var n=r.split(","),s=n[0],o=n[1],a=n[2],l=n[3];if(hashPassword(t,o)===s){if(currentUser=e,currentUserRole=a,l&&""!==l)try{masterXORKey=xorDecrypt(l,t)}catch(c){masterXORKey=null}updateLastLogin(e),showSecureContent(e,a)}else alert("Невірне ім'я користувача або пароль")}else alert("Невірне ім'я користувача або пароль")}else alert("Будь ласка, заповніть усі поля!")}function createNewUser(){if("Administrator"===currentUserRole){var e=trimString(document.getElementById("newUserName").value),t=document.getElementById("newUserPassword").value,r=document.getElementById("newUserRole").value;if(e&&t&&r)if(checkPasswordStrength(t)<2)alert("Пароль занадто слабкий! Використовуйте принаймні 6 символів.");else if(userExistsCheck(e))alert("Користувач з таким іменем вже існує!");else try{var n=generateSalt(),s=hashPassword(t,n),o="";"Guest"===r?o=masterXORKey?masterXORKey.substring(0,8):"":"User"!==r&&"Moderator"!==r||(o=masterXORKey||"");var a="";o&&(a=xorEncrypt(o,t)),saveUser(e,s,n,r,a),alert("Користувача "+e+" ("+r+") успішно створено!"),document.getElementById("newUserName").value="",document.getElementById("newUserPassword").value="",document.getElementById("newUserRole").selectedIndex=0}catch(l){alert("Помилка при створенні користувача: "+l.message)}else alert("Будь ласка, заповніть усі поля!")}else alert("Недостатньо прав доступу!")}function deleteUserById(){if("Administrator"===currentUserRole){var e=document.getElementById("deleteUserID").value;e&&"1"!==e?confirm("Ви впевнені, що хочете видалити користувача з ID: "+e+"?")&&(deleteUser(e),alert("Користувача видалено!"),document.getElementById("deleteUserID").value="",showUsersList()):alert("Неможливо видалити адміністратора або невірний ID!")}else alert("Недостатньо прав доступу!")}function showUsersList(){if("Administrator"===currentUserRole){var e=getAllUsers(),t=document.getElementById("usersList");if(e){var r=e.split("|"),n="<table border='1' style='width:100%; border-collapse:collapse;'>";n+="<tr><th>ID</th><th>Ім'я</th><th>Роль</th><th>Останній вхід</th></tr>";for(var s=0;s<r.length;s++)if(r[s]){var o=r[s].split(",");n+="<tr>",n+="<td>"+o[0]+"</td>",n+="<td>"+o[1]+"</td>",n+="<td>"+o[2]+"</td>",n+="<td>"+o[3]+"</td>",n+="</tr>"}n+="</table>",t.innerHTML=n}else t.innerHTML="<p>Користувачів не знайдено</p>"}else alert("Недостатньо прав доступу!")}function decryptAndShowXORKey(){if("Administrator"===currentUserRole){var e=document.getElementById("decryptPassword").value;if(e){var t=getUserDataString(currentUser);if(t){var r=t.split(","),n=r[0],s=r[1],o=r[3];if(hashPassword(e,s)!==n)return alert("Невірний пароль!"),void(document.getElementById("decryptPassword").value="");try{if(!o||""===o)return void alert("XOR ключ не знайдено в базі даних");var a=xorDecrypt(o,e);document.getElementById("xorKeyValue").value=a,document.getElementById("xorKeyDisplay").style.display="block",document.getElementById("decryptPassword").value=""}catch(l){alert("Помилка розшифрування XOR ключа: "+l.message),document.getElementById("decryptPassword").value=""}}else alert("Помилка доступу до даних користувача")}else alert("Введіть ваш пароль!")}else alert("Недостатньо прав доступу!")}function copyXORKeyToClipboard(){var e=document.getElementById("xorKeyValue");try{e.select(),e.setSelectionRange(0,99999),document.execCommand("copy")?alert("XOR ключ скопійовано в буфер обміну!"):alert("Не вдалося скопіювати. Виділіть текст вручну та скопіюйте (Ctrl+C).")}catch(t){alert("Помилка копіювання: "+t.message+"\nВиділіть текст вручну та скопіюйте (Ctrl+C).")}window.getSelection&&window.getSelection().removeAllRanges()}function changePassword(){var e=document.getElementById("currentPassword").value,t=document.getElementById("newPassword").value,r=document.getElementById("confirmPassword").value;if(e&&t&&r)if(t===r)if(checkPasswordStrength(t)<3)alert("Новий пароль занадто слабкий!");else{var n=getUserDataString(currentUser);if(n){var s=n.split(","),o=s[0];if(hashPassword(e,s[1])===o)try{var a=generateSalt(),l=hashPassword(t,a);changeUserPassword(currentUser,l,a),alert("Пароль успішно змінено!"),document.getElementById("currentPassword").value="",document.getElementById("newPassword").value="",document.getElementById("confirmPassword").value=""}catch(c){alert("Помилка при зміні паролю: "+c.message)}else alert("Невірний поточний пароль!")}else alert("Помилка доступу до даних користувача")}else alert("Нові паролі не співпадають!");else alert("Будь ласка, заповніть усі поля!")}function showAdminSetup(){hideAllForms(),document.getElementById("adminSetupForm").style.display="block"}function showSecureContent(e,t){hideAllForms(),document.getElementById("secureContent").style.display="block",document.getElementById("welcomeUser").innerText=e,document.getElementById("userRole").innerText=t,document.getElementById("adminMenu").style.display="Administrator"===t?"block":"none"}function logout(){currentUser=null,currentUserRole=null,masterXORKey=null,hideAllForms(),document.getElementById("loginForm").style.display="block",document.getElementById("username").value="",document.getElementById("password").value="",document.getElementById("username").focus()}function showLoginForm(){hideAllForms(),document.getElementById("loginForm").style.display="block",document.getElementById("username").focus()}function showCreateUserForm(){"Administrator"===currentUserRole?(hideAllForms(),document.getElementById("createUserForm").style.display="block",document.getElementById("newUserName").focus()):alert("Недостатньо прав доступу!")}function showDeleteUserForm(){"Administrator"===currentUserRole?(hideAllForms(),document.getElementById("deleteUserForm").style.display="block",document.getElementById("deleteUserID").focus()):alert("Недостатньо прав доступу!")}function showUsersListForm(){"Administrator"===currentUserRole?(hideAllForms(),document.getElementById("usersListForm").style.display="block",showUsersList()):alert("Недостатньо прав доступу!")}function showChangePasswordForm(){hideAllForms(),document.getElementById("changePasswordForm").style.display="block",document.getElementById("currentPassword").focus()}function returnToMainMenu(){currentUser&&currentUserRole?showSecureContent(currentUser,currentUserRole):showLoginForm()}function showMyXORKeyForm(){"Administrator"===currentUserRole?(hideAllForms(),document.getElementById("myXORKeyForm").style.display="block",document.getElementById("decryptPassword").focus(),document.getElementById("xorKeyDisplay").style.display="none",document.getElementById("decryptPassword").value=""):alert("Недостатньо прав доступу!")}function hideAllForms(){for(var e=["loginForm","adminSetupForm","secureContent","createUserForm","deleteUserForm","usersListForm","changePasswordForm","myXORKeyForm"],t=0;t<e.length;t++){var r=document.getElementById(e[t]);r&&(r.style.display="none")}}function normalizeContent(e){return e.replace(/\s*data-integrity="[^"]*"/g,"").replace(/<!--[\s\S]*?-->/g,"").replace(/<script[^>]*>\s*verifyIntegrity\(\)\s*<\/script>/gi,"").replace(/\r\n/g,"\n").replace(/\r/g,"\n").replace(/>\s+</g,"><").replace(/\s{2,}/g," ").replace(/^\s+|\s+$/gm,"").replace(/\n\s*\n/g,"\n")}function generateIntegrityHash(e){return crypto_sha256(normalizeContent(e).toLowerCase())}function verifyIntegrity(){try{var e=document.documentElement.getAttribute("data-integrity"),t=generateIntegrityHash(ReadHTAFile());return e&&t===e?(alert("Перевірка цілісності пройшла успішно!\nФайл не було змінено.\nОчікуваний хеш="+e.substring(0,16)+"...\\nПоточний хеш: "+t.substring(0,16)+"..."),!0):(alert("УВАГА: Файл було змінено!\nПрограма буде закрита з міркувань безпеки."),window.close(),!1)}catch(r){return alert("Критична помилка перевірки цілісності: "+r.message),window.close(),!1}} 
+function crypto_sha256(e){function t(e,t){var n=(65535&e)+(65535&t);return(e>>16)+(t>>16)+(n>>16)<<16|65535&n}function n(e,t){return e>>>t|e<<32-t}function r(e,t){return e>>>t}function a(e,t,n){return e&t^~e&n}function o(e,t,n){return e&t^e&n^t&n}function s(e){return n(e,2)^n(e,13)^n(e,22)}function i(e){return n(e,6)^n(e,11)^n(e,25)}function l(e){return n(e,7)^n(e,18)^r(e,3)}function c(e){return n(e,17)^n(e,19)^r(e,10)}return function(e){for(var t="0123456789abcdef",n="",r=0;r<4*e.length;r++)n+=t.charAt(e[r>>2]>>8*(3-r%4)+4&15)+t.charAt(e[r>>2]>>8*(3-r%4)&15);return n}(function(e,n){var r,d,u,g,m,f,p,h,y,v,w,D,E=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],S=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225],_=new Array(64);for(e[n>>5]|=128<<24-n%32,e[15+(n+64>>9<<4)]=n,y=0;y<e.length;y+=16){for(r=S[0],d=S[1],u=S[2],g=S[3],m=S[4],f=S[5],p=S[6],h=S[7],v=0;v<64;v++)_[v]=v<16?e[v+y]:t(t(t(c(_[v-2]),_[v-7]),l(_[v-15])),_[v-16]),w=t(t(t(t(h,i(m)),a(m,f,p)),E[v]),_[v]),D=t(s(r),o(r,d,u)),h=p,p=f,f=m,m=t(g,w),g=u,u=d,d=r,r=t(w,D);S[0]=t(r,S[0]),S[1]=t(d,S[1]),S[2]=t(u,S[2]),S[3]=t(g,S[3]),S[4]=t(m,S[4]),S[5]=t(f,S[5]),S[6]=t(p,S[6]),S[7]=t(h,S[7])}return S}(function(e){for(var t=Array(),n=0;n<8*e.length;n+=8)t[n>>5]|=(255&e.charCodeAt(n/8))<<24-n%32;return t}(e),8*e.length))}function generateSalt(){for(var e="",t=0;t<16;t++)e+="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789".charAt(Math.floor(62*Math.random()));return e}function hashPassword(e,t){return crypto_sha256(t+e+t)}function checkPasswordStrength(e){var t=0;return e.length>=8&&t++,/[a-z]/.test(e)&&t++,/[A-Z]/.test(e)&&t++,/[0-9]/.test(e)&&t++,/[^A-Za-z0-9]/.test(e)&&t++,t}function xorEncrypt(e,t){if(!e||!t)throw new Error("Plaintext and key are required");for(var n=stringToUTF8Bytes(e),r=stringToUTF8Bytes(t),a=[],o=0;o<n.length;o++){var s=r[o%r.length];a.push(n[o]^s)}for(var i="",l=0;l<a.length;l++)i+=String.fromCharCode(a[l]);return base64Encode(i)}function xorDecrypt(e,t){if(!e||!t)throw new Error("Encrypted data and key are required");try{for(var n=base64Decode(e),r=[],a=0;a<n.length;a++)r.push(n.charCodeAt(a));for(var o=stringToUTF8Bytes(t),s=[],i=0;i<r.length;i++){var l=o[i%o.length];s.push(r[i]^l)}return utf8BytesToString(s)}catch(c){throw new Error("Decryption failed: "+c.message)}}function generateXORKey(e){e=e||32;for(var t="",n=0;n<e;n++)t+="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*".charAt(Math.floor(70*Math.random()));return t}function base64Encode(e){for(var t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",n="",r=0;r<e.length;){var a=e.charCodeAt(r++)<<16|(r<e.length?e.charCodeAt(r++):0)<<8|(r<e.length?e.charCodeAt(r++):0);n+=t.charAt(a>>18&63),n+=t.charAt(a>>12&63),n+=r-2<e.length?t.charAt(a>>6&63):"=",n+=r-1<e.length?t.charAt(63&a):"="}return n}function base64Decode(e){var t="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",n="",r=0;for(e=e.replace(/[^A-Za-z0-9+/]/g,"");r<e.length;){var a=t.indexOf(e.charAt(r++)),o=t.indexOf(e.charAt(r++)),s=t.indexOf(e.charAt(r++)),i=t.indexOf(e.charAt(r++)),l=a<<18|o<<12|s<<6|i;n+=String.fromCharCode(l>>16&255),64!==s&&(n+=String.fromCharCode(l>>8&255)),64!==i&&(n+=String.fromCharCode(255&l))}return n}function stringToUTF8Bytes(e){for(var t=[],n=0;n<e.length;n++){var r=e.charCodeAt(n);r<128?t.push(r):r<2048?(t.push(192|r>>6),t.push(128|63&r)):(t.push(224|r>>12),t.push(128|r>>6&63),t.push(128|63&r))}return t}function utf8BytesToString(e){for(var t="",n=0;n<e.length;){var r=e[n++];if(r<128)t+=String.fromCharCode(r);else if(192==(224&r)){var a=e[n++];t+=String.fromCharCode((31&r)<<6|63&a)}else if(224==(240&r)){a=e[n++];var o=e[n++];t+=String.fromCharCode((15&r)<<12|(63&a)<<6|63&o)}}return t}function trimString(e){return e.replace(/^\s+|\s+$/g,"")}function registerAdmin(){var e=document.getElementById("adminPassword").value,t=document.getElementById("adminXORKey").value;if(e&&t)if(checkPasswordStrength(e)<3)alert("Пароль занадто слабкий! Використовуйте принаймні 8 символів, включаючи великі та малі літери, цифри.");else if(t.length<16)alert("XOR ключ повинен містити мінімум 16 символів!");else if("undefined"!=typeof saveUser)try{var n=generateSalt(),r=hashPassword(e,n),a=xorEncrypt(t,e);saveUser("YavirLab",r,n,"Administrator",a),alert("Адміністратор успішно створений!\nВикористовуйте ім'я користувача 'YavirLab' та вказаний пароль для входу."),showLoginForm()}catch(o){alert("Помилка при створенні адміністратора: "+o.message)}else alert("ПОМИЛКА: VBScript функція saveUser недоступна!");else alert("Будь ласка, заповніть усі поля!")}function loginUser(){var e=trimString(document.getElementById("username").value),t=document.getElementById("password").value;if(e&&t){var n=getUserDataString(e);if(n){var r=n.split(","),a=r[0],o=r[1],s=r[2],i=r[3],l=r[4];if(hashPassword(t,s)===o){var c="";if(l&&""!==l)try{c=xorDecrypt(l,t)}catch(d){c=null}window.currentUserData={id:parseInt(a),username:e,role:i,xorkey:c},updateLastLogin(e),showSecureContent(e,i),console.log("Користувач увійшов:",JSON.stringify(window.currentUserData))}else alert("Невірне ім'я користувача або пароль")}else alert("Невірне ім'я користувача або пароль")}else alert("Будь ласка, заповніть усі поля!")}function logout(){console.log("Користувач виходить:",window.currentUserData.username),window.currentUserData={},document.getElementById("username").value="",document.getElementById("password").value="",showLoginForm()}function changePassword(){var e=document.getElementById("currentPassword").value,t=document.getElementById("newPassword").value,n=document.getElementById("confirmPassword").value;if(e&&t&&n)if(t===n)if(checkPasswordStrength(t)<3)alert("Новий пароль занадто слабкий!");else{var r=window.currentUserData.username,a=getUserDataString(r);if(a){var o=a.split(","),s=o[1],i=o[2],l=o[4];if(hashPassword(e,i)===s)try{var c="";if(l&&""!==l&&"-"!==l)try{c=xorDecrypt(l,e)}catch(m){return void alert("Помилка розшифрування XOR ключа: "+m.message)}var d=generateSalt(),u=hashPassword(t,d),g="";if(""!==c)try{g=xorEncrypt(c,t)}catch(m){return void alert("Помилка шифрування XOR ключа новим паролем: "+m.message)}else g=l;changeUserPassword(r,u,d,g),alert("Пароль успішно змінено!"),document.getElementById("currentPassword").value="",document.getElementById("newPassword").value="",document.getElementById("confirmPassword").value=""}catch(m){alert("Помилка при зміні паролю: "+m.message)}else alert("Невірний поточний пароль!")}else alert("Помилка доступу до даних користувача")}else alert("Нові паролі не співпадають!");else alert("Будь ласка, заповніть усі поля!")}function createNewUser(){var e=trimString(document.getElementById("newUserName").value),t=document.getElementById("newUserPassword").value,n=document.getElementById("newUserRole").value;if(e&&t&&n)if(checkPasswordStrength(t)<2)alert("Пароль занадто слабкий! Використовуйте принаймні 6 символів.");else if(userExistsCheck(e))alert("Користувач з таким іменем вже існує!");else try{var r=generateSalt(),a=hashPassword(t,r),o="";"Guest"===n?o=window.currentUserData.xorkey?window.currentUserData.xorkey.substring(0,8):"":"User"!==n&&"Moderator"!==n||(o=window.currentUserData.xorkey||"");var s="";o&&(s=xorEncrypt(o,t)),saveUser(e,a,r,n,s),alert("Користувача "+e+" ("+n+") успішно створено!"),document.getElementById("newUserName").value="",document.getElementById("newUserPassword").value="",document.getElementById("newUserRole").selectedIndex=0}catch(i){alert("Помилка при створенні користувача: "+i.message)}else alert("Будь ласка, заповніть усі поля!")}function deleteUserById(){var e=document.getElementById("deleteUserID").value;e&&"1"!==e?confirm("Ви впевнені, що хочете видалити користувача з ID: "+e+"?")&&(deleteUser(e),alert("Користувача видалено!"),document.getElementById("deleteUserID").value="",showUsersList()):alert("Неможливо видалити адміністратора або невірний ID!")}function showUsersList(){var e=getAllUsers(),t=document.getElementById("usersList");if(e){var n=e.split("|"),r="<table border='1' style='width:100%; border-collapse:collapse; margin-bottom:16px;'>";r+="<tr><th>ID</th><th>Ім'я</th><th>Роль</th><th>Останній вхід</th></tr>";for(var a=0;a<n.length;a++)if(n[a]){var o=n[a].split(",");r+="<tr>",r+="<td>"+o[0]+"</td>",r+="<td>"+o[1]+"</td>",r+="<td>"+o[2]+"</td>",r+="<td>"+o[3]+"</td>",r+="</tr>"}r+="</table>",t.innerHTML=r}else t.innerHTML="<p>Користувачів не знайдено</p>"}function decryptAndShowXORKey(){var e=document.getElementById("decryptPassword").value;if(e){var t=getUserDataString(window.currentUserData.username);if(t){var n=t.split(","),r=n[1],a=n[2],o=n[4];if(hashPassword(e,a)!==r)return alert("Невірний пароль!"),void(document.getElementById("decryptPassword").value="");try{if(!o||""===o)return void alert("XOR ключ не знайдено в базі даних");var s=xorDecrypt(o,e);document.getElementById("xorKeyValue").value=s,document.getElementById("xorKeyGet").style.display="none",document.getElementById("xorKeyDisplay").style.display="block",document.getElementById("decryptPassword").value=""}catch(i){alert("Помилка розшифрування XOR ключа: "+i.message),document.getElementById("decryptPassword").value=""}}else alert("Помилка доступу до даних користувача")}else alert("Введіть ваш пароль!")}function copyXORKeyToClipboard(){var e=document.getElementById("xorKeyValue");try{e.select(),e.setSelectionRange(0,99999),document.execCommand("copy")?alert("XOR ключ скопійовано в буфер обміну!"):alert("Не вдалося скопіювати. Виділіть текст вручну та скопіюйте (Ctrl+C).")}catch(t){alert("Помилка копіювання: "+t.message+"\nВиділіть текст вручну та скопіюйте (Ctrl+C).")}window.getSelection&&window.getSelection().removeAllRanges()}function showAdminSetup(){hideAllForms(),document.getElementById("adminSetupForm").style.display="block"}function showSecureContent(e,t){hideAllForms(),document.getElementById("secureContent").style.display="block",document.getElementById("welcomeUser").innerText=e,document.getElementById("userRole").innerText=t,document.getElementById("adminMenu").style.display="none",document.getElementById("workspaceMenu").style.display="none","Administrator"===t?document.getElementById("adminMenu").style.display="block":(document.getElementById("workspaceMenu").style.display="block",document.getElementById("workJournalLink").style.display="User"===t||"Moderator"===t?"block":"none")}function showLoginForm(){hideAllForms(),document.getElementById("loginForm").style.display="block",document.getElementById("username").focus()}function showCreateUserForm(){window.currentUserData&&"Administrator"===window.currentUserData.role?(hideAllForms(),document.getElementById("createUserForm").style.display="block",document.getElementById("newUserName").focus()):alert("Недостатньо прав доступу!")}function showDeleteUserForm(){window.currentUserData&&"Administrator"===window.currentUserData.role?(hideAllForms(),document.getElementById("deleteUserForm").style.display="block",document.getElementById("deleteUserID").focus()):alert("Недостатньо прав доступу!")}function showUsersListForm(){window.currentUserData&&"Administrator"===window.currentUserData.role?(hideAllForms(),document.getElementById("usersListForm").style.display="block",showUsersList()):alert("Недостатньо прав доступу!")}function showChangePasswordForm(){hideAllForms(),document.getElementById("changePasswordForm").style.display="block",document.getElementById("currentPassword").focus()}function showMyXORKeyForm(){window.currentUserData&&"Administrator"===window.currentUserData.role?(hideAllForms(),document.getElementById("myXORKeyForm").style.display="block",document.getElementById("decryptPassword").focus(),document.getElementById("xorKeyDisplay").style.display="none",document.getElementById("decryptPassword").value=""):alert("Недостатньо прав доступу!")}function showWorkJournal(){hideAllForms(),document.getElementById("workspace").style.display="block",setTimeout(function(){document.getElementById("qualityTableBody")&&0===document.getElementById("qualityTableBody").children.length&&(setCurrentDate(),initializeTable())},100),initializeWorkJournal(),loadUserSettings()}function returnToMainMenu(){if(window.currentUserData&&window.currentUserData.id){var e=window.currentUserData;document.getElementById("xorKeyDisplay").style.display="none",document.getElementById("xorKeyGet").style.display="block",showSecureContent(e.username,e.role)}else showLoginForm()}function hideAllForms(){for(var e=["loginForm","adminSetupForm","secureContent","createUserForm","deleteUserForm","usersListForm","changePasswordForm","myXORKeyForm","workspace"],t=0;t<e.length;t++){var n=document.getElementById(e[t]);n&&(n.style.display="none")}}String.prototype.padStart||(String.prototype.padStart=function(e,t){return e|=0,t=String(void 0!==t?t:" "),this.length>e?String(this):((e-=this.length)>t.length&&(t+=t.repeat(e/t.length)),t.slice(0,e)+String(this))}),String.prototype.padEnd||(String.prototype.padEnd=function(e,t){return e|=0,t=String(void 0!==t?t:" "),this.length>e?String(this):((e-=this.length)>t.length&&(t+=t.repeat(e/t.length)),String(this)+t.slice(0,e))}),String.prototype.repeat||(String.prototype.repeat=function(e){"use strict";if(null==this)throw new TypeError("can't convert "+this+" to object");var t=""+this;if((e=+e)!=e&&(e=0),e<0)throw new RangeError("repeat count must be non-negative");if(e==Infinity)throw new RangeError("repeat count must be less than infinity");if(e=Math.floor(e),0==t.length||0==e)return"";if(t.length*e>=1<<28)throw new RangeError("repeat count must not overflow maximum string size");for(var n="",r=0;r<e;r++)n+=t;return n}),Array.prototype.indexOf||(Array.prototype.indexOf=function(e,t){if(null==this)throw new TypeError('"this" is null or not defined');var n=Object(this),r=parseInt(n.length)||0;if(0===r)return-1;var a,o=parseInt(t)||0;if(o>=r)return-1;for(a=Math.max(o>=0?o:r-Math.abs(o),0);a<r;a++)if(a in n&&n[a]===e)return a;return-1}),Object.keys||(Object.keys=function(e){var t=[];for(var n in e)e.hasOwnProperty(n)&&t.push(n);return t}),Array.prototype.forEach||(Array.prototype.forEach=function(e,t){var n,r;if(null==this)throw new TypeError("this is null or not defined");var a=Object(this),o=parseInt(a.length)||0;if("function"!=typeof e)throw new TypeError(e+" is not a function");for(arguments.length>1&&(n=t),r=0;r<o;){var s;r in a&&(s=a[r],e.call(n,s,r,a)),r++}}),Function.prototype.bind||(Function.prototype.bind=function(e){if("function"!=typeof this)throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");var t=Array.prototype.slice.call(arguments,1),n=this,r=function(){},a=function(){return n.apply(this instanceof r?this:e,t.concat(Array.prototype.slice.call(arguments)))};return this.prototype&&(r.prototype=this.prototype),a.prototype=new r,a}),Array.isArray||(Array.isArray=function(e){return"[object Array]"===Object.prototype.toString.call(e)}),window.currentUserData={},function(context){var layout='<div id="panel-box">  <div id="panel-dragbar"></div>  <div id="panel-header">  <span style="padding-left: 5px; font-weight: 700; color: #555;">Console</span>    <span id="panel-menu-close" style="float: right; margin-right: 8px; cursor: pointer; color: grey;" onclick="htaConsole.toggle();">&#10006;</span>    <span id="panel-menu-minimize" style="float: right; margin-top:1px;margin-right: 10px; cursor: pointer; color: grey;" onclick="htaConsole.minimize()">&#9660;</span>  </div>  <div style="background:#fff">    <div id="panel-console"></div>    <span style="padding-left:4px; font-weight:700; font-size:16px; color:#62adea">&#62;</i></span><input id="commandline">  </div>  <div id="panel-navigation">    <span style="cursor: pointer" onclick="htaConsole.clear()">&#10680;</span>    <span id="panel-menu-transparent" style="cursor: pointer" onclick="htaConsole.transparent()">&#9680;</span>  </div></div>',css={panelBox:{width:"100%",color:"#000","font-family":"Consolas, Courier","font-size":"14px",padding:"3px 0px 3px 0px",position:"fixed",bottom:"-4px",left:"0px",opacity:"1.0",display:"none","z-index":"10000"},panelDragbar:{"border-top":"3px solid #ededed","border-bottom":"1px solid #ccc",width:"100%",cursor:"row-resize"},panelHeader:{height:"24px",background:"#ededed","border-top":"1px solid #fff","border-bottom":"1px solid #cacaca","text-align":"left","font-family":"Arial"},panelConsole:{overflow:"auto",height:"150px",padding:" 0 5px 0 5px","text-align":"left",display:"block",background:"#fff"},panelNavigation:{height:"21px",width:"100%","padding-left":"4px","line-height":"1","font-size":"18px","font-weight":"700",background:"#ededed","border-top":"1px solid #cacaca","font-family":"Arial",color:"grey"},commandline:{width:"97%",border:"none","padding-left":"6px","outline-width":"0px"}},cmdHistory=[],cmdHistoryPosition=0,camelCase=function(e){return e.toLowerCase().replace(/-(.)/g,function(e,t){return t.toUpperCase()})},hyphen=function(e){return e.replace(/([a-z][A-Z])/g,function(e){return e[0]+"-"+e[1].toLowerCase()})},censor=function(e){var t=0;return function(n,r){return 0!==t&&"object"==typeof e&&"object"==typeof r&&e==r?"[Circular]":t>=29?"[Unknown]":(++t,r)}},htaConsole={init:function(){var container=document.createElement("div");for(var cssClass in container.innerHTML=layout,document.body.appendChild(container),css)for(var cssProp in css[cssClass])document.getElementById(hyphen(cssClass)).style[camelCase(cssProp)]=css[cssClass][cssProp];var dragHandler=function(e){var t="innerHeight"in window?window.innerHeight:document.documentElement.offsetHeight;document.getElementById("panel-console").style.height=t-86-e.clientY+"px"};document.getElementById("panel-dragbar").addEventListener("mousedown",function(e){e.preventDefault(),document.addEventListener("mousemove",dragHandler)}),document.addEventListener("mouseup",function(e){document.removeEventListener("mousemove",dragHandler)}),document.addEventListener("keydown",function(e){123===e.keyCode&&htaConsole.toggle()},!0),document.getElementById("panel-console").addEventListener("click",function(e){document.getElementById("commandline").focus()}),document.getElementById("commandline").addEventListener("keypress",function(evt){if(13===evt.keyCode){var sCmd=this.value;if("clear"===sCmd)htaConsole.clear(),this.value="";else if("history"===sCmd){for(var x=0;x<cmdHistory.length;x++)console.log(cmdHistory[x]);this.value=""}else if(sCmd){htaConsole.log('<span style="color:#777"; font-weight:700">&#62;</span> <span>'+sCmd+"</span>"),cmdHistory.push(sCmd);try{var evalCmd=eval(sCmd);if("object"==typeof evalCmd)try{console.log(JSON.stringify(evalCmd))}catch(e){try{console.log(JSON.stringify(evalCmd,censor(evalCmd)))}catch(e){throw e}}else console.log(evalCmd);this.value=""}catch(e){throw this.value="",e}}cmdHistoryPosition=cmdHistory.length}}),document.getElementById("commandline").addEventListener("keydown",function(e){if(38===e.keyCode){if(--cmdHistoryPosition<0&&(cmdHistoryPosition=0),cmdHistory[cmdHistoryPosition]!==undefined&&""!==cmdHistory[cmdHistoryPosition])return this.value=cmdHistory[cmdHistoryPosition],!1;if(cmdHistoryPosition===cmdHistory.length)return this.value="",!1}if(40===e.keyCode){if(++cmdHistoryPosition>=cmdHistory.length&&(cmdHistoryPosition=cmdHistory.length),cmdHistory[cmdHistoryPosition]!==undefined&&""!==cmdHistory[cmdHistoryPosition])return this.value=cmdHistory[cmdHistoryPosition],!1;if(cmdHistoryPosition===cmdHistory.length)return this.value="",!1}}),console=window||window.console;for(var method=["log","info","warn","onerror","debug","trace","dir","group","groupCollapsed","groupEnd","time","timeEnd","profile","profileEnd","dirxml","assert","count","markTimeline","timeStamp","clear","cmd"],i=0;i<method.length;i++)window.console[method[i]]||("onerror"===method[i]?console[method[i]]=function(){var e=arguments[1],t=e.split("/")[e.split("/").length-1];return htaConsole.log('<span style="color:red">&otimes;  <span>'+arguments[0]+'</span>  <span class="pull-right" style="cursor:pointer; color:blue" onclick="htaConsole.showModal(\''+e+"')\">"+t+":"+arguments[2]+"</span></span>"),!0}:console[method[i]]=function(){return!0});console={clear:function(){htaConsole.clear()},cmd:function(e){htaConsole.log('<span style="color:#777"; font-weight:700">&#62;</span> <span>'+e+"</span>")},info:function(e){htaConsole.log('<span style="color: RoyalBlue">&#9432;</span> <span>'+e+"</span>")},log:function(e){htaConsole.log('<span style="padding-left: 2px;">'+e+"</span>")},warn:function(e){htaConsole.log('<span style="color: orange">&#9888;</span> <span>'+e+"</span>")},error:function(e){throw e}}},log:function(e){var t=document.createElement("div");t.innerHTML=e+"<br>",document.getElementById("panel-console").appendChild(t),this.consoleresize()},consoleresize:function(){var e=document.getElementById("panel-console");e.scrollTop=e.scrollHeight},clear:function(){document.getElementById("panel-console").innerHTML=""},transparent:function(){var e=document.getElementById("panel-box"),t=document.getElementById("panel-menu-transparent");"0.5"===e.style.opacity?(e.style.opacity="1.0",t.innerHTML="&#9680;"):(e.style.opacity="0.5",t.innerHTML="&#9899;")},minimize:function(){var e=document.getElementById("panel-console"),t=document.getElementById("panel-menu-minimize");"block"===e.style.display?(this.panelConsoleHeight=e.style.height,e.style.height="0px",e.style.display="none",t.innerHTML="&#9650;"):(e.style.height=this.panelConsoleHeight,e.style.display="block",t.innerHTML="&#9660;",this.consoleresize())},toggle:function(){var e=document.getElementById("panel-box");"block"===e.style.display?e.style.display="none":(e.style.display="block",this.consoleresize())},showModal:function(e){window.open(e)}};return context.htaConsole=htaConsole}(window).init();var currentUserSettings={},settingsUpdateTimeout=null,SETTINGS_SAVE_DELAY=2e3,PRODUCT_FIELDS_MAP={general:["sampleSelection","shiftNumber","brigadeInfo"],"I драна":["drama_sample1","drama_mass1","drama_sample2","drama_mass2"],"В/С":["vs_bunker","vs_sample1","vs_mass1","vs_sample2","vs_mass2","vs_residue","vs_metal","vs_color","vs_crunch"],"1/С":["first_bunker","first_sample1","first_mass1","first_sample2","first_mass2","first_residue","first_passage","first_metal","first_color","first_crunch"],"Висівки":["bran_bunker","bran_sample1","bran_mass1","bran_sample2","bran_mass2","bran_passage","bran_metal","bran_color","bran_crunch"],"Подача":["feed_bunker","feed_sample1","feed_mass1","feed_sample2","feed_mass2","feed_crunch"],"I Замочка":["soak_bunker","soak_sample1","soak_mass1","soak_sample2","soak_mass2"]};function initializeUserSettings(){if(window.currentUserData&&"Guest"!==window.currentUserData.role)try{var e=GetUserSettings(window.currentUserData.id);if(e&&""!==e){var t=xorDecrypt(e,window.currentUserData.xorkey),n=t.indexOf("|");if(-1!==n){var r=parseInt(t.substring(0,n)),a=t.substring(n+1,n+1+r);try{currentUserSettings=JSON.parse(a)}catch(s){currentUserSettings=createDefaultSettings()}}else{var o=t.trim().replace(/\0/g,"").replace(/[\x00-\x1F\x7F]/g,"");try{currentUserSettings=JSON.parse(o)}catch(s){currentUserSettings=createDefaultSettings()}}}else currentUserSettings=createDefaultSettings();applySettingsToForm()}catch(i){currentUserSettings=createDefaultSettings()}}function createDefaultSettings(){return{general:{},products:{},productStates:{drama:!0,vs:!0,first:!0,bran:!0,feed:!0,soak:!0}}}function applySettingsToForm(){try{if(currentUserSettings.general)for(var e=0;e<PRODUCT_FIELDS_MAP.general.length;e++){var t=PRODUCT_FIELDS_MAP.general[e];(s=currentUserSettings.general[t])!==undefined&&setElementValue(t,s)}if(currentUserSettings.products)for(var n in PRODUCT_FIELDS_MAP)if("general"!==n){var r=currentUserSettings.products[n];if(r)for(var a=PRODUCT_FIELDS_MAP[n],o=0;o<a.length;o++){var s;(s=r[t=a[o]])!==undefined&&setElementValue(t,s)}}if(currentUserSettings.productStates&&void 0!==productToggleStates)for(var i in currentUserSettings.productStates)productToggleStates.hasOwnProperty(i)&&(productToggleStates[i]=currentUserSettings.productStates[i])}catch(l){}}function saveCurrentSettings(){if(window.currentUserData&&"Guest"!==window.currentUserData.role)try{currentUserSettings.general={};for(var e=0;e<PRODUCT_FIELDS_MAP.general.length;e++){var t=PRODUCT_FIELDS_MAP.general[e];(i=getElementValue(t))&&(currentUserSettings.general[t]=i)}for(var n in currentUserSettings.products={},PRODUCT_FIELDS_MAP)if("general"!==n){for(var r={},a=PRODUCT_FIELDS_MAP[n],o=!1,s=0;s<a.length;s++){var i;t=a[s],(i=getElementValue(t))&&(r[t]=i,o=!0)}o&&(currentUserSettings.products[n]=r)}if(void 0!==productToggleStates)for(var l in currentUserSettings.productStates={},productToggleStates)currentUserSettings.productStates[l]=productToggleStates[l];var c=JSON.stringify(currentUserSettings);try{JSON.parse(c);var d=xorEncrypt(c.length+"|"+c,window.currentUserData.xorkey);SaveUserSettings(window.currentUserData.id,d),console.log("Налаштування збережено для користувача: "+window.currentUserData.username)}catch(u){return}}catch(g){}}function getElementValue(e){var t=document.getElementById(e);return t?t.value:""}function setElementValue(e,t){var n=document.getElementById(e);n&&t!==undefined&&null!==t&&(n.value=t)}function handleSettingsChange(){window.currentUserData&&"Guest"!==window.currentUserData.role&&(settingsUpdateTimeout&&clearTimeout(settingsUpdateTimeout),settingsUpdateTimeout=setTimeout(function(){saveCurrentSettings()},SETTINGS_SAVE_DELAY))}function initializeSettingsEventListeners(){if(window.currentUserData&&"Guest"!==window.currentUserData.role){var e=[];for(var t in e=e.concat(PRODUCT_FIELDS_MAP.general),PRODUCT_FIELDS_MAP)"general"!==t&&(e=e.concat(PRODUCT_FIELDS_MAP[t]));for(var n=0;n<e.length;n++){var r=document.getElementById(e[n]);r&&(r.addEventListener?(r.addEventListener("change",handleSettingsChange,!1),r.addEventListener("input",handleSettingsChange,!1)):r.attachEvent&&(r.attachEvent("onchange",handleSettingsChange),r.attachEvent("oninput",handleSettingsChange)))}}}function saveProductStatesQuick(){if(window.currentUserData&&"Guest"!==window.currentUserData.role)try{if(void 0!==productToggleStates){for(var e in currentUserSettings.productStates||(currentUserSettings.productStates={}),productToggleStates)currentUserSettings.productStates[e]=productToggleStates[e];saveCurrentSettings()}}catch(t){}}function loadUserSettings(){initializeUserSettings(),initializeSettingsEventListeners()}function saveUserSettingsManually(){saveCurrentSettings()}var DatePicker={currentDate:new Date,selectedDate:new Date,isOpen:!1,targetInput:null,init:function(){this.createDatePicker(),this.attachEvents()},createDatePicker:function(){document.body.insertAdjacentHTML("beforeend",'<div id="datepicker" class="datepicker" style="display: none;"><div class="datepicker-header"><button type="button" class="datepicker-btn" id="prevMonth">&lt;</button><span class="datepicker-title" id="monthYear"></span><button type="button" class="datepicker-btn" id="nextMonth">&gt;</button></div><div class="datepicker-calendar"><div class="datepicker-weekdays"><span>Пн</span><span>Вт</span><span>Ср</span><span>Чт</span><span>Пт</span><span>Сб</span><span>Нд</span></div><div class="datepicker-days" id="calendarDays"></div></div><div class="datepicker-footer"><button type="button" class="datepicker-btn" id="todayBtn">Сьогодні</button><button type="button" class="datepicker-btn" id="closeBtn">Закрити</button></div></div>')},attachEvents:function(){var e=this;document.getElementById("prevMonth").onclick=function(){e.previousMonth()},document.getElementById("nextMonth").onclick=function(){e.nextMonth()},document.getElementById("todayBtn").onclick=function(){e.selectToday()},document.getElementById("closeBtn").onclick=function(){e.close()},document.onclick=function(t){var n=document.getElementById("datepicker"),r=t.target||t.srcElement;e.isOpen&&!e.isChildOf(r,n)&&r!==e.targetInput&&e.close()},document.onkeydown=function(t){if(e.isOpen){var n=t.keyCode||t.which;return 27===n?(e.close(),e.targetInput.focus(),t.preventDefault?t.preventDefault():t.returnValue=!1,!1):13===n?(e.selectToday(),t.preventDefault?t.preventDefault():t.returnValue=!1,!1):37===n?(e.previousMonth(),t.preventDefault?t.preventDefault():t.returnValue=!1,!1):39===n?(e.nextMonth(),t.preventDefault?t.preventDefault():t.returnValue=!1,!1):void 0}}},isChildOf:function(e,t){if(!e||!t)return!1;for(;e&&e!==t;)e=e.parentNode;return e===t},show:function(e){this.targetInput=e,this.isOpen=!0;var t=e.value;t?(this.selectedDate=new Date(t),this.currentDate=new Date(this.selectedDate)):(this.selectedDate=new Date,this.currentDate=new Date),this.render(),this.position(e),document.getElementById("datepicker").style.display="block"},position:function(e){var t=document.getElementById("datepicker"),n=e.getBoundingClientRect(),r=n.bottom+window.pageYOffset+5,a=n.left+window.pageXOffset;a+280>window.innerWidth&&(a=window.innerWidth-280-10),r+350>window.innerHeight+window.pageYOffset&&(r=n.top+window.pageYOffset-350-5),t.style.top=r+"px",t.style.left=a+"px"},render:function(){this.renderHeader(),this.renderDays()},renderHeader:function(){var e=["Січень","Лютий","Березень","Квітень","Травень","Червень","Липень","Серпень","Вересень","Жовтень","Листопад","Грудень"][this.currentDate.getMonth()]+" "+this.currentDate.getFullYear();document.getElementById("monthYear").textContent=e},renderDays:function(){var e=document.getElementById("calendarDays");e.innerHTML="";for(var t=this.currentDate.getFullYear(),n=this.currentDate.getMonth(),r=new Date(t,n,1),a=new Date(t,n+1,0),o=(r.getDay()+6)%7,s=new Date(t,n,0),i="",l=0,c=o-1;c>=0;c--)i+='<div class="datepicker-day other-month" data-date="'+(0===n?t-1:t)+"-"+(0===n?12:n)+"-"+(d=s.getDate()-c)+'">'+d+"</div>",l++;for(var d=1;d<=a.getDate();d++){var u=t+"-"+(n+1)+"-"+d,g="datepicker-day",m=new Date;t===m.getFullYear()&&n===m.getMonth()&&d===m.getDate()&&(g+=" today"),this.selectedDate&&t===this.selectedDate.getFullYear()&&n===this.selectedDate.getMonth()&&d===this.selectedDate.getDate()&&(g+=" selected"),i+='<div class="'+g+'" data-date="'+u+'">'+d+"</div>",l++}var f=42-l;for(d=1;d<=f;d++){var p=n+2,h=t;p>12&&(p=1,h++),i+='<div class="datepicker-day other-month" data-date="'+h+"-"+p+"-"+d+'">'+d+"</div>"}e.innerHTML=i;var y=e.getElementsByClassName("datepicker-day");for(c=0;c<y.length;c++)y[c].onclick=this.createDayClickHandler(y[c])},createDayClickHandler:function(e){var t=this;return function(){t.selectDate(e.getAttribute("data-date"))}},selectDate:function(e){var t=e.split("-"),n=parseInt(t[0]),r=parseInt(t[1])-1,a=parseInt(t[2]);this.selectedDate=new Date(n,r,a);var o=n+"-"+(r+1<10?"0":"")+(r+1)+"-"+(a<10?"0":"")+a;this.targetInput.value=o,this.targetInput.onchange&&this.targetInput.onchange(),this.close()},selectToday:function(){var e=new Date;this.selectedDate=new Date(e),this.currentDate=new Date(e),this.render()},previousMonth:function(){this.currentDate.setMonth(this.currentDate.getMonth()-1),this.render()},nextMonth:function(){this.currentDate.setMonth(this.currentDate.getMonth()+1),this.render()},close:function(){this.isOpen=!1,document.getElementById("datepicker").style.display="none"}};function attachDatePicker(e){var t=document.getElementById(e);t&&(t.parentNode.className+=" datepicker-input",t.onclick=function(){DatePicker.show(t)},t.onkeydown=function(e){var n=e.keyCode||e.which;return!(9!==n&&(27===n?DatePicker.isOpen&&(DatePicker.close(),e.preventDefault?e.preventDefault():e.returnValue=!1,1):13===n||32===n?(DatePicker.show(t),e.preventDefault?e.preventDefault():e.returnValue=!1,1):(e.preventDefault?e.preventDefault():e.returnValue=!1,1)))})}function initializeDatePicker(){"loading"===document.readyState?document.addEventListener("DOMContentLoaded",function(){DatePicker.init()}):DatePicker.init()}var productToggleStates={drama:!0,vs:!0,first:!0,bran:!0,feed:!0,soak:!0};function calculateMoisture(e){try{var t=parseFloat(getElementValue(e+"_mass1"))||0,n=parseFloat(getElementValue(e+"_dried1"))||0,r=parseFloat(getElementValue(e+"_mass2"))||0,a=parseFloat(getElementValue(e+"_dried2"))||0,o="";n&&a&&(o=(t-n+(r-a))/10,((o=Math.round(10*o)/10)<=0||o>=100)&&(o=""));var s=document.getElementById(e+"_moisture");return s&&(s.textContent=o.toString()),o}catch(i){return 0}}function calculateAllMoisture(){for(var e=["drama","vs","first","bran","feed","soak"],t=0;t<e.length;t++)calculateMoisture(e[t])}function handleMassChange(e){calculateMoisture(e)}function initializeMoistureCalculation(){for(var e=["drama","vs","first","bran","feed","soak"],t=0;t<e.length;t++)for(var n=e[t],r=["_mass1","_dried1","_mass2","_dried2"],a=0;a<r.length;a++){var o=n+r[a],s=document.getElementById(o);s&&function(e){s.addEventListener?(s.addEventListener("input",function(){handleMassChange(e)},!1),s.addEventListener("change",function(){handleMassChange(e)},!1)):s.attachEvent&&(s.attachEvent("oninput",function(){handleMassChange(e)}),s.attachEvent("onchange",function(){handleMassChange(e)}))}(n)}calculateAllMoisture()}function setCurrentDate(){var e=new Date,t=e.getFullYear(),n=e.getMonth()+1,r=e.getDate(),a=t+"-"+(n<10?"0"+n:n.toString())+"-"+(r<10?"0"+r:r.toString()),o=document.getElementById("journalDate");o&&!o.value&&(o.value=a)}function getElementValue(e){var t=document.getElementById(e);return t?t.value:""}function initializeMassFieldsNavigation(){for(var e=["drama","vs","first","bran","feed","soak"],t=["_mass1","_mass2","_dried1","_dried2"],n=0;n<e.length;n++)for(var r=e[n],a=0;a<t.length;a++){var o=r+t[a],s=document.getElementById(o);s&&function(e,t){e.addEventListener?e.addEventListener("keydown",function(n){handleMassFieldKeydown(n,e,t)},!1):e.attachEvent&&e.attachEvent("onkeydown",function(n){handleMassFieldKeydown(n||window.event,e,t)})}(s,r)}}function handleMassFieldKeydown(e,t,n){var r=e.keyCode||e.which;if(38===r||40===r){e.preventDefault?e.preventDefault():e.returnValue=!1;var a,o=parseFloat(t.value)||0;return a=38===r?o+1:Math.max(0,o-1),t.value=a,calculateMoisture(n),!1}}function toggleProductRow(e){try{productToggleStates[e]=!productToggleStates[e];var t=productToggleStates[e],n=document.querySelectorAll('tr[data-product="'+e+'"]');if(!n||0===n.length)return;for(var r=document.querySelector('button[onclick*="'+e+'"]'),a=[],o=[],s=document.querySelectorAll('input[id^="'+e+'_"], select[id^="'+e+'_"]'),i=0;i<s.length;i++)"input"===s[i].tagName.toLowerCase()?a.push(s[i]):"select"===s[i].tagName.toLowerCase()&&o.push(s[i]);if(t){for(var l=0;l<n.length;l++)n[l].className=n[l].className.replace(/ inactive/g,"");for(var c=0;c<a.length;c++)a[c].disabled=!1,a[c].style.backgroundColor="",a[c].style.color="",a[c].style.borderColor="",a[c].style.cursor="";for(var d=0;d<o.length;d++)o[d].disabled=!1,o[d].style.backgroundColor="",o[d].style.color="",o[d].style.borderColor="",o[d].style.cursor="";r&&(r.className=r.className.replace(/ inactive/g,""),r.textContent="−",r.title="Деактивувати продукцію")}else{for(var u=0;u<n.length;u++)-1===n[u].className.indexOf("inactive")&&(n[u].className+=" inactive");for(var g=0;g<a.length;g++)a[g].disabled=!0;for(var m=0;m<o.length;m++)o[m].disabled=!0;r&&(-1===r.className.indexOf("inactive")&&(r.className+=" inactive"),r.textContent="+",r.title="Активувати продукцію")}t&&setTimeout(function(){calculateMoisture(e)},100),handleProductToggleChange()}catch(f){}}function initializeProductToggleStates(){try{for(var e=["drama","vs","first","bran","feed","soak"],t=0;t<e.length;t++){var n=e[t];productToggleStates[n]=!0;var r=document.querySelector('button[onclick*="'+n+'"]');r&&(r.textContent="−",r.title="Деактивувати продукцію")}}catch(a){}}function loadProductToggleStates(){if(window.currentUserData&&"Guest"!==window.currentUserData.role)try{if(currentUserSettings&&currentUserSettings.productStates){var e=currentUserSettings.productStates;for(var t in e)if(productToggleStates.hasOwnProperty(t)){var n=e[t];productToggleStates[t]=n,applyProductRowState(t,n)}}}catch(r){}}function applyProductRowState(e,t){try{var n=document.querySelectorAll('tr[data-product="'+e+'"]');if(!n||0===n.length)return;var r=document.querySelector('button[onclick*="'+e+'"]'),a=document.querySelectorAll('input[id^="'+e+'_"], select[id^="'+e+'_"]');if(t){for(var o=0;o<n.length;o++)n[o].className=n[o].className.replace(/ inactive/g,"");for(var s=0;s<a.length;s++)a[s].disabled=!1,a[s].style.backgroundColor="",a[s].style.color="",a[s].style.borderColor="",a[s].style.cursor="";r&&(r.className=r.className.replace(/ inactive/g,""),r.textContent="−",r.title="Деактивувати продукцію")}else{for(var i=0;i<n.length;i++)-1===n[i].className.indexOf("inactive")&&(n[i].className+=" inactive");for(var l=0;l<a.length;l++)a[l].disabled=!0;r&&(-1===r.className.indexOf("inactive")&&(r.className+=" inactive"),r.textContent="+",r.title="Активувати продукцію")}}catch(c){}}function initializeWorkJournal(){setCurrentDate(),initializeProductToggleStates(),initializeMoistureCalculation(),initializeMassFieldsNavigation(),initializeProductionFlow(),setTimeout(function(){initializeDatePicker(),attachDatePicker("journalDate")},100)}function loadUserSettings(){initializeUserSettings(),initializeSettingsEventListeners(),setTimeout(function(){loadProductToggleStates(),"function"==typeof loadProductionFlowData&&(loadProductionFlowData(),console.log("ProductionFlow дані завантажено"))},500)}function handleProductToggleChange(){window.currentUserData&&"Guest"!==window.currentUserData.role&&setTimeout(function(){"function"==typeof saveProductStatesQuick?saveProductStatesQuick():saveCurrentSettings()},100)}var PRODUCTION_FLOW_FIELDS_MAP={"I драна":["drama_sample1","drama_mass1","drama_dried1","drama_sample2","drama_mass2","drama_dried2","drama_moisture"],"В/С":["vs_bunker","vs_sample1","vs_mass1","vs_dried1","vs_sample2","vs_mass2","vs_dried2","vs_moisture","vs_whiteness","vs_gluten_quantity","vs_gluten_bdk","vs_residue","vs_metal","vs_color","vs_crunch"],"1/С":["first_bunker","first_sample1","first_mass1","first_dried1","first_sample2","first_mass2","first_dried2","first_moisture","first_whiteness","first_gluten_quantity","first_gluten_bdk","first_residue","first_passage","first_metal","first_color","first_crunch"],"Висівки":["bran_bunker","bran_sample1","bran_mass1","bran_dried1","bran_sample2","bran_mass2","bran_dried2","bran_moisture","bran_passage","bran_metal","bran_color","bran_crunch"],"Подача":["feed_bunker","feed_sample1","feed_mass1","feed_dried1","feed_sample2","feed_mass2","feed_dried2","feed_moisture","feed_gluten_quantity","feed_gluten_bdk","feed_crunch"],"I Замочка":["soak_bunker","soak_sample1","soak_mass1","soak_dried1","soak_sample2","soak_mass2","soak_dried2","soak_moisture"]};function collectProductionFlowData(){try{var e={},t=getElementValue("shiftNumber")||"1",n=getElementValue("brigadeInfo")||"",r=getElementValue("sampleSelection")||"1";for(var a in PRODUCTION_FLOW_FIELDS_MAP){var o=getProductPrefixByName(a);if(productToggleStates[o]){for(var s={},i=!1,l=PRODUCTION_FLOW_FIELDS_MAP[a],c=0;c<l.length;c++){var d=l[c],u=getElementValue(d);u&&""!==u&&(s[d]=u,i=!0)}i&&(e[a]||(e[a]={}),e[a][t]||(e[a][t]={}),e[a][t][r]=s,e[a][t].brigade=n)}}return e}catch(g){return{}}}function getProductPrefixByName(e){return{"I драна":"drama","В/С":"vs","1/С":"first","Висівки":"bran","Подача":"feed","I Замочка":"soak"}[e]||""}function saveProductionFlowData(){if(window.currentUserData&&"Guest"!==window.currentUserData.role)try{var e=collectProductionFlowData();if(0===Object.keys(e).length)return;var t=getElementValue("journalDate");if(!t)return void alert("Будь ласка, вкажіть дату аналізу!");var n,r={},a=GetProductionFlowData(t);if(a&&""!==a)try{var o,s=xorDecrypt(a,window.currentUserData.xorkey),i=s.indexOf("|");if(-1!==i){var l=parseInt(s.substring(0,i));o=s.substring(i+1,i+1+l)}else o=s.trim().replace(/\0/g,"").replace(/[\x00-\x1F\x7F]/g,"");r=JSON.parse(o),console.log("Завантажено існуючі дані для об'єднання")}catch(g){console.log("Помилка завантаження існуючих даних: "+g.message),r={}}try{n=mergeProductionFlowData(r,e)}catch(m){return alert("ПОМИЛКА: Не вдалося об'єднати дані з існуючими!\nЗбереження скасовано для збереження старих даних.\n\nДеталі: "+m.message),void console.log("Збереження скасовано через помилку об'єднання")}var c=JSON.stringify(n),d=xorEncrypt(c.length+"|"+c,window.currentUserData.xorkey),u=(new Date).toISOString();SaveProductionFlowData(t,d,u,window.currentUserData.id),console.log("ProductionFlow збережено з об'єднанням для дати: "+t)}catch(g){console.log("Помилка збереження ProductionFlow: "+g.message),alert("Помилка збереження даних: "+g.message)}}function mergeProductionFlowData(e,t){try{var n=JSON.parse(JSON.stringify(e));for(var r in t)for(var a in n[r]||(n[r]={}),t[r])for(var o in n[r][a]||(n[r][a]={}),t[r][a])n[r][a][o]=t[r][a][o];return console.log("Дані успішно об'єднано"),n}catch(s){throw console.log("КРИТИЧНА ПОМИЛКА об'єднання даних: "+s.message),new Error("Не вдалося об'єднати дані: "+s.message)}}function loadProductionFlowData(){if(window.currentUserData&&window.currentUserData.xorkey)try{var e=getElementValue("journalDate");if(!e)return void loadDefaultValuesFromSettings();var t=GetProductionFlowData(e);if(!t||""===t)return void loadDefaultValuesFromSettings();var n,r=xorDecrypt(t,window.currentUserData.xorkey),a=r.indexOf("|");if(-1!==a){var o=parseInt(r.substring(0,a));n=r.substring(a+1,a+1+o)}else n=r.trim().replace(/\0/g,"").replace(/[\x00-\x1F\x7F]/g,"");applyProductionFlowDataToForm(JSON.parse(n),getElementValue("shiftNumber")||"1",getElementValue("sampleSelection")||"1")}catch(s){loadDefaultValuesFromSettings()}else loadDefaultValuesFromSettings()}function applyProductionFlowDataToForm(e,t,n){try{var r=0,a="";for(var o in PRODUCTION_FLOW_FIELDS_MAP)if(e[o]&&e[o][t]&&e[o][t][n]){var s=e[o][t][n],i=PRODUCTION_FLOW_FIELDS_MAP[o];!a&&e[o][t].brigade&&(a=e[o][t].brigade);for(var l=0;l<i.length;l++){var c=i[l];if(-1===c.indexOf("_moisture")&&s.hasOwnProperty(c)){var d=s[c],u=document.getElementById(c);u&&(u.value=d,r++)}}}if(a){var g=getElementValue("brigadeInfo");g&&""!==g||setElementValue("brigadeInfo",a)}r>0?setTimeout(function(){calculateAllMoisture()},100):loadDefaultValuesFromSettings()}catch(m){loadDefaultValuesFromSettings()}}function loadDefaultValuesFromSettings(){try{var e=getElementValue("shiftNumber"),t=getElementValue("sampleSelection"),n=getElementValue("brigadeInfo"),r=getElementValue("journalDate");for(var a in PRODUCTION_FLOW_FIELDS_MAP)for(var o=PRODUCTION_FLOW_FIELDS_MAP[a],s=0;s<o.length;s++){var i=o[s];if(-1===i.indexOf("_moisture")){var l=document.getElementById(i);if(l){var c="";void 0!==currentUserSettings&&currentUserSettings.products&&currentUserSettings.products[a]&&currentUserSettings.products[a][i]&&(c=currentUserSettings.products[a][i]),l.value=c}}}e&&setElementValue("shiftNumber",e),t&&setElementValue("sampleSelection",t),n&&setElementValue("brigadeInfo",n),r&&setElementValue("journalDate",r),setTimeout(function(){calculateAllMoisture()},50)}catch(d){}}function initializeProductionFlowOnChange(){for(var e=["journalDate","shiftNumber","sampleSelection","brigadeInfo"],t=0;t<e.length;t++){var n=document.getElementById(e[t]);n&&function(e,t){var n=function(){loadProductionFlowData()};e.addEventListener?(e.addEventListener("change",n,!1),"journalDate"===t&&e.addEventListener("blur",n,!1)):e.attachEvent&&(e.attachEvent("onchange",n),"journalDate"===t&&e.attachEvent("onblur",n))}(n,e[t])}if(void 0!==DatePicker&&DatePicker.selectDate){var r=DatePicker.selectDate;DatePicker.selectDate=function(e){r.call(this,e),setTimeout(function(){loadProductionFlowData()},100)}}}function saveJournalDataWithProductionFlow(){calculateAllMoisture(),saveProductionFlowData(),"function"==typeof saveCurrentSettings&&saveCurrentSettings();var e=parseInt(getElementValue("sampleSelection"))||1;if(e<6){var t=e+1;setElementValue("sampleSelection",t.toString()),alert("Дані збережено! Переходимо до відбору "+t),setTimeout(function(){loadProductionFlowData()},500)}else alert("Дані збережено! Всі відбори завершено."),setTimeout(function(){returnToMainMenu()},1e3)}function initializeProductionFlow(){console.log("Ініціалізація ProductionFlow модуля");var e=document.getElementById("journalDate"),t=document.getElementById("shiftNumber");e&&t?(initializeProductionFlowOnChange(),loadProductionFlowData()):setTimeout(function(){initializeProductionFlow()},100)}function normalizeContent(e){return e.replace(/\s*data-integrity="[^"]*"/g,"").replace(/<!--[\s\S]*?-->/g,"").replace(/<script[^>]*>\s*verifyIntegrity\(\)\s*<\/script>/gi,"").replace(/\r\n/g,"\n").replace(/\r/g,"\n").replace(/>\s+</g,"><").replace(/\s{2,}/g," ").replace(/^\s+|\s+$/gm,"").replace(/\n\s*\n/g,"\n")}function generateIntegrityHash(e){return crypto_sha256(normalizeContent(e).toLowerCase())}function verifyIntegrity(){try{var e=document.documentElement.getAttribute("data-integrity"),t=generateIntegrityHash(ReadHTAFile());return!(!e||t!==e)||(alert("УВАГА: Файл було змінено!\nПрограма буде закрита з міркувань безпеки. "+t),window.close(),!1)}catch(n){return alert("Критична помилка перевірки цілісності: "+n.message),window.close(),!1}}window.saveProductionFlowData=saveProductionFlowData,window.loadProductionFlowData=loadProductionFlowData,window.saveJournalDataWithProductionFlow=saveJournalDataWithProductionFlow,window.initializeProductionFlow=initializeProductionFlow; 
 </script>
 
 <script language="VBScript">
@@ -59,7 +60,7 @@ End If
 settingsFile = GetSettingsFilePath()
 If Not fso.FileExists(settingsFile) Then
 Set file = fso.CreateTextFile(settingsFile, True, True)
-file.WriteLine "Key" & vbTab & "Value" & vbTab & "UpdatedDate"
+file.WriteLine "UserID" & vbTab & "SettingsData" & vbTab & "UpdatedDate"
 file.Close
 Set file = Nothing
 End If
@@ -116,7 +117,8 @@ If line <> "" Then
 fields = Split(line, vbTab)
 If UBound(fields) >= 7 Then
 If Trim(fields(1)) = username Then
-getUserDataString = Trim(fields(2)) & "," & _
+getUserDataString = Trim(fields(0)) & "," & _
+Trim(fields(2)) & "," & _
 Trim(fields(3)) & "," & _
 Trim(fields(4)) & "," & _
 Trim(fields(5))
@@ -288,7 +290,7 @@ fso.MoveFile tempFilePath, usersFile
 End If
 On Error GoTo 0
 End Sub
-Sub changeUserPassword(username, newHash, newSalt)
+Sub changeUserPassword(username, newHash, newSalt, newEncryptedXORKey)
 Dim fso,usersFile,tempFile, file, tempFilePath, line, fields
 If Not CreateTSVFilesIfNotExists() Then Exit Sub
 Set fso = CreateObject("Scripting.FileSystemObject")
@@ -309,6 +311,7 @@ If UBound(fields) >= 7 Then
 If Trim(fields(1)) = username Then
 fields(2) = newHash
 fields(3) = newSalt
+fields(5) = newEncryptedXORKey ' XOR ключ (позиція 5)
 End If
 tempFile.WriteLine Join(fields, vbTab)
 End If
@@ -320,6 +323,9 @@ Set file = Nothing
 Set tempFile = Nothing
 fso.DeleteFile usersFile
 fso.MoveFile tempFilePath, usersFile
+End If
+If Err.Number <> 0 Then
+MsgBox "Помилка зміни паролю з XOR: " & Err.Description, vbCritical
 End If
 On Error GoTo 0
 End Sub
@@ -333,7 +339,7 @@ Dim pos
 pos = InStr(path, "?")
 If pos > 0 Then path = Left(path, pos - 1)
 If fso.FileExists(path) Then
-Set file = fso.OpenTextFile(path, 1, False, -1)
+Set file = fso.OpenTextFile(path, 1, False, 0)
 content = file.ReadAll
 file.Close
 Set file = Nothing
@@ -346,7 +352,7 @@ End If
 If Err.Number <> 0 Then
 Err.Clear
 If fso.FileExists(path) Then
-Set file = fso.OpenTextFile(path, 1, False, 0)
+Set file = fso.OpenTextFile(path, 1, False, -1)
 content = file.ReadAll
 file.Close
 Set file = Nothing
@@ -394,7 +400,218 @@ TestDatabaseConnection = "Помилка роботи з TSV: " & Err.Descriptio
 End If
 On Error GoTo 0
 End Function
+Function GetUserSettings(userID)
+Dim fso,settingsFile,file, line, fields
+GetUserSettings = ""
+Set fso = CreateObject("Scripting.FileSystemObject")
+settingsFile = GetSettingsFilePath()
+On Error Resume Next
+If fso.FileExists(settingsFile) Then
+Set file = fso.OpenTextFile(settingsFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 1 Then
+If CInt(Trim(fields(0))) = CInt(userID) Then
+GetUserSettings = Trim(fields(1))
+Exit Do
+End If
+End If
+End If
+Loop
+file.Close
+Set file = Nothing
+End If
+On Error GoTo 0
+End Function
+Sub SaveUserSettings(userID, settingsData)
+Dim fso,settingsFile,tempFile, file, tempFilePath, line, fields, currentDate, userFound
+Set fso = CreateObject("Scripting.FileSystemObject")
+settingsFile = GetSettingsFilePath()
+tempFilePath = GetTSVPath() & "\settings_temp.tsv"
+currentDate = Now()
+userFound = False
+On Error Resume Next
+If fso.FileExists(settingsFile) Then
+Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
+Set file = fso.OpenTextFile(settingsFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+tempFile.WriteLine file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 1 Then
+If CInt(Trim(fields(0))) = CInt(userID) Then
+tempFile.WriteLine userID & vbTab & settingsData & vbTab & currentDate
+userFound = True
+Else
+tempFile.WriteLine line
+End If
+End If
+End If
+Loop
+If Not userFound Then
+tempFile.WriteLine userID & vbTab & settingsData & vbTab & currentDate
+End If
+file.Close
+tempFile.Close
+Set file = Nothing
+Set tempFile = Nothing
+fso.DeleteFile settingsFile
+fso.MoveFile tempFilePath, settingsFile
+End If
+If Err.Number <> 0 Then
+MsgBox "Помилка збереження налаштувань: " & Err.Description, vbCritical
+End If
+On Error GoTo 0
+End Sub
+Function GetProductionFlowFilePath()
+GetProductionFlowFilePath = GetTSVPath() & "\ProductionFlowDB.tsv"
+End Function
+Function CreateProductionFlowFileIfNotExists()
+Dim fso,productionFlowFile
+Set fso = CreateObject("Scripting.FileSystemObject")
+CreateProductionFlowFileIfNotExists = True
+On Error Resume Next
+productionFlowFile = GetProductionFlowFilePath()
+If Not fso.FileExists(productionFlowFile) Then
+Dim file
+Set file = fso.CreateTextFile(productionFlowFile, True, True)
+file.WriteLine "Date" & vbTab & "ProductionFlow" & vbTab & "VerifiedProductionFlow" & vbTab & "PFUpdatedDate" & vbTab & "VPFUpdatedDate" & vbTab & "User" & vbTab & "Moderator"
+file.Close
+Set file = Nothing
+End If
+If Err.Number <> 0 Then
+MsgBox "Помилка створення ProductionFlowDB.tsv: " & Err.Description, vbCritical
+CreateProductionFlowFileIfNotExists = False
+End If
+On Error GoTo 0
+End Function
+Function GetProductionFlowData(analysisDate)
+Dim fso,productionFlowFile,file, line, fields
+GetProductionFlowData = ""
+If Not CreateProductionFlowFileIfNotExists() Then Exit Function
+Set fso = CreateObject("Scripting.FileSystemObject")
+productionFlowFile = GetProductionFlowFilePath()
+On Error Resume Next
+If fso.FileExists(productionFlowFile) Then
+Set file = fso.OpenTextFile(productionFlowFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 6 Then
+If Trim(fields(0)) = analysisDate Then
+GetProductionFlowData = Trim(fields(1))
+Exit Do
+End If
+End If
+End If
+Loop
+file.Close
+Set file = Nothing
+End If
+On Error GoTo 0
+End Function
+Sub SaveProductionFlowData(analysisDate, encryptedProductionFlow, updatedDate, userID)
+Dim fso,productionFlowFile,tempFile, file, tempFilePath, line, fields, recordFound
+If Not CreateProductionFlowFileIfNotExists() Then Exit Sub
+Set fso = CreateObject("Scripting.FileSystemObject")
+productionFlowFile = GetProductionFlowFilePath()
+tempFilePath = GetTSVPath() & "\ProductionFlow_temp.tsv"
+recordFound = False
+On Error Resume Next
+If fso.FileExists(productionFlowFile) Then
+Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
+Set file = fso.OpenTextFile(productionFlowFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+tempFile.WriteLine file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= 6 Then
+If Trim(fields(0)) = analysisDate Then
+tempFile.WriteLine analysisDate & vbTab & _
+encryptedProductionFlow & vbTab & _
+Trim(fields(2)) & vbTab & _
+updatedDate & vbTab & _
+Trim(fields(4)) & vbTab & _
+userID & vbTab & _
+Trim(fields(6))
+recordFound = True
+Else
+tempFile.WriteLine line
+End If
+End If
+End If
+Loop
+If Not recordFound Then
+tempFile.WriteLine analysisDate & vbTab & _
+encryptedProductionFlow & vbTab & _
+"" & vbTab & _
+updatedDate & vbTab & _
+"" & vbTab & _
+userID & vbTab & _
+""
+End If
+file.Close
+tempFile.Close
+Set file = Nothing
+Set tempFile = Nothing
+fso.DeleteFile productionFlowFile
+fso.MoveFile tempFilePath, productionFlowFile
+End If
+If Err.Number <> 0 Then
+MsgBox "Помилка збереження ProductionFlow: " & Err.Description, vbCritical
+End If
+On Error GoTo 0
+End Sub
+Function GetProductionFlowStats()
+Dim fso,productionFlowFile,file, line, recordCount
+GetProductionFlowStats = ""
+recordCount = 0
+If Not CreateProductionFlowFileIfNotExists() Then
+GetProductionFlowStats = "Помилка створення ProductionFlowDB.tsv"
+Exit Function
+End If
+Set fso = CreateObject("Scripting.FileSystemObject")
+productionFlowFile = GetProductionFlowFilePath()
+On Error Resume Next
+If fso.FileExists(productionFlowFile) Then
+Set file = fso.OpenTextFile(productionFlowFile, 1, False, -1)
+If Not file.AtEndOfStream Then
+file.ReadLine
+End If
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+recordCount = recordCount + 1
+End If
+Loop
+file.Close
+Set file = Nothing
+GetProductionFlowStats = "ProductionFlowDB працює. Записів: " & recordCount
+Else
+GetProductionFlowStats = "ProductionFlowDB.tsv не знайдено"
+End If
+If Err.Number <> 0 Then
+GetProductionFlowStats = "Помилка роботи з ProductionFlowDB: " & Err.Description
+End If
+On Error GoTo 0
+End Function
 Sub Window_OnLoad
+Call hideAllForms()
 Dim dbTest
 dbTest = TestDatabaseConnection()
 If Not CheckIfAdminExists() Then
@@ -407,15 +624,1145 @@ End Sub
 </script>
 
 <style>
-body {
-  font-family: "Segoe UI",Arial,sans-serif;
-  background: -ms-linear-gradient(top,#2c3e50,#34495e);
-  background: -webkit-linear-gradient(135deg,#2c3e50,#34495e);
-  background: linear-gradient(135deg,#2c3e50,#34495e);
+* {
+  box-sizing: border-box
+}
+html {
+  height: 100%;
+  font-size: 100%;
   margin: 0;
-  padding: 20px;
-  color: #333;
-  height: 100vh;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  overflow: hidden
+}
+body {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: "Segoe UI",Arial,sans-serif;
+  font-size: 16px;
+  line-height: 1.4;
+  color: #424242;
+  background-color: #f5f5f5;
+  width: 100%;
+  height: 100%;
+  overflow: hidden
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0
+}
+ol,
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none
+}
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: 0 0
+}
+img {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  border: none
+}
+table {
+  border-spacing: 0;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px
+}
+td,
+th {
+  padding: 0;
+  margin: 0;
+  text-align: left
+}
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0
+}
+legend {
+  padding: 0;
+  margin: 0
+}
+#adminSetupForm,
+#changePasswordForm,
+#createUserForm,
+#deleteUserForm,
+#loginForm,
+#myXORKeyForm,
+#registerForm,
+#secureContent,
+#usersListForm {
+  display: none
+}
+h1 {
+  text-align: center;
+  color: #334155;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 36px
+}
+h2 {
+  color: #334155;
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 24px
+}
+h3 {
+  color: #334155;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  margin-top: 0
+}
+h4 {
+  color: #424242;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px
+}
+h5 {
+  color: #424242;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px
+}
+h6 {
+  color: #757575;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px
+}
+p {
+  margin: 0 0 16px;
+  padding: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #424242
+}
+p:last-child {
+  margin-bottom: 0
+}
+a {
+  color: #3498db;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-transition: color .3s;
+  -moz-transition: color .3s;
+  -o-transition: color .3s;
+  transition: color .3s
+}
+a:hover {
+  color: #2980b9;
+  text-decoration: underline
+}
+a:focus {
+  outline: #3498db solid 2px;
+  outline-offset: 2px
+}
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #757575;
+  font-size: 16px
+}
+.success-message {
+  text-align: center;
+  font-size: 18px;
+  color: #22c55e;
+  font-weight: 600;
+  margin-top: 24px
+}
+.info-note {
+  font-size: 12px;
+  color: #9e9e9e;
+  margin-top: 8px;
+  text-align: center
+}
+.security-info {
+  background: #f5f5f5;
+  padding: 16px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  margin-top: 16px;
+  font-size: 13px;
+  color: #757575;
+  line-height: 1.5
+}
+.security-info strong {
+  color: #424242;
+  font-weight: 700
+}
+.form-toggle {
+  text-align: center;
+  margin-top: 24px
+}
+.form-toggle a {
+  color: #3498db;
+  font-weight: 600
+}
+.form-toggle a:hover {
+  text-decoration: underline
+}
+.text-center {
+  text-align: center
+}
+.text-left {
+  text-align: left
+}
+.text-right {
+  text-align: right
+}
+.text-muted {
+  color: #9e9e9e
+}
+.text-primary {
+  color: #3498db
+}
+.text-success {
+  color: #22c55e
+}
+.text-danger {
+  color: #ef4444
+}
+.text-warning {
+  color: #f59e0b
+}
+.font-weight-normal {
+  font-weight: 400
+}
+.font-weight-bold {
+  font-weight: 700
+}
+.font-size-small {
+  font-size: 12px
+}
+.font-size-large {
+  font-size: 18px
+}
+button {
+  background: 0 0;
+  margin: 0;
+  font-family: inherit;
+  border: none;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: -ms-linear-gradient(top,#3498db,#2980b9);
+  background: -webkit-linear-gradient(135deg,#3498db,#2980b9);
+  background: linear-gradient(135deg,#3498db,#2980b9);
+  color: #fff
+}
+button:focus,
+button:hover {
+  background: -ms-linear-gradient(top,#2980b9,#1f618d);
+  background: -webkit-linear-gradient(135deg,#2980b9,#1f618d);
+  background: linear-gradient(135deg,#2980b9,#1f618d);
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.secondary-btn {
+  border: 2px solid #3498db;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: 0 0;
+  color: #3498db;
+  margin-top: 16px
+}
+.secondary-btn:hover {
+  background: #e3f2fd;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.back-button {
+  border: none;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: #9e9e9e;
+  color: #fff;
+  margin-top: 10px
+}
+.back-button:hover {
+  background: #757575;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.back-button--journal {
+  width: 36px;
+  padding: 8px;
+  margin-top: 0
+}
+.danger-button {
+  border: none;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: #ef4444;
+  color: #fff
+}
+.danger-button:hover {
+  background: #dc2626;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.menu-button {
+  border: none;
+  padding: 12px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  background: #3498db;
+  color: #fff;
+  -webkit-border-radius: 4px;
+  font-size: 14px
+}
+.menu-button:hover {
+  background: #2980b9;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.button-group {
+  display: block
+}
+.button-group .button {
+  margin-bottom: 10px
+}
+.button-group .button:last-child {
+  margin-bottom: 0
+}
+.btn-small {
+  padding: 8px 16px;
+  font-size: 12px
+}
+.btn-large {
+  padding: 24px 36px;
+  font-size: 18px
+}
+.btn-disabled {
+  opacity: .6;
+  cursor: not-allowed
+}
+.btn-disabled:hover {
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none
+}
+.btn-loading {
+  position: relative;
+  color: transparent
+}
+.btn-loading:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  margin-left: -8px;
+  border: 2px solid transparent;
+  border-top: 2px solid #fff;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  animation: 1s linear infinite spin
+}
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0);
+    -ms-transform: rotate(0);
+    transform: rotate(0)
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg)
+  }
+}
+.btn-icon {
+  position: relative
+}
+.btn-icon:before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 8px;
+  vertical-align: middle
+}
+.btn-icon-only {
+  width: auto;
+  min-width: 44px;
+  height: 44px;
+  padding: 10px
+}
+.btn-icon-only:before {
+  margin-right: 0
+}
+.btn-success {
+  border: none;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: #22c55e;
+  color: #fff
+}
+.btn-success:hover {
+  background: #1a9a49;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.btn-warning {
+  border: none;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: #f59e0b;
+  color: #fff
+}
+.btn-warning:hover {
+  background: #c57f08;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.btn-info {
+  border: none;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: #3498db;
+  color: #fff
+}
+.btn-info:hover {
+  background: #217dbb;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.btn-light {
+  border: none;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: #f5f5f5;
+  color: #424242
+}
+.btn-light:hover {
+  background: #dcdcdc;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.btn-outline-primary {
+  border: 2px solid #3498db;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: 0 0;
+  color: #3498db
+}
+.btn-outline-primary:hover {
+  background: #3498db;
+  color: #fff;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.btn-outline-secondary {
+  border: 2px solid #334155;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: 0 0;
+  color: #334155
+}
+.btn-outline-secondary:hover {
+  background: #334155;
+  color: #fff;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.btn-outline-danger {
+  border: 2px solid #ef4444;
+  padding: 16px 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  width: 100%;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
+  background: 0 0;
+  color: #ef4444
+}
+.btn-outline-danger:hover {
+  background: #ef4444;
+  color: #fff;
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.wrapper {
+  min-width: 100vw;
+  width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  overflow-y: auto
+}
+@media screen and (max-height:768px) {
+  .wrapper {
+    padding-right: 8vw;
+    padding-top: 8vh;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -ms-flex-pack: flex-end;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    -ms-flex-align: flex-start;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    margin-left: 0;
+    margin-right: 0
+  }
+  .wrapper > * {
+    margin-left: 0;
+    margin-right: 0
+  }
+}
+.containerForm {
+  background-color: rgba(255,255,255,.95);
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  padding: 36px;
+  max-width: 90%;
+  width: 480px
+}
+@media screen and (min-height:768px) {
+  .containerForm {
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-50%,-50%);
+    z-index: 1
+  }
+}
+.promo-box {
+  max-width: 35vw;
+  width: 35vw;
+  margin: 0;
+  border: none;
+  overflow: hidden;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%,-50%);
+  z-index: 1
+}
+#loginForm {
+  min-height: 450px
+}
+#adminSetupForm {
+  min-height: 645px
+}
+#myXORKeyForm,
+#secureContent,
+#usersListForm {
+  min-height: 768px
+}
+#createUserForm {
+  min-height: 720px
+}
+#changePasswordForm {
+  min-height: 740px
+}
+.form-group {
+  margin-bottom: 24px
+}
+.form-group:last-child {
+  margin-bottom: 0
+}
+.form-row {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -ms-flex-align: flex-start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  margin-bottom: 24px
+}
+.form-row .form-group {
+  flex: 1;
+  margin-bottom: 0
+}
+.form-row .form-group:not(:last-child) {
+  margin-right: 16px
+}
+input[type=date],
+input[type=email],
+input[type=number],
+input[type=password],
+input[type=tel],
+input[type=text],
+input[type=url] {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #e0e0e0;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  -webkit-transition: border-color .3s;
+  -moz-transition: border-color .3s;
+  -o-transition: border-color .3s;
+  transition: border-color .3s
+}
+input[type=date]:focus,
+input[type=email]:focus,
+input[type=number]:focus,
+input[type=password]:focus,
+input[type=tel]:focus,
+input[type=text]:focus,
+input[type=url]:focus,
+select:focus,
+textarea:focus {
+  border-color: #3498db;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 3px rgba(52,152,219,.25);
+  -moz-box-shadow: 0 0 0 3px rgba(52,152,219,.25);
+  box-shadow: 0 0 0 3px rgba(52,152,219,.25)
+}
+input[type=date]:hover,
+input[type=email]:hover,
+input[type=number]:hover,
+input[type=password]:hover,
+input[type=tel]:hover,
+input[type=text]:hover,
+input[type=url]:hover,
+textarea:hover {
+  border-color: #bdbdbd
+}
+input[type=date]:disabled,
+input[type=email]:disabled,
+input[type=number]:disabled,
+input[type=password]:disabled,
+input[type=tel]:disabled,
+input[type=text]:disabled,
+input[type=url]:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: #f5f5f5;
+  color: #bdbdbd;
+  border-color: #e0e0e0;
+  cursor: not-allowed
+}
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #e0e0e0;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  -webkit-transition: border-color .3s;
+  -moz-transition: border-color .3s;
+  -o-transition: border-color .3s;
+  transition: border-color .3s;
+  resize: vertical;
+  min-height: 80px;
+  font-family: monospace;
+  font-size: 12px;
+  line-height: 1.4
+}
+select {
+  width: 100%;
+  padding: 8px 40px 8px 8px;
+  border: 2px solid #e0e0e0;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+  -webkit-transition: border-color .3s;
+  -moz-transition: border-color .3s;
+  -o-transition: border-color .3s;
+  transition: border-color .3s;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  cursor: pointer
+}
+select:hover {
+  border-color: #bdbdbd;
+  background-color: #e3f2fd
+}
+select::-ms-expand {
+  display: none
+}
+.form-check {
+  display: block;
+  margin-bottom: 16px
+}
+.form-check input[type=checkbox],
+.form-check input[type=radio] {
+  width: auto;
+  margin-right: 8px;
+  vertical-align: middle
+}
+.form-check label {
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: 400;
+  cursor: pointer
+}
+.form-check-inline {
+  display: inline-block;
+  margin-right: 24px;
+  margin-bottom: 0
+}
+.form-group.has-success input,
+.form-group.has-success select,
+.form-group.has-success textarea {
+  border-color: #22c55e
+}
+.form-group.has-success input:focus,
+.form-group.has-success select:focus,
+.form-group.has-success textarea:focus {
+  border-color: #22c55e;
+  -webkit-box-shadow: 0 0 0 3px rgba(34,197,94,.25);
+  -moz-box-shadow: 0 0 0 3px rgba(34,197,94,.25);
+  box-shadow: 0 0 0 3px rgba(34,197,94,.25)
+}
+.form-group.has-error input,
+.form-group.has-error select,
+.form-group.has-error textarea {
+  border-color: #ef4444
+}
+.form-group.has-error input:focus,
+.form-group.has-error select:focus,
+.form-group.has-error textarea:focus {
+  border-color: #ef4444;
+  -webkit-box-shadow: 0 0 0 3px rgba(239,68,68,.25);
+  -moz-box-shadow: 0 0 0 3px rgba(239,68,68,.25);
+  box-shadow: 0 0 0 3px rgba(239,68,68,.25)
+}
+.form-group.has-warning input,
+.form-group.has-warning select,
+.form-group.has-warning textarea {
+  border-color: #f59e0b
+}
+.form-group.has-warning input:focus,
+.form-group.has-warning select:focus,
+.form-group.has-warning textarea:focus {
+  border-color: #f59e0b;
+  -webkit-box-shadow: 0 0 0 3px rgba(245,158,11,.25);
+  -moz-box-shadow: 0 0 0 3px rgba(245,158,11,.25);
+  box-shadow: 0 0 0 3px rgba(245,158,11,.25)
+}
+.form-feedback {
+  display: block;
+  margin-top: 8px;
+  font-size: 12px
+}
+.form-feedback.valid-feedback {
+  color: #22c55e
+}
+.form-feedback.invalid-feedback {
+  color: #ef4444
+}
+.form-feedback.warning-feedback {
+  color: #f59e0b
+}
+.menu {
+  background: #f5f5f5;
+  padding: 24px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  margin-top: 16px
+}
+.menu h3 {
+  margin-top: 0;
+  color: #334155;
+  margin-bottom: 16px
+}
+.role-badge {
+  background: #22c55e;
+  color: #fff;
+  padding: 4px 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700
+}
+.role-badge.Administrator {
+  background: #ef4444;
+  color: #fff;
+  padding: 4px 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700
+}
+.role-badge.Moderator {
+  background: #f59e0b;
+  color: #fff;
+  padding: 4px 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700
+}
+.role-badge.User {
+  background: #3498db;
+  color: #fff;
+  padding: 4px 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700
+}
+.role-badge.Guest {
+  background: #9e9e9e;
+  color: #fff;
+  padding: 4px 8px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700
+}
+table td,
+table th {
+  padding: 8px;
+  text-align: left;
+  border: 1px solid #e0e0e0
+}
+table th {
+  background-color: #eee;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 10
+}
+table tr:nth-child(2n) {
+  background-color: #fafafa
+}
+table tr:hover {
+  background-color: #e3f2fd
+}
+table th.sortable {
+  cursor: pointer;
+  user-select: none
+}
+table th.sortable:hover {
+  background-color: #bdbdbd
+}
+table th.sortable:after {
+  content: " ↕";
+  color: #9e9e9e;
+  font-size: 12px
+}
+table th.sortable.sort-asc:after {
+  content: " ↑";
+  color: #3498db
+}
+table th.sortable.sort-desc:after {
+  content: " ↓";
+  color: #3498db
+}
+table td {
+  vertical-align: middle
+}
+table td.text-center {
+  text-align: center
+}
+table td.text-right {
+  text-align: right
+}
+table td.actions {
+  white-space: nowrap;
+  width: 1%
+}
+.stats-grid {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  margin-bottom: 24px;
+  gap: 16px
+}
+.stat-card {
+  flex: 1;
+  min-width: 200px;
+  background: #fff;
+  padding: 24px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  box-shadow: 0 1px 3px rgba(0,0,0,.1);
+  text-align: center
+}
+.stat-card .stat-number {
+  font-size: 32px;
+  font-weight: 700;
+  color: #3498db;
+  margin-bottom: 8px
+}
+.stat-card .stat-label {
+  color: #9e9e9e;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1px
+}
+.stat-card.stat-success .stat-number {
+  color: #22c55e
+}
+.stat-card.stat-warning .stat-number {
+  color: #f59e0b
+}
+.stat-card.stat-danger .stat-number {
+  color: #ef4444
+}
+.alert {
+  padding: 16px;
+  margin-bottom: 16px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  border: 1px solid transparent
+}
+.alert.alert-success {
+  color: #16a34a;
+  background-color: #dcfce7;
+  border-color: #22c55e
+}
+.alert.alert-danger {
+  color: #dc2626;
+  background-color: #fee2e2;
+  border-color: #ef4444
+}
+.alert.alert-warning {
+  color: #d97706;
+  background-color: #fef3c7;
+  border-color: #f59e0b
+}
+.alert.alert-info {
+  color: #2980b9;
+  background-color: #bbdefb;
+  border-color: #3498db
+}
+.progress {
+  width: 100%;
+  height: 20px;
+  background-color: #f5f5f5;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-bottom: 16px
+}
+.progress .progress-bar {
+  height: 100%;
+  background-color: #3498db;
+  -webkit-transition: width .6s;
+  -moz-transition: width .6s;
+  -o-transition: width .6s;
+  transition: width .6s
+}
+.progress .progress-bar.progress-striped {
+  background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent);
+  background-size: 1rem 1rem
+}
+.progress .progress-bar.progress-animated {
+  animation: 1s linear infinite progress-bar-stripes
+}
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0
+  }
+  to {
+    background-position: 0 0
+  }
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,.5);
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
@@ -424,391 +1771,2514 @@ body {
   justify-content: center;
   -ms-flex-align: center;
   -webkit-align-items: center;
+  align-items: center;
+  z-index: 1050
+}
+.modal .modal-dialog {
+  background: #fff;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto
+}
+.modal .modal-header {
+  padding: 24px;
+  border-bottom: 1px solid #e0e0e0;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
   align-items: center
 }
-.container {
-  background-color: rgba(255,255,255,.95);
-  border-radius: 12px;
-  -webkit-box-shadow: 0 8px 32px rgba(0,0,0,.3);
-  box-shadow: 0 8px 32px rgba(0,0,0,.3);
-  padding: 35px;
-  width: 380px;
-  max-width: 90%
+.modal .modal-header h5 {
+  margin: 0;
+  color: #424242
 }
-h1 {
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 0;
-  margin-bottom: 25px
+.modal .modal-header .close {
+  background: 0 0;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: auto;
+  color: #9e9e9e
 }
-.form-group {
-  margin-bottom: 20px
+.modal .modal-header .close:hover {
+  color: #424242
 }
-label {
+.modal .modal-body {
+  padding: 24px
+}
+.modal .modal-footer {
+  padding: 24px;
+  border-top: 1px solid #e0e0e0;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: flex-end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center
+}
+.modal .modal-footer button {
+  width: auto;
+  margin-left: 8px
+}
+.modal .modal-footer button:first-child {
+  margin-left: 0
+}
+.dropdown {
+  position: relative;
+  display: inline-block
+}
+.dropdown .dropdown-toggle {
+  cursor: pointer
+}
+.dropdown .dropdown-toggle:after {
+  content: " ▼";
+  font-size: 12px;
+  margin-left: 8px
+}
+.dropdown .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 160px;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 4px 6px rgba(0,0,0,.07);
+  -moz-box-shadow: 0 4px 6px rgba(0,0,0,.07);
+  box-shadow: 0 4px 6px rgba(0,0,0,.07);
+  border: 1px solid #e0e0e0
+}
+.dropdown .dropdown-menu.show {
+  display: block
+}
+.dropdown .dropdown-menu .dropdown-item {
   display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-  color: #555
-}
-input[type=password],
-input[type=text] {
+  padding: 8px 16px;
+  color: #424242;
+  text-decoration: none;
+  border: none;
+  background: 0 0;
   width: 100%;
-  padding: 14px;
-  border: 2px solid #ddd;
+  text-align: left;
+  cursor: pointer
+}
+.dropdown .dropdown-menu .dropdown-item:hover {
+  background-color: #e3f2fd;
+  color: #424242
+}
+.dropdown .dropdown-menu .dropdown-item:focus {
+  background-color: #3498db;
+  color: #fff;
+  outline: 0
+}
+.dropdown .dropdown-menu .dropdown-item.disabled {
+  color: #9e9e9e;
+  cursor: not-allowed
+}
+.dropdown .dropdown-menu .dropdown-item.disabled:hover {
+  background-color: transparent
+}
+.dropdown .dropdown-menu .dropdown-divider {
+  height: 0;
+  margin: 8px 0;
+  overflow: hidden;
+  border-top: 1px solid #e0e0e0
+}
+.pagination {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-top: 24px
+}
+.pagination .page-item {
+  margin: 0 2px
+}
+.pagination .page-item .page-link {
+  display: block;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  color: #3498db;
+  text-decoration: none;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s
+}
+.pagination .page-item .page-link:hover {
+  background-color: #e3f2fd;
+  border-color: #3498db
+}
+.pagination .page-item .page-link:focus {
+  outline: #3498db solid 2px;
+  outline-offset: 2px
+}
+.pagination .page-item.active .page-link {
+  background-color: #3498db;
+  border-color: #3498db;
+  color: #fff
+}
+.pagination .page-item.disabled .page-link {
+  color: #9e9e9e;
+  cursor: not-allowed
+}
+.pagination .page-item.disabled .page-link:hover {
+  background-color: #fff;
+  border-color: #e0e0e0
+}
+.datepicker {
+  position: absolute;
+  background: #fff;
+  border: 2px solid #3498db;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 20px 25px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 20px 25px rgba(0,0,0,.1);
+  box-shadow: 0 20px 25px rgba(0,0,0,.1);
+  z-index: 1060;
+  font-family: "Segoe UI",Arial,sans-serif;
+  font-size: 14px;
+  width: 280px;
+  animation: .3s ease-out datepicker-fadeIn;
+  transform-origin: top left
+}
+.datepicker-header {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 12px;
+  background: #3498db;
+  color: #fff;
+  -webkit-border-radius: 4px 4px 0 0;
+  -moz-border-radius: 4px 4px 0 0;
+  border-radius: 4px 4px 0 0
+}
+.datepicker-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff
+}
+.datepicker-btn {
+  width: 48px;
+  background: rgba(255,255,255,.2);
+  border: none;
+  color: #fff;
+  padding: 6px 12px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-transition: background .15s;
+  -moz-transition: background .15s;
+  -o-transition: background .15s;
+  transition: background .15s
+}
+.datepicker-btn:hover {
+  background: rgba(255,255,255,.3);
+  -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
+  transform: translateY(-1px)
+}
+.datepicker-btn:active {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  background: rgba(255,255,255,.4)
+}
+.datepicker-btn:focus {
+  outline: rgba(255,255,255,.5) solid 2px;
+  outline-offset: 2px
+}
+.datepicker-weekdays {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  padding: 8px;
+  background: #fafafa;
+  border-bottom: 1px solid #e0e0e0
+}
+.datepicker-weekdays span {
+  display: block;
+  width: 14.28%;
+  text-align: center;
+  padding: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #9e9e9e
+}
+.datepicker-days {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
+  padding: 8px;
+  background: #fff
+}
+.datepicker-day {
+  width: 14.28%;
+  text-align: center;
+  padding: 8px 4px;
+  cursor: pointer;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-transition: .15s;
+  -moz-transition: .15s;
+  -o-transition: .15s;
+  transition: .15s;
+  color: #424242;
+  position: relative
+}
+.datepicker-day:hover {
+  background: #e3f2fd;
+  color: #3498db;
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05)
+}
+.datepicker-day:active {
+  -webkit-transform: scale(.95);
+  -ms-transform: scale(.95);
+  transform: scale(.95)
+}
+.datepicker-day.other-month {
+  color: #9e9e9e
+}
+.datepicker-day.other-month:hover {
+  color: #757575;
+  background: #f5f5f5
+}
+.datepicker-day.selected {
+  background: #3498db;
+  color: #fff;
+  -webkit-box-shadow: 0 4px 6px rgba(0,0,0,.07);
+  -moz-box-shadow: 0 4px 6px rgba(0,0,0,.07);
+  box-shadow: 0 4px 6px rgba(0,0,0,.07);
+  font-weight: 700
+}
+.datepicker-day.selected:hover {
+  background: #2980b9;
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05)
+}
+.datepicker-day.today {
+  background: #f59e0b;
+  color: #fff;
+  font-weight: 700;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05)
+}
+.datepicker-day.today:hover {
+  background: #d97706;
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05)
+}
+.datepicker-day.today.selected {
+  background: #3498db
+}
+.datepicker-day.today.selected::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  background: #f59e0b;
+  -webkit-border-radius: 9999px;
+  -moz-border-radius: 9999px;
+  border-radius: 9999px
+}
+.datepicker-day:focus {
+  outline: #3498db solid 2px;
+  outline-offset: 2px;
+  z-index: 1
+}
+.datepicker-footer {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  padding: 8px 12px;
+  border-top: 1px solid #e0e0e0;
+  background: #fafafa;
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px
+}
+.datepicker-footer .datepicker-btn {
+  width: 48%;
+  background: #9e9e9e;
+  color: #fff;
+  padding: 6px 16px;
+  font-size: 12px
+}
+.datepicker-footer .datepicker-btn:hover {
+  background: #757575;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05)
+}
+.datepicker-footer .datepicker-btn:active {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none
+}
+.datepicker-footer .datepicker-btn#todayBtn {
+  background: #3498db
+}
+.datepicker-footer .datepicker-btn#todayBtn:hover {
+  background: #2980b9
+}
+.datepicker-footer .datepicker-btn#closeBtn {
+  background: #9e9e9e
+}
+.datepicker-footer .datepicker-btn#closeBtn:hover {
+  background: #757575
+}
+.datepicker-input {
+  position: relative
+}
+.datepicker-input input {
+  width: 100%;
+  padding: 8px 30px 8px 8px;
+  border: 2px solid #e0e0e0;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
   border-radius: 6px;
   font-size: 16px;
   box-sizing: border-box;
   -webkit-transition: border-color .3s;
-  transition: border-color .3s
+  -moz-transition: border-color .3s;
+  -o-transition: border-color .3s;
+  transition: border-color .3s;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEzIDJIMTVWMTRIMVYySDE1VjJINTNNMyA2SDE1TTUgMFY0TTExIDBWNCIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiLz4KPC9zdmc+");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  background-size: 16px 16px
 }
-input[type=password]:focus,
-input[type=text]:focus {
+.datepicker-input input:focus {
   border-color: #3498db;
-  outline: 0
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 3px rgba(52,152,219,.25);
+  -moz-box-shadow: 0 0 0 3px rgba(52,152,219,.25);
+  box-shadow: 0 0 0 3px rgba(52,152,219,.25)
 }
-button {
+.datepicker-input input:hover {
+  border-color: #bdbdbd
+}
+.datepicker-input input:disabled {
+  background-color: #f5f5f5;
+  color: #bdbdbd;
+  border-color: #e0e0e0;
+  cursor: not-allowed
+}
+.datepicker.loading .datepicker-days {
+  position: relative
+}
+.datepicker.loading .datepicker-days::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255,255,255,.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1
+}
+.datepicker.loading .datepicker-days::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #e0e0e0;
+  border-top: 2px solid #3498db;
+  -webkit-border-radius: 9999px;
+  -moz-border-radius: 9999px;
+  border-radius: 9999px;
+  animation: 1s linear infinite datepicker-spin;
+  z-index: 2
+}
+@keyframes datepicker-spin {
+  0% {
+    transform: rotate(0)
+  }
+  100% {
+    transform: rotate(360deg)
+  }
+}
+@media screen and (max-width:480px) {
+  .datepicker {
+    width: 260px;
+    font-size: 12px
+  }
+  .datepicker-header {
+    padding: 8px 12px
+  }
+  .datepicker-btn {
+    width: 40px;
+    padding: 4px 8px;
+    font-size: 12px
+  }
+  .datepicker-day {
+    padding: 6px 2px;
+    font-size: 12px
+  }
+  .datepicker-footer {
+    padding: 6px 8px
+  }
+  .datepicker-footer .datepicker-btn {
+    padding: 4px 12px;
+    font-size: 12px
+  }
+}
+@media screen and (max-height:600px) {
+  .datepicker .datepicker-header {
+    padding: 6px 12px
+  }
+  .datepicker .datepicker-day {
+    padding: 4px 2px
+  }
+  .datepicker .datepicker-footer {
+    padding: 4px 8px
+  }
+}
+@media (prefers-color-scheme:dark) {
+  .datepicker {
+    background: #1e293b;
+    border-color: #475569;
+    color: #f5f5f5
+  }
+  .datepicker .datepicker-header {
+    background: #334155;
+    color: #f5f5f5
+  }
+  .datepicker .datepicker-weekdays {
+    background: #334155;
+    border-color: #475569
+  }
+  .datepicker .datepicker-weekdays span {
+    color: #bdbdbd
+  }
+  .datepicker .datepicker-days {
+    background: #1e293b
+  }
+  .datepicker .datepicker-day {
+    color: #eee
+  }
+  .datepicker .datepicker-day:hover {
+    background: #334155;
+    color: #42a5f5
+  }
+  .datepicker .datepicker-day.other-month {
+    color: #9e9e9e
+  }
+  .datepicker .datepicker-day.other-month:hover {
+    color: #bdbdbd;
+    background: #334155
+  }
+  .datepicker .datepicker-day.selected {
+    background: #2980b9;
+    color: #fff
+  }
+  .datepicker .datepicker-day.selected:hover {
+    background: #3498db
+  }
+  .datepicker .datepicker-day.today {
+    background: #d97706;
+    color: #fff
+  }
+  .datepicker .datepicker-day.today:hover {
+    background: #f59e0b
+  }
+  .datepicker .datepicker-footer {
+    background: #334155;
+    border-color: #475569
+  }
+  .datepicker .datepicker-footer .datepicker-btn:hover {
+    background: #475569
+  }
+}
+@keyframes datepicker-fadeIn {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(.95) translateY(-10px);
+    -ms-transform: scale(.95) translateY(-10px);
+    transform: scale(.95) translateY(-10px)
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(0);
+    -ms-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0)
+  }
+}
+.datepicker.closing {
+  animation: .15s ease-in datepicker-fadeOut
+}
+@keyframes datepicker-fadeOut {
+  from {
+    opacity: 1;
+    -webkit-transform: scale(1) translateY(0);
+    -ms-transform: scale(1) translateY(0);
+    transform: scale(1) translateY(0)
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: scale(.95) translateY(-10px);
+    -ms-transform: scale(.95) translateY(-10px);
+    transform: scale(.95) translateY(-10px)
+  }
+}
+@media (prefers-contrast:high) {
+  .datepicker {
+    border-width: 3px
+  }
+  .datepicker .datepicker-day {
+    border: 1px solid transparent
+  }
+  .datepicker .datepicker-day:focus {
+    border-color: #424242;
+    outline: 0
+  }
+  .datepicker .datepicker-day.selected {
+    border-color: #fff
+  }
+}
+@media (prefers-reduced-motion:reduce) {
+  .datepicker {
+    animation: none
+  }
+  .datepicker .datepicker-btn,
+  .datepicker .datepicker-day {
+    transition: none
+  }
+  .datepicker .datepicker-btn:hover,
+  .datepicker .datepicker-day:hover {
+    transform: none
+  }
+}
+.workspace-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #f5f5f5;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: auto;
+  z-index: 1030
+}
+.journal-header {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: space-between;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-bottom: 24px;
+  background: rgba(255,255,255,.95);
+  padding: 15px 24px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  position: relative
+}
+@media screen and (max-width:768px) {
+  .journal-header {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -ms-flex-pack: flex-start;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    -ms-flex-align: stretch;
+    -webkit-align-items: stretch;
+    align-items: stretch;
+    gap: 16px
+  }
+}
+.journal-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #334155;
+  margin: 0
+}
+@media screen and (max-width:480px) {
+  .journal-title {
+    font-size: 20px;
+    text-align: center
+  }
+}
+.journal-controls {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-pack: flex-end;
+  -webkit-justify-content: flex-end;
+  justify-content: flex-end;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center
+}
+@media screen and (max-width:768px) {
+  .journal-controls {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+    width: 100%
+  }
+}
+.control-group {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  flex-wrap: nowrap;
+  -ms-flex-pack: flex-start;
+  -webkit-justify-content: flex-start;
+  justify-content: flex-start;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #757575;
+  white-space: nowrap
+}
+.control-group:last-child {
+  margin-right: 0
+}
+.control-group label {
+  margin-bottom: 0;
+  margin-right: 8px;
+  font-size: 14px;
+  color: #757575
+}
+.journal-controls .control-input {
+  padding: 0 4px;
+  border: 2px solid #e0e0e0;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  box-sizing: border-box;
+  -webkit-transition: border-color .3s;
+  -moz-transition: border-color .3s;
+  -o-transition: border-color .3s;
+  transition: border-color .3s;
+  width: 80px;
+  height: 26px;
+  font-size: 14px;
+  vertical-align: middle
+}
+.journal-controls .control-input:hover {
+  border-color: #bdbdbd
+}
+.journal-controls .control-input:disabled {
+  background-color: #f5f5f5;
+  color: #bdbdbd;
+  border-color: #e0e0e0;
+  cursor: not-allowed
+}
+.journal-controls .control-input:focus {
+  outline: 0;
+  border-color: #3498db;
+  -webkit-box-shadow: 0 0 0 3px rgba(52,152,219,.25);
+  -moz-box-shadow: 0 0 0 3px rgba(52,152,219,.25);
+  box-shadow: 0 0 0 3px rgba(52,152,219,.25)
+}
+.journal-controls .control-input[type=date] {
+  width: 108px
+}
+.journal-controls .control-input#brigadeInfo {
+  width: 120px
+}
+.journal-controls .control-input#sampleSelection,
+.journal-controls .control-input#shiftNumber {
+  width: 48px
+}
+.journal-table-container {
+  background: rgba(255,255,255,.95);
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  padding: 24px;
+  overflow-x: auto
+}
+@media screen and (max-width:768px) {
+  .journal-table-container {
+    padding: 16px;
+    margin: 0 -16px;
+    border-radius: 0
+  }
+}
+.journal-table {
+  border-collapse: collapse;
+  margin-top: 16px;
+  font-size: 12px;
+  width: 91.5vw
+}
+.journal-table th {
+  background: #334155;
+  color: #fff;
+  font-weight: 700;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 6px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #1f618d
+}
+.journal-table th[rowspan="2"] {
+  vertical-align: middle
+}
+.journal-table td {
+  padding: 2px 4px;
+  border: 1px solid #e0e0e0;
+  text-align: center;
+  vertical-align: middle
+}
+.journal-table td.product-name {
+  font-weight: 700;
+  background-color: rgba(255,255,255,.95);
+  text-align: center;
+  vertical-align: middle
+}
+.journal-table td:hover {
+  background-color: #e3f2fd
+}
+.journal-table tbody tr.product-group-1,
+.journal-table tbody tr.product-group-3 {
+  background-color: #f5f0e6
+}
+.journal-table tbody tr.product-group-2 {
+  background-color: #fff8e1
+}
+.table-input,
+.table-select {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  margin: 0;
+  font-size: 14px;
+  line-height: 14px;
+  background: #fff;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  -webkit-transition: .15s;
+  -moz-transition: .15s;
+  -o-transition: .15s;
+  transition: .15s
+}
+.table-input:focus,
+.table-select:focus {
+  border-color: #3498db;
+  outline: 0;
+  background-color: #e3f2fd;
+  -webkit-box-shadow: 0 0 0 3px rgba(52,152,219,.25);
+  -moz-box-shadow: 0 0 0 3px rgba(52,152,219,.25);
+  box-shadow: 0 0 0 3px rgba(52,152,219,.25)
+}
+.table-input:hover,
+.table-select:hover {
+  border-color: #2980b9
+}
+.table-input:disabled,
+.table-select:disabled {
+  background-color: #f5f5f5;
+  color: #bdbdbd;
+  border-color: #e0e0e0;
+  cursor: not-allowed
+}
+.table-input.number,
+.table-select.number {
+  font-size: 14px;
+  text-align: center
+}
+.table-input.text,
+.table-select.text {
+  font-size: 14px;
+  text-align: left
+}
+.table-select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 8px;
+  padding-right: 8px
+}
+.table-select::-ms-expand {
+  display: none
+}
+.table-select:hover {
+  background-color: #e3f2fd
+}
+.table-text {
+  padding: 0;
+  margin: 0;
+  color: #424242
+}
+.table-text.number {
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  font-weight: 600
+}
+.col-table {
+  width: 6.1vw;
+  min-width: 64px
+}
+.journal-footer {
+  margin-top: 24px;
+  background: rgba(255,255,255,.95);
+  padding: 15px 24px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  -moz-box-shadow: 0 10px 15px rgba(0,0,0,.1);
+  box-shadow: 0 10px 15px rgba(0,0,0,.1)
+}
+@media screen and (max-width:768px) {
+  .journal-footer {
+    padding: 16px;
+    margin: 24px -16px 0;
+    border-radius: 0
+  }
+}
+.journal-notes {
+  font-size: 13px;
+  color: #757575;
+  line-height: 1.5;
+  margin-bottom: 15px
+}
+.journal-notes strong {
+  color: #424242;
+  font-weight: 700
+}
+.save-btn {
+  border: none;
+  padding: 12px 36px;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s;
   background: -ms-linear-gradient(top,#3498db,#2980b9);
   background: -webkit-linear-gradient(135deg,#3498db,#2980b9);
   background: linear-gradient(135deg,#3498db,#2980b9);
   color: #fff;
-  border: none;
-  padding: 14px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: 600;
-  width: 100%;
-  -webkit-transition: .3s;
-  transition: .3s
+  width: auto;
+  font-size: 16px
 }
-button:hover {
+.save-btn:focus,
+.save-btn:hover {
   background: -ms-linear-gradient(top,#2980b9,#1f618d);
   background: -webkit-linear-gradient(135deg,#2980b9,#1f618d);
   background: linear-gradient(135deg,#2980b9,#1f618d);
   -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
   transform: translateY(-1px)
 }
-.secondary-btn {
-  background: 0 0;
-  color: #3498db;
-  border: 2px solid #3498db;
-  margin-top: 15px
+@media screen and (max-width:480px) {
+  .save-btn {
+    width: 100%
+  }
 }
-.secondary-btn:hover {
-  background: rgba(52,152,219,.1);
+.save-btn:hover {
+  -webkit-box-shadow: 0 4px 6px rgba(0,0,0,.07);
+  -moz-box-shadow: 0 4px 6px rgba(0,0,0,.07);
+  box-shadow: 0 4px 6px rgba(0,0,0,.07);
   -webkit-transform: translateY(-1px);
+  -ms-transform: translateY(-1px);
   transform: translateY(-1px)
 }
-.form-toggle {
-  text-align: center;
-  margin-top: 20px
+.save-btn:active {
+  -webkit-transform: translateY(0);
+  -ms-transform: translateY(0);
+  transform: translateY(0);
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05)
 }
-.form-toggle a {
-  color: #3498db;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer
+@media screen and (max-width:768px) {
+  .workspace-container {
+    padding: 16px
+  }
+  .journal-table {
+    font-size: 11px
+  }
+  .journal-table td,
+  .journal-table th {
+    padding: 4px
+  }
+  .table-input,
+  .table-select {
+    padding: 2px;
+    font-size: 11px
+  }
 }
-.form-toggle a:hover {
-  text-decoration: underline
+@media print {
+  .workspace-container {
+    position: static;
+    width: auto;
+    height: auto;
+    background: #fff;
+    padding: 0
+  }
+  .journal-footer,
+  .journal-header {
+    background: #fff;
+    box-shadow: none;
+    border: 1px solid #424242
+  }
+  .back-button,
+  .save-btn {
+    display: none
+  }
+  .journal-table {
+    font-size: 10px
+  }
+  .journal-table td,
+  .journal-table th {
+    border: 1px solid #424242;
+    padding: 4px 2px
+  }
+  .journal-table th {
+    background: #f5f5f5;
+    color: #424242
+  }
+  .table-input,
+  .table-select {
+    border: none;
+    background: 0 0;
+    padding: 0
+  }
 }
-#registerForm,
-#secureContent {
-  display: none
-}
-.success-message {
-  text-align: center;
-  font-size: 18px;
-  color: #27ae60;
-  margin-top: 20px
-}
-.info-note {
-  font-size: 12px;
-  color: #7f8c8d;
-  margin-top: 8px;
-  text-align: center
-}
-.security-info {
-  background: #ecf0f1;
-  padding: 15px;
-  border-radius: 6px;
-  margin-top: 15px;
-  font-size: 13px;
-  color: #555
-}
-
-/* Додаткові стилі для нових форм */
-.admin-menu {
-  background: #f8f9fa;
-  padding: 20px;
-  border-radius: 8px;
-  margin-top: 15px;
-}
-
-.admin-menu h3 {
-  margin-top: 0;
-  color: #2c3e50;
-}
-
-.menu-button {
+.product-name-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: block;
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 12px;
+  padding-right: 20px;
+  line-height: 1.2
+}
+.product-toggle-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 18px;
+  height: 18px;
   background: #3498db;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.menu-button:hover {
-  background: #2980b9;
-}
-
-.role-badge {
-  background: #27ae60;
-  color: white;
-  padding: 4px 8px;
-  border-radius: 4px;
+  color: #fff;
+  border: 1px solid #2980b9;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  z-index: 2;
+  -webkit-transition: .15s;
+  -moz-transition: .15s;
+  -o-transition: .15s;
+  transition: .15s
+}
+.product-toggle-btn:focus {
+  outline: 0
+}
+.product-toggle-btn:hover {
+  background: #2980b9;
+  border-color: #1f618d;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+  box-shadow: 0 1px 2px rgba(0,0,0,.05)
+}
+.product-toggle-btn:active {
+  -webkit-transform: scale(.95);
+  -ms-transform: scale(.95);
+  transform: scale(.95);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none
+}
+.product-toggle-btn.inactive {
+  background: #9e9e9e;
+  border-color: #757575;
+  color: #fff
+}
+.product-toggle-btn.inactive:hover {
+  background: #757575;
+  border-color: #9e9e9e
+}
+.product-row {
+  -webkit-transition: .3s;
+  -moz-transition: .3s;
+  -o-transition: .3s;
+  transition: .3s
+}
+.product-row.inactive {
+  background-color: #f5f5f5!important;
+  color: #bdbdbd;
+  opacity: .6
+}
+.product-row.inactive .table-input,
+.product-row.inactive .table-select {
+  background-color: #f5f5f5!important;
+  color: #bdbdbd!important;
+  border-color: #e0e0e0!important;
+  cursor: not-allowed!important
+}
+.product-row.inactive .table-input:focus,
+.product-row.inactive .table-input:hover,
+.product-row.inactive .table-select:focus,
+.product-row.inactive .table-select:hover {
+  background-color: #f5f5f5!important;
+  border-color: #e0e0e0!important;
+  -webkit-box-shadow: none!important;
+  -moz-box-shadow: none!important;
+  box-shadow: none!important
+}
+.product-row.inactive .table-text {
+  color: #bdbdbd!important
+}
+.product-row.inactive:hover {
+  background-color: #ededed!important
+}
+@media print {
+  .product-row.inactive,
+  .product-toggle-btn {
+    display: none!important
+  }
+  body {
+    background: #fff!important;
+    color: #000!important
+  }
+  .containerForm {
+    box-shadow: none!important;
+    border: 1px solid #000
+  }
+  button {
+    display: none!important
+  }
+}
+#xorKeyDisplay {
+  display: none;
+  margin-top: 24px
+}
+#xorKeyDisplay button,
+#xorKeyDisplay textarea {
+  margin-top: 10px
+}
+#usersList p {
+  text-align: center;
+  color: #9e9e9e;
+  font-style: italic
+}
+.security-info br {
+  line-height: 1.8
+}
+.logo {
+  margin: 0 auto 24px;
+  display: block
+}
+@media screen and (max-width:480px) {
+  .product-name-container {
+    font-size: 12px;
+    padding-right: 18px
+  }
+  .product-toggle-btn {
+    width: 14px;
+    height: 14px;
+    font-size: 9px;
+    top: 1px;
+    right: 1px
+  }
+  .containerForm {
+    width: 95%;
+    padding: 24px
+  }
+  .wrapper {
+    padding: 8px
+  }
 }
 
-.role-badge.Administrator {
-  background: #e74c3c;
-}
-
-.role-badge.Moderator {
-  background: #f39c12;
-}
-
-.role-badge.User {
-  background: #3498db;
-}
-
-.role-badge.Guest {
-  background: #95a5a6;
-}
-
-select {
-  width: 100%;
-  padding: 14px;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  font-size: 16px;
-  box-sizing: border-box;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 15px;
-}
-
-table th, table td {
-  padding: 8px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-.back-button {
-  background: #95a5a6;
-  margin-top: 10px;
-}
-
-.back-button:hover {
-  background: #7f8c8d;
-}
-
-.danger-button {
-  background: #e74c3c;
-}
-
-.danger-button:hover {
-  background: #c0392b;
-}
 </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Форма входу -->
-        <div id="loginForm">
-            <h1>🔐 Безпечний вхід</h1>
-            <div class="form-group">
-                <label for="username">Ім'я користувача:</label>
-                <input type="text" id="username" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="password">Пароль:</label>
-                <input type="password" id="password" autocomplete="off">
-            </div>
-            <button onclick="loginUser()">Увійти</button>
-            <div class="info-note">SHA-256 хешування з XOR шифруванням</div>
-        </div>
-        
+<body id="body" onload="VBScript:Window_OnLoad()">
+    <div class="wrapper">
+        <div class="promo-box">
+  <img
+    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAyNCIgaGVpZ2h0PSI1MzYiIHZpZXdCb3g9IjAgMCAxMDI0IDUzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI5OCAyNzBDMjk4IDI3MCAyOTcuODcgMzc3LjU2MyAyOTguMjczIDQyNi4wMTVDMjk4LjMwMyA0MjkuNTk0IDI5Ni45NTcgNDMwLjU5MiAyOTMuNTkgNDMwLjU4NUMyNTIuNjAzIDQzMC40OTUgMjExLjYxNiA0MzAuNDc1IDE3MC42MyA0MzAuNTM1QzE2Ny4zODUgNDMwLjU0IDE2Ni4yNTggNDI5LjUzMSAxNjYuMzQ2IDQyNi4yMkMxNjYuNTU4IDQxOC4yMjggMTY2LjQ2NCA0MTAuMjI3IDE2Ni40MTYgNDAyLjIzQzE2Ni4xODYgMzYzLjc2MiAxNjUuOTc2IDMyNS4yOTQgMTY1LjU3MiAyODYuODI4QzE2NS41NDYgMjg0LjM5IDE2NC4zODcgMjgxLjY2OCAxNjIuOTk2IDI3OS41ODVDMTQ3LjI5OSAyNTYuMDkxIDY1LjQ1MzggMTMyLjY5NyA1MCAxMDlDNTQuNjY4OCAxMTQuMzYxIDEyNC45ODYgMjE5Ljk5OSAxMjkuMzUyIDIyNS45ODRDMTM2LjI1NyAyMzYuNDg0IDE0My4xNzIgMjQ2LjU5NyAxNDkuOTUzIDI1Ni43OThDMTU1LjkwOCAyNjUuNzU1IDE2MS42NDYgMjc0LjY0MyAxNjcuNSAyODRDMTY3LjUgMjg0IDIzMCAyMTcuNSAyMzQgMjE1QzIzMy43NDMgMjE4LjcyOSAyMzMgMzU0LjUgMjMzIDM1NC41QzIzMyAzNTQuNSAxNzguMTU2IDQxNy43NzIgMTc2LjAzMiA0MTkuODE0QzE3My40MjUgNDIyLjYyMSAxNzEuMTM5IDQyNS40MTYgMTY4LjUgNDI4LjVDMTY5Ljg2NyA0MjguNjQ3IDE3MC40OSA0MjguNjYxIDE3MS4xMjEgNDI4LjY2MUMxOTMuMzg3IDQyOC42NDkgMjM3LjkxOCA0MjguNTcxIDIzNy45MTggNDI4LjU3MUwyNTEuNzggNDI4LjQ3N0MyNTMuOTE2IDQyOC41MzkgMjU1LjYyOSA0MjguNTM1IDI1Ny43NjggNDI4LjU3MUMyNTkuOTA1IDQyOC41OTQgMjYxLjYxNiA0MjguNTc1IDI2My43MjggNDI4LjYwMUMyNjUuMjAxIDQyOC42MTEgMjY2LjI3MyA0MjguNTc2IDI2Ny43OTIgNDI4LjU4NkMyNzAuOTQgNDI4LjU5MyAyNzMuNjQxIDQyOC41NTYgMjc2LjgwNyA0MjguNTcyQzI4Mi4yNTcgNDI4LjYzNiAyODcuMjQ1IDQyOC41NjIgMjkyLjIyOCA0MjguNjg3QzI5NS4xNDEgNDI4Ljc2MSAyOTYuNDc5IDQyNy43MjkgMjk2LjQ1MSA0MjQuNjU0QzI5Ni4xNDMgMzkxLjU5IDI5NS45MDQgMzU4LjUyNiAyOTUuNzMyIDMyNS4wNjhDMjk1LjgwMSAzMjMuMDc1IDI5NS44MjIgMzI1LjEzNCAyOTUuNzMyIDMyNS4wNjhMMjk2IDI3M0wyOTggMjcwWiIgZmlsbD0iIzc5QTdCRCIvPgo8cGF0aCBkPSJNMjMzIDM1NC41QzIzMi45ODMgMzQzLjg1NyAyMzIuOTQxIDMzNC4zMjYgMjMyLjk1NSAzMjMuNjgzQzIzMi45NzYgMzA4LjM4MyAyMzIuOTQ3IDI5My4wODMgMjMzLjA0MSAyNzcuNzg0TDIzNCAyMTVMMzA4LjUgMTEwLjVMMzY5LjUgMTc4TDIzMyAzNTQuNVoiIGZpbGw9IiNCOUYwRjciLz4KPHBhdGggZD0iTTE2MS4yNzQgMTExQzE2MiAxMTEgMTcxIDEyNCAxNzEgMTI0QzE4OS43NDIgMTUwLjY1IDIxNS4zNDQgMTg4LjI4OSAyMzQgMjE1QzIzMy40OTkgMjE1LjM5NSAyMzMuNDk5IDIxNS42ODQgMjMzIDIxNS41QzIzMC42MSAyMTIuNzM0IDIyOC44NjEgMjA5LjczNyAyMjcgMjA3QzIyMS43MDMgMTk5LjIwOCAyMTUuOTk1IDE5MS4xMTUgMjEwLjU4NiAxODMuNDA0QzIwMC45MTYgMTY5LjYyIDE5MC45OTkgMTU2LjAwOSAxODEuMTg4IDE0Mi4zMjRDMTc4LjAzOSAxMzcuOTMyIDE3NC44OTggMTMzLjUzNCAxNzEuNzAzIDEyOC43NzRDMTY4LjgzOCAxMjQuNDIxIDE2Ni4zNTMgMTIwLjM0NSAxNjMuNSAxMTZDMTYyLjcxOSAxMTQuMTg5IDE2MS42NSAxMTIuNTQ3IDE2MSAxMTFMMTYxLjI3NCAxMTFaIiBmaWxsPSIjQjlGMEY3Ii8+CjxwYXRoIGQ9Ik0zNjkgMTc3LjVDMzczLjc5OCAxNzEuMjM2IDM5OS44NzggMTM3Ljg1NiA0MDUgMTMxLjVDNDAwLjU3MSAxMzguMDU5IDM3NC41ODQgMTcxLjI1MyAzNjkuNSAxNzhDMzY5LjE2OCAxNzguMDk3IDM2OS4wNDkgMTc4LjEwMSAzNjkuMDM3IDE3Ny44MUMzNjkuMDI1IDE3Ny41MiAzNjkgMTc3LjUgMzY5IDE3Ny41WiIgZmlsbD0iIzc5QTdCRCIvPgo8cGF0aCBkPSJNMzY5LjUgMTc4QzM2OS41IDE3OCA0MjAuMjc4IDExMS41OTEgNDIxIDEwOS41QzQxNi45NyAxMDguOTE5IDMxMy45OSAxMTAuNDQ1IDMxMCAxMDkuNUMzMTQuNzU3IDEwOS4xMTUgNDE3LjQzMyAxMDggNDI0IDEwOEM0MjEuNjQ1IDExMS4zOCAzNjkuNSAxNzggMzY5LjUgMTc4WiIgZmlsbD0iIzc5QTdCRCIvPgo8cGF0aCBkPSJNMTcwLjUgNDI4Ljk5NUMxNjguNSA0MjkgMTY4IDQyOSAxNjggNDI4LjVMMjk4IDI3MC41QzI5OCAyNzAuNSAyOTcgNDI0LjUgMjk2LjUgNDI2LjVDMjk1LjQ0MyA0MzAuNzI3IDI4Ny42NDcgNDI5LjA5OSAyNjkuMDc4IDQyOC45OTVDMjM3LjMwOSA0MjguODE3IDIwNS4yNDYgNDI5LjA4NiAxNzAuNSA0MjguOTk1WiIgZmlsbD0iIzIwNjQ4OSIvPgo8cGF0aCBkPSJNMjM0IDIxNkwxNjcuNSAyODRMNTAgMTA5SDE2MC41TDIzNCAyMTZaIiBmaWxsPSIjNTU4NjlDIi8+CjxwYXRoIGQ9Ik00MjMgMTA4LjVMMzY5IDE3Ny41TDMwOC41IDExMC41TDMwOS41IDEwOUw0MjMgMTA4LjVaIiBmaWxsPSIjNUNDQURGIi8+CjxwYXRoIGQ9Ik00MTAuMSAzMzJWMjkyLjFMMzcwLjA1IDIyMi41SDM5My42TDQyMC45IDI3My42NUg0MjEuMkw0NDguMzUgMjIyLjVINDcyLjA1TDQzMiAyOTIuMVYzMzJINDEwLjFaTTQ3OC4wODYgMzMzLjVDNDcwLjM4NiAzMzMuNSA0NjQuMjg2IDMzMS4zNSA0NTkuNzg2IDMyNy4wNUM0NTUuMzg2IDMyMi43NSA0NTMuMTg2IDMxNyA0NTMuMTg2IDMwOS44QzQ1My4xODYgMzAwLjggNDU2LjY4NiAyOTMuODUgNDYzLjY4NiAyODguOTVDNDcwLjc4NiAyODQuMDUgNDgwLjgzNiAyODEuNiA0OTMuODM2IDI4MS42SDUwNC4xODZDNTA0LjE4NiAyNzYuOCA1MDIuOTM2IDI3My40IDUwMC40MzYgMjcxLjRDNDk3LjkzNiAyNjkuNCA0OTMuNjM2IDI2OC40IDQ4Ny41MzYgMjY4LjRDNDgyLjYzNiAyNjguNCA0NzcuODM2IDI2OSA0NzMuMTM2IDI3MC4yQzQ2OC41MzYgMjcxLjQgNDYzLjgzNiAyNzMuMyA0NTkuMDM2IDI3NS45TDQ1Ni42MzYgMjU5LjdDNDYxLjYzNiAyNTcuMiA0NjYuODM2IDI1NS40IDQ3Mi4yMzYgMjU0LjNDNDc3LjczNiAyNTMuMSA0ODMuNzM2IDI1Mi41IDQ5MC4yMzYgMjUyLjVDNDk4LjUzNiAyNTIuNSA1MDUuMTg2IDI1My41IDUxMC4xODYgMjU1LjVDNTE1LjI4NiAyNTcuNSA1MTguOTg2IDI2MC43NSA1MjEuMjg2IDI2NS4yNUM1MjMuNTg2IDI2OS42NSA1MjQuNzM2IDI3NS41IDUyNC43MzYgMjgyLjhWMzMySDUwNS4wODZMNTA0LjkzNiAzMjNINTA0LjYzNkM1MDEuODM2IDMyNi4yIDQ5Ny45ODYgMzI4Ljc1IDQ5My4wODYgMzMwLjY1QzQ4OC4xODYgMzMyLjU1IDQ4My4xODYgMzMzLjUgNDc4LjA4NiAzMzMuNVpNNDg1LjU4NiAzMTcuOUM0ODkuMDg2IDMxNy45IDQ5Mi4yMzYgMzE3LjMgNDk1LjAzNiAzMTYuMUM0OTcuODM2IDMxNC45IDUwMC4wMzYgMzEzLjI1IDUwMS42MzYgMzExLjE1QzUwMy4zMzYgMzA4Ljk1IDUwNC4xODYgMzA2LjU1IDUwNC4xODYgMzAzLjk1VjI5NS4xSDQ5Ni44MzZDNDg4LjczNiAyOTUuMSA0ODIuNjg2IDI5Ni4xNSA0NzguNjg2IDI5OC4yNUM0NzQuNjg2IDMwMC4yNSA0NzIuNjg2IDMwMy40IDQ3Mi42ODYgMzA3LjdDNDcyLjY4NiAzMTAuOSA0NzMuNzg2IDMxMy40IDQ3NS45ODYgMzE1LjJDNDc4LjI4NiAzMTcgNDgxLjQ4NiAzMTcuOSA0ODUuNTg2IDMxNy45Wk01NTIuMTYxIDMzMkw1MjYuMzYxIDI1NEg1NDguMjYxTDU2Ni41NjEgMzE4LjJINTY2Ljg2MUw1ODUuMDExIDI1NEg2MDYuOTExTDU4MS4xMTEgMzMySDU1Mi4xNjFaTTYxNS41NzggMzMyVjI1NS41SDYzNi41NzhWMzMySDYxNS41NzhaTTYyNi4wNzggMjQ0Ljg1QzYyMi4xNzggMjQ0Ljg1IDYxOS4wNzggMjQzLjggNjE2Ljc3OCAyNDEuN0M2MTQuNDc4IDIzOS41IDYxMy4zMjggMjM2LjUgNjEzLjMyOCAyMzIuN0M2MTMuMzI4IDIyOC45IDYxNC40NzggMjI1Ljk1IDYxNi43NzggMjIzLjg1QzYxOS4wNzggMjIxLjY1IDYyMi4xNzggMjIwLjU1IDYyNi4wNzggMjIwLjU1QzYyOS45NzggMjIwLjU1IDYzMy4wNzggMjIxLjY1IDYzNS4zNzggMjIzLjg1QzYzNy42NzggMjI1Ljk1IDYzOC44MjggMjI4LjkgNjM4LjgyOCAyMzIuN0M2MzguODI4IDIzNi41IDYzNy42NzggMjM5LjUgNjM1LjM3OCAyNDEuN0M2MzMuMDc4IDI0My44IDYyOS45NzggMjQ0Ljg1IDYyNi4wNzggMjQ0Ljg1Wk02NTQuNjE4IDMzMlYyNTRINjc0LjQxOEw2NzQuNTY4IDI2OC41NUg2NzUuMDE4QzY3Ny42MTggMjY1LjA1IDY4MC42NjggMjYyLjE1IDY4NC4xNjggMjU5Ljg1QzY4Ny43NjggMjU3LjQ1IDY5MS42NjggMjU1LjY1IDY5NS44NjggMjU0LjQ1QzcwMC4xNjggMjUzLjE1IDcwNC41NjggMjUyLjUgNzA5LjA2OCAyNTIuNVYyNzAuMDVDNzAyLjg2OCAyNzAuMDUgNjk3LjIxOCAyNzEuMiA2OTIuMTE4IDI3My41QzY4Ny4wMTggMjc1LjggNjgyLjk2OCAyNzguOTUgNjc5Ljk2OCAyODIuOTVDNjc2Ljk2OCAyODYuODUgNjc1LjQ2OCAyOTEuMiA2NzUuNDY4IDI5NlYzMzJINjU0LjYxOFpNNzE3LjQ5MyAzMzJWMjIyLjVINzM4Ljk0M1YzMTMuNTVINzk1Ljk0M1YzMzJINzE3LjQ5M1pNODIxLjkxNCAzMzMuNUM4MTQuMjE0IDMzMy41IDgwOC4xMTQgMzMxLjM1IDgwMy42MTQgMzI3LjA1Qzc5OS4yMTQgMzIyLjc1IDc5Ny4wMTQgMzE3IDc5Ny4wMTQgMzA5LjhDNzk3LjAxNCAzMDAuOCA4MDAuNTE0IDI5My44NSA4MDcuNTE0IDI4OC45NUM4MTQuNjE0IDI4NC4wNSA4MjQuNjY0IDI4MS42IDgzNy42NjQgMjgxLjZIODQ4LjAxNEM4NDguMDE0IDI3Ni44IDg0Ni43NjQgMjczLjQgODQ0LjI2NCAyNzEuNEM4NDEuNzY0IDI2OS40IDgzNy40NjQgMjY4LjQgODMxLjM2NCAyNjguNEM4MjYuNDY0IDI2OC40IDgyMS42NjQgMjY5IDgxNi45NjQgMjcwLjJDODEyLjM2NCAyNzEuNCA4MDcuNjY0IDI3My4zIDgwMi44NjQgMjc1LjlMODAwLjQ2NCAyNTkuN0M4MDUuNDY0IDI1Ny4yIDgxMC42NjQgMjU1LjQgODE2LjA2NCAyNTQuM0M4MjEuNTY0IDI1My4xIDgyNy41NjQgMjUyLjUgODM0LjA2NCAyNTIuNUM4NDIuMzY0IDI1Mi41IDg0OS4wMTQgMjUzLjUgODU0LjAxNCAyNTUuNUM4NTkuMTE0IDI1Ny41IDg2Mi44MTQgMjYwLjc1IDg2NS4xMTQgMjY1LjI1Qzg2Ny40MTQgMjY5LjY1IDg2OC41NjQgMjc1LjUgODY4LjU2NCAyODIuOFYzMzJIODQ4LjkxNEw4NDguNzY0IDMyM0g4NDguNDY0Qzg0NS42NjQgMzI2LjIgODQxLjgxNCAzMjguNzUgODM2LjkxNCAzMzAuNjVDODMyLjAxNCAzMzIuNTUgODI3LjAxNCAzMzMuNSA4MjEuOTE0IDMzMy41Wk04MjkuNDE0IDMxNy45QzgzMi45MTQgMzE3LjkgODM2LjA2NCAzMTcuMyA4MzguODY0IDMxNi4xQzg0MS42NjQgMzE0LjkgODQzLjg2NCAzMTMuMjUgODQ1LjQ2NCAzMTEuMTVDODQ3LjE2NCAzMDguOTUgODQ4LjAxNCAzMDYuNTUgODQ4LjAxNCAzMDMuOTVWMjk1LjFIODQwLjY2NEM4MzIuNTY0IDI5NS4xIDgyNi41MTQgMjk2LjE1IDgyMi41MTQgMjk4LjI1QzgxOC41MTQgMzAwLjI1IDgxNi41MTQgMzAzLjQgODE2LjUxNCAzMDcuN0M4MTYuNTE0IDMxMC45IDgxNy42MTQgMzEzLjQgODE5LjgxNCAzMTUuMkM4MjIuMTE0IDMxNyA4MjUuMzE0IDMxNy45IDgyOS40MTQgMzE3LjlaTTkyNi42OTYgMzMzLjVDOTIxLjU5NiAzMzMuNSA5MTYuODk2IDMzMi42IDkxMi41OTYgMzMwLjhDOTA4LjI5NiAzMjkgOTA0LjU0NiAzMjYuMzUgOTAxLjM0NiAzMjIuODVIOTAxLjA0Nkw5MDAuODk2IDMzMkg4ODEuMjQ2VjIyMi41SDkwMS45NDZWMjYzLjE1SDkwMi4yNDZDOTA1LjI0NiAyNTkuNTUgOTA4Ljc5NiAyNTYuOSA5MTIuODk2IDI1NS4yQzkxNy4wOTYgMjUzLjQgOTIxLjY5NiAyNTIuNSA5MjYuNjk2IDI1Mi41QzkzNi45OTYgMjUyLjUgOTQ0Ljk5NiAyNTYuMDUgOTUwLjY5NiAyNjMuMTVDOTU2LjM5NiAyNzAuMjUgOTU5LjI0NiAyODAuMiA5NTkuMjQ2IDI5M0M5NTkuMjQ2IDMwNS44IDk1Ni4zOTYgMzE1Ljc1IDk1MC42OTYgMzIyLjg1Qzk0NC45OTYgMzI5Ljk1IDkzNi45OTYgMzMzLjUgOTI2LjY5NiAzMzMuNVpNOTIwLjU0NiAzMTdDOTI2LjU0NiAzMTcgOTMxLjE0NiAzMTQuOTUgOTM0LjM0NiAzMTAuODVDOTM3LjU0NiAzMDYuNjUgOTM5LjE0NiAzMDAuNyA5MzkuMTQ2IDI5M0M5MzkuMTQ2IDI4NS4zIDkzNy41NDYgMjc5LjQgOTM0LjM0NiAyNzUuM0M5MzEuMTQ2IDI3MS4xIDkyNi41NDYgMjY5IDkyMC41NDYgMjY5QzkxNy4wNDYgMjY5IDkxMy44NDYgMjY5Ljc1IDkxMC45NDYgMjcxLjI1QzkwOC4xNDYgMjcyLjc1IDkwNS45NDYgMjc0LjggOTA0LjM0NiAyNzcuNEM5MDIuNzQ2IDI3OS45IDkwMS45NDYgMjgyLjggOTAxLjk0NiAyODYuMVYyOTkuOUM5MDEuOTQ2IDMwMy4yIDkwMi43NDYgMzA2LjE1IDkwNC4zNDYgMzA4Ljc1QzkwNS45NDYgMzExLjI1IDkwOC4xNDYgMzEzLjI1IDkxMC45NDYgMzE0Ljc1QzkxMy44NDYgMzE2LjI1IDkxNy4wNDYgMzE3IDkyMC41NDYgMzE3WiIgZmlsbD0iIzIwNjQ4OSIvPgo8L3N2Zz4K"
+    alt="YavirLab Logo"
+    class="logo"
+    width="400"
+    height="200"
+  />
+</div>
+
+
         <!-- Форма налаштування адміністратора -->
-        <div id="adminSetupForm">
-            <h1>⚙️ Налаштування адміністратора</h1>
-            <p>База даних порожня. Створіть обліковий запис адміністратора:</p>
-            <div class="form-group">
-                <label for="adminPassword">Пароль адміністратора:</label>
-                <input type="password" id="adminPassword" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="adminXORKey">Головний XOR ключ:</label>
-                <input type="text" id="adminXORKey" autocomplete="off">
-            </div>
-            <button onclick="registerAdmin()">Створити адміністратора</button>
-            <div class="security-info">
-                <strong>Важливо:</strong><br>
-                • Пароль: мінімум 8 символів<br>
-                • XOR ключ: мінімум 16 символів<br>
-                • Збережіть ці дані в надійному місці!
-            </div>
-        </div>
-        
-        <!-- Захищений вміст -->
-        <div id="secureContent">
-            <h1>✅ Успішний вхід!</h1>
-            <p class="success-message">Ласкаво просимо, <span id="welcomeUser"></span>!</p>
-            <p>Роль: <span class="role-badge" id="userRole"></span></p>
-            
-            <!-- Меню адміністратора -->
-            <div id="adminMenu" class="admin-menu">
-                <h3>🛠️ Панель адміністратора</h3>
-                <button class="menu-button" onclick="showCreateUserForm()">Створити користувача</button>
-                <button class="menu-button" onclick="showDeleteUserForm()">Видалити користувача</button>
-                <button class="menu-button" onclick="showUsersListForm()">Список користувачів</button>
-                <button class="menu-button" onclick="showMyXORKeyForm()">Мій XORKey</button>
-            </div>
-            
-            <div class="security-info">
-                <strong>Рівень безпеки:</strong><br>
-                • SHA-256 хешування<br>
-                • XOR шифрування даних<br>
-                • Система ролей користувачів<br>
-                • MDB база даних
-            </div>
-            
-            <button onclick="showChangePasswordForm()" class="secondary-btn">Змінити пароль</button>
-            <button onclick="logout()" class="secondary-btn">Вийти з системи</button>
-        </div>
-        
+<div id="adminSetupForm" class="containerForm">
+  <h1>⚙️ Налаштування адміністратора</h1>
+  <p>База даних порожня. Створіть обліковий запис адміністратора:</p>
+  <div class="form-group">
+    <label for="adminPassword">Пароль адміністратора:</label>
+    <input type="password" id="adminPassword" autocomplete="off" />
+  </div>
+  <div class="form-group">
+    <label for="adminXORKey">Головний XOR ключ:</label>
+    <input type="text" id="adminXORKey" autocomplete="off" />
+  </div>
+  <button onclick="registerAdmin()">Створити адміністратора</button>
+  <div class="security-info">
+    <strong>Важливо:</strong><br />
+    • Пароль: мінімум 8 символів<br />
+    • XOR ключ: мінімум 16 символів<br />
+    • Збережіть ці дані в надійному місці!
+  </div>
+</div>
+
+
+        <!-- Форма входу -->
+<div id="loginForm" class="containerForm">
+  <h1>🔐 Вхід в систему</h1>
+  <div class="form-group">
+    <label for="username">Ім'я користувача:</label>
+    <input type="text" id="username" autocomplete="off" value="Gogi" />
+  </div>
+  <div class="form-group">
+    <label for="password">Пароль:</label>
+    <input type="password" id="password" autocomplete="off" value="Qwerty1!" />
+  </div>
+  <button onclick="loginUser()">Увійти</button>
+  <div class="info-note">SHA-256 хешування з XOR шифруванням</div>
+</div>
+
+<!-- Захищений вміст -->
+<div id="secureContent" class="containerForm">
+  <p>Роль: <span class="role-badge" id="userRole"></span></p>
+
+  <!-- Меню адміністратора -->
+  <div id="adminMenu" class="menu">
+    <h3>🛠️ Панель адміністратора <span id="welcomeUser"></span></h3>
+    <button class="menu-button" onclick="showCreateUserForm()">
+      Створити користувача
+    </button>
+    <button class="menu-button" onclick="showDeleteUserForm()">
+      Видалити користувача
+    </button>
+    <button class="menu-button" onclick="showUsersListForm()">
+      Список користувачів
+    </button>
+    <button class="menu-button" onclick="showMyXORKeyForm()">Мій XORKey</button>
+  </div>
+
+  <!-- Меню користувача -->
+  <div id="workspaceMenu" class="menu">
+    <h3>Панель користувача <span id="welcomeUser"></span></h3>
+    <button
+      id="workJournalLink"
+      class="menu-button"
+      onclick="showWorkJournal()"
+    >
+      <!-- showWorkJournal() -->
+      Робочий журнал
+    </button>
+    <button class="menu-button" onclick="">
+      Журнал вологості<br />Готова продукція
+    </button>
+    <button class="menu-button" onclick="">
+      Журнал оперативно-<br />якісного контролю
+    </button>
+    <button class="menu-button" onclick="">Зведений журнал</button>
+  </div>
+
+  <div class="security-info">
+    <strong>Рівень безпеки:</strong><br />
+    • SHA-256 хешування<br />
+    • XOR шифрування даних<br />
+    • Система ролей користувачів<br />
+    • TSV база даних
+  </div>
+
+  <button onclick="showChangePasswordForm()" class="secondary-btn">
+    Змінити пароль
+  </button>
+  <button onclick="logout()" class="secondary-btn">Вийти з системи</button>
+</div>
+
+<!-- Форма зміни паролю -->
+<div id="changePasswordForm" class="containerForm">
+  <h1>🔑 Зміна паролю</h1>
+  <div class="form-group">
+    <label for="currentPassword">Поточний пароль:</label>
+    <input type="password" id="currentPassword" autocomplete="off" />
+  </div>
+  <div class="form-group">
+    <label for="newPassword">Новий пароль:</label>
+    <input type="password" id="newPassword" autocomplete="off" />
+  </div>
+  <div class="form-group">
+    <label for="confirmPassword">Підтвердіть новий пароль:</label>
+    <input type="password" id="confirmPassword" autocomplete="off" />
+  </div>
+  <button onclick="changePassword()">Змінити пароль</button>
+  <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+
+  <div class="security-info">
+    <strong>Вимоги до паролю:</strong><br />
+    • Мінімум 8 символів<br />
+    • Великі та малі літери<br />
+    • Цифри та спеціальні символи
+  </div>
+</div>
+
+
         <!-- Форма створення користувача -->
-        <div id="createUserForm">
-            <h1>👤 Створити користувача</h1>
-            <div class="form-group">
-                <label for="newUserName">Ім'я користувача:</label>
-                <input type="text" id="newUserName" autocomplete="off">
+<div id="createUserForm" class="containerForm">
+  <h1>👤 Створити користувача</h1>
+  <div class="form-group">
+    <label for="newUserName">Ім'я користувача:</label>
+    <input type="text" id="newUserName" autocomplete="off" />
+  </div>
+  <div class="form-group">
+    <label for="newUserPassword">Пароль:</label>
+    <input type="password" id="newUserPassword" autocomplete="off" />
+  </div>
+  <div class="form-group">
+    <label for="newUserRole">Роль:</label>
+    <select id="newUserRole">
+      <option value="Guest">Guest (обмежений доступ)</option>
+      <option value="User">User (повний доступ)</option>
+      <option value="Moderator">Moderator (розширений доступ)</option>
+    </select>
+  </div>
+  <button onclick="createNewUser()">Створити користувача</button>
+  <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+
+  <div class="security-info">
+    <strong>XOR ключі:</strong><br />
+    • Guest: перші 8 символів головного ключа<br />
+    • User/Moderator: повний головний ключ
+  </div>
+</div>
+
+<!-- Форма видалення користувача -->
+<div id="deleteUserForm" class="containerForm">
+  <h1>🗑️ Видалити користувача</h1>
+  <div class="form-group">
+    <label for="deleteUserID">ID користувача для видалення:</label>
+    <input type="number" id="deleteUserID" min="2" autocomplete="off" />
+  </div>
+  <button onclick="deleteUserById()" class="danger-button">
+    Видалити користувача
+  </button>
+  <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+
+  <div class="security-info">
+    <strong>Увага:</strong><br />
+    • Неможливо видалити адміністратора (ID=1)<br />
+    • Дія незворотна!
+  </div>
+</div>
+
+<!-- Форма списку користувачів -->
+<div id="usersListForm" class="containerForm">
+  <h1>📋 Список користувачів</h1>
+  <div id="usersList">
+    <p>Завантаження...</p>
+  </div>
+  <button onclick="showUsersList()">Оновити список</button>
+  <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+</div>
+
+<!-- Форма перегляду XOR ключа адміністратора -->
+<div id="myXORKeyForm" class="containerForm">
+  <h1>🔑 Мій XORKey</h1>
+
+  <div id="xorKeyGet" style="display: block">
+    <div class="form-group">
+      <label for="decryptPassword">Введіть ваш пароль для розшифрування:</label>
+      <input type="password" id="decryptPassword" autocomplete="off" />
+    </div>
+    <button onclick="decryptAndShowXORKey()">Показати XORKey</button>
+  </div>
+
+  <div id="xorKeyDisplay" style="display: none; margin-top: 20px">
+    <div class="security-info">
+      <strong>Ваш головний XORKey:</strong><br />
+      <textarea
+        id="xorKeyValue"
+        readonly
+        style="
+          width: 100%;
+          height: 80px;
+          margin-top: 10px;
+          font-family: monospace;
+          font-size: 12px;
+        "
+      ></textarea>
+    </div>
+    <button onclick="copyXORKeyToClipboard()" style="margin-top: 10px">
+      Копіювати в буфер
+    </button>
+  </div>
+
+  <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
+
+  <div class="security-info">
+    <strong>Безпека:</strong><br />
+    • XORKey зберігається в зашифрованому вигляді<br />
+    • Для розшифрування потрібен ваш пароль<br />
+    • Не передавайте цей ключ сторонім особам
+  </div>
+</div>
+
+
+        <div id="workspace" class="workspaceContainer">
+  <!-- {{РОБОЧИЙ_ЖУРНАЛ // work-journal.html}} -->
+  <!-- work-journal.html - {{WORK_JOURNAL_CONTENT}} -->
+<div class="workspace-container">
+  <div class="journal-header">
+    <button
+      class="back-button back-button--journal"
+      onclick="returnToMainMenu()"
+      tabindex="1"
+    >
+      &laquo;&laquo;
+    </button>
+    <h1 class="journal-title">Робочий журнал</h1>
+    <div class="journal-controls">
+      <div class="control-group">
+        <label>Відбір:</label>
+        <select class="control-input" id="sampleSelection" tabindex="2">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Зміна:</label>
+        <select class="control-input" id="shiftNumber" tabindex="3">
+          <option value="1">1</option>
+          <option value="2">2</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label>Дата:</label>
+        <input
+          type="date"
+          class="control-input"
+          id="journalDate"
+          tabindex="4"
+        />
+      </div>
+      <div class="control-group">
+        <label>Бригада:</label>
+        <input
+          type="text"
+          class="control-input"
+          id="brigadeInfo"
+          value="Ушакова"
+          tabindex="5"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="journal-table-container">
+    <table class="journal-table" id="qualityTable">
+      <thead>
+        <tr>
+          <th rowspan="2" class="col-table col-product">
+            Назва про&shy;дукції
+          </th>
+          <th rowspan="2" class="col-table col-bunker">Бункер/ Силос/ Яма</th>
+          <th colspan="4">Воло&shy;гість</th>
+          <th rowspan="2" class="col-table col-whiteness">Білість, од.</th>
+          <th colspan="2">Сира клейко&shy;вина</th>
+          <th rowspan="2" class="col-table col-residue">
+            Зали&shy;шок на ситі *, %
+          </th>
+          <th rowspan="2" class="col-table col-passage">
+            Прохо&shy;дження через сито **, %
+          </th>
+          <th rowspan="2" class="col-table col-metal">
+            Метало&shy;домішки, мг
+          </th>
+          <th rowspan="2" class="col-table col-color">Колір, запах, смак</th>
+          <th rowspan="2" class="col-table col-crust">Хруст&shy;кість</th>
+          <th rowspan="2" class="col-table col-infection">
+            Зараже&shy;ність шкідни&shy;ками
+          </th>
+        </tr>
+        <tr>
+          <th class="col-table col-sample">№ бюкси</th>
+          <th class="col-table col-mass">Маса бюкси з наважкою 500г, мг</th>
+          <th class="col-table col-moisture">
+            Маса бюкси з наважкою після сушиль&shy;ної шафи, мг
+          </th>
+          <th class="col-table col-avg-moisture">Середня воло&shy;гість, %</th>
+          <th class="col-table col-quantity">Кількість, %</th>
+          <th class="col-table col-bdk">БДК, од.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- I драна -->
+        <tr class="product-group-1 product-row" data-product="drama">
+          <td rowspan="2" class="product-name">
+            <div class="product-name-container">
+              I драна
+              <button
+                class="product-toggle-btn"
+                onclick="toggleProductRow('drama')"
+                tabindex="-1"
+                title="Активувати/деактивувати продукцію"
+              ></button>
             </div>
-            <div class="form-group">
-                <label for="newUserPassword">Пароль:</label>
-                <input type="password" id="newUserPassword" autocomplete="off">
+          </td>
+          <td rowspan="2"></td>
+          <td>
+            <select class="table-select" id="drama_sample1" tabindex="26">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="drama_mass1"
+              tabindex="41"
+              value="1838"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="drama_dried1"
+              tabindex="56"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <span class="table-text number" id="drama_moisture"> </span>
+          </td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+        </tr>
+        <tr class="product-group-1 product-row" data-product="drama">
+          <td>
+            <select class="table-select" id="drama_sample2" tabindex="27">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="drama_mass2"
+              tabindex="42"
+              value="1842"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="drama_dried2"
+              tabindex="57"
+              value=""
+            />
+          </td>
+        </tr>
+
+        <!-- В/С - Вищий Сорт -->
+        <tr class="product-group-2 product-row" data-product="vs">
+          <td rowspan="2" class="product-name">
+            <div class="product-name-container">
+              В/С
+              <button
+                class="product-toggle-btn"
+                onclick="toggleProductRow('vs')"
+                tabindex="-1"
+                title="Активувати/деактивувати продукцію"
+              ></button>
             </div>
-            <div class="form-group">
-                <label for="newUserRole">Роль:</label>
-                <select id="newUserRole">
-                    <option value="Guest">Guest (обмежений доступ)</option>
-                    <option value="User">User (повний доступ)</option>
-                    <option value="Moderator">Moderator (розширений доступ)</option>
-                </select>
+          </td>
+          <td rowspan="2">
+            <select class="table-select" id="vs_bunker" tabindex="6">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </td>
+          <td>
+            <select class="table-select" id="vs_sample1" tabindex="28">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="vs_mass1"
+              tabindex="43"
+              value="1838"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="vs_dried1"
+              tabindex="58"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <span class="table-text number" id="vs_moisture"> </span>
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="vs_whiteness"
+              tabindex="81"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="vs_gluten_quantity"
+              tabindex="86"
+              step="0.1"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="vs_gluten_bdk"
+              tabindex="91"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="vs_residue"
+              tabindex="96"
+              step="0.1"
+              value=""
+            />
+          </td>
+          <td rowspan="2"></td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="vs_metal"
+              tabindex="106"
+              value="сл."
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="vs_color"
+              tabindex="111"
+              value="вл."
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="vs_crunch"
+              tabindex="116"
+              value="н/в"
+            />
+          </td>
+          <td rowspan="2"></td>
+        </tr>
+        <tr class="product-group-2 product-row" data-product="vs">
+          <td>
+            <select class="table-select" id="vs_sample2" tabindex="29">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="vs_mass2"
+              tabindex="44"
+              value="1842"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="vs_dried2"
+              tabindex="59"
+              value=""
+            />
+          </td>
+        </tr>
+
+        <!-- 1/С - Перший Сорт -->
+        <tr class="product-group-3 product-row" data-product="first">
+          <td rowspan="2" class="product-name">
+            <div class="product-name-container">
+              1/С
+              <button
+                class="product-toggle-btn"
+                onclick="toggleProductRow('first')"
+                tabindex="-1"
+                title="Активувати/деактивувати продукцію"
+              ></button>
             </div>
-            <button onclick="createNewUser()">Створити користувача</button>
-            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
-            
-            <div class="security-info">
-                <strong>XOR ключі:</strong><br>
-                • Guest: перші 8 символів головного ключа<br>
-                • User/Moderator: повний головний ключ
+          </td>
+          <td rowspan="2">
+            <select class="table-select" id="first_bunker" tabindex="7">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </td>
+          <td>
+            <select class="table-select" id="first_sample1" tabindex="30">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="first_mass1"
+              tabindex="45"
+              value="1838"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="first_dried1"
+              tabindex="60"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <span class="table-text number" id="first_moisture"> </span>
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="first_whiteness"
+              tabindex="82"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="first_gluten_quantity"
+              tabindex="87"
+              step="0.1"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="first_gluten_bdk"
+              tabindex="92"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="first_residue"
+              tabindex="97"
+              step="0.1"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="first_passage"
+              tabindex="102"
+              step="0.1"
+              value="92.4"
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="first_metal"
+              tabindex="107"
+              value="сл."
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="first_color"
+              tabindex="112"
+              value="вл."
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="first_crunch"
+              tabindex="117"
+              value="н/в"
+            />
+          </td>
+          <td rowspan="2"></td>
+        </tr>
+        <tr class="product-group-3 product-row" data-product="first">
+          <td>
+            <select class="table-select" id="first_sample2" tabindex="31">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="first_mass2"
+              tabindex="46"
+              value="1842"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="first_dried2"
+              tabindex="61"
+              value=""
+            />
+          </td>
+        </tr>
+
+        <!-- Висівки -->
+        <tr class="product-group-2 product-row" data-product="bran">
+          <td rowspan="2" class="product-name">
+            <div class="product-name-container">
+              Висівки
+              <button
+                class="product-toggle-btn"
+                onclick="toggleProductRow('bran')"
+                tabindex="-1"
+                title="Активувати/деактивувати продукцію"
+              ></button>
             </div>
-        </div>
-        
-        <!-- Форма видалення користувача -->
-        <div id="deleteUserForm">
-            <h1>🗑️ Видалити користувача</h1>
-            <div class="form-group">
-                <label for="deleteUserID">ID користувача для видалення:</label>
-                <input type="number" id="deleteUserID" min="2" autocomplete="off">
+          </td>
+          <td rowspan="2">
+            <select class="table-select" id="bran_bunker" tabindex="8">
+              <option value=""></option>
+              <option value="11">11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+            </select>
+          </td>
+          <td>
+            <select class="table-select" id="bran_sample1" tabindex="32">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="bran_mass1"
+              tabindex="47"
+              value="1838"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="bran_dried1"
+              tabindex="62"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <span class="table-text number" id="bran_moisture"> </span>
+          </td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="bran_passage"
+              tabindex="103"
+              step="0.1"
+              value="10.5"
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="bran_metal"
+              tabindex="108"
+              value="сл."
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="bran_color"
+              tabindex="113"
+              value="вл."
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="bran_crunch"
+              tabindex="118"
+              value="н/в"
+            />
+          </td>
+          <td rowspan="2"></td>
+        </tr>
+        <tr class="product-group-2 product-row" data-product="bran">
+          <td>
+            <select class="table-select" id="bran_sample2" tabindex="33">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="bran_mass2"
+              tabindex="48"
+              value="1842"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="bran_dried2"
+              tabindex="63"
+              value=""
+            />
+          </td>
+        </tr>
+
+        <!-- Подача -->
+        <tr class="product-group-3 product-row" data-product="feed">
+          <td rowspan="2" class="product-name">
+            <div class="product-name-container">
+              Подача
+              <button
+                class="product-toggle-btn"
+                onclick="toggleProductRow('feed')"
+                tabindex="-1"
+                title="Активувати/деактивувати продукцію"
+              ></button>
             </div>
-            <button onclick="deleteUserById()" class="danger-button">Видалити користувача</button>
-            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
-            
-            <div class="security-info">
-                <strong>Увага:</strong><br>
-                • Неможливо видалити адміністратора (ID=1)<br>
-                • Дія незворотна!
+          </td>
+          <td rowspan="2">
+            <select class="table-select" id="feed_bunker" tabindex="9">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </td>
+          <td>
+            <select class="table-select" id="feed_sample1" tabindex="34">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="feed_mass1"
+              tabindex="49"
+              value="1816"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="feed_dried1"
+              tabindex="64"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <span class="table-text number" id="feed_moisture"> </span>
+          </td>
+          <td rowspan="2"></td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="feed_gluten_quantity"
+              tabindex="88"
+              step="0.1"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <input
+              type="number"
+              class="table-input number"
+              id="feed_gluten_bdk"
+              tabindex="93"
+              value=""
+            />
+          </td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2">
+            <input
+              type="text"
+              class="table-input text"
+              id="feed_crunch"
+              tabindex="119"
+              value="н/в"
+            />
+          </td>
+        </tr>
+        <tr class="product-group-3 product-row" data-product="feed">
+          <td>
+            <select class="table-select" id="feed_sample2" tabindex="35">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="feed_mass2"
+              tabindex="50"
+              value="1808"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="feed_dried2"
+              tabindex="65"
+              value=""
+            />
+          </td>
+        </tr>
+
+        <!-- I Замочка -->
+        <tr class="product-group-2 product-row" data-product="soak">
+          <td rowspan="2" class="product-name">
+            <div class="product-name-container">
+              I Замочка
+              <button
+                class="product-toggle-btn"
+                onclick="toggleProductRow('soak')"
+                tabindex="-1"
+                title="Активувати/деактивувати продукцію"
+              ></button>
             </div>
-        </div>
-        
-        <!-- Форма списку користувачів -->
-        <div id="usersListForm">
-            <h1>📋 Список користувачів</h1>
-            <div id="usersList">
-                <p>Завантаження...</p>
-            </div>
-            <button onclick="showUsersList()">Оновити список</button>
-            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
-        </div>
-        
-        <!-- Форма перегляду XOR ключа адміністратора -->
-        <div id="myXORKeyForm">
-            <h1>🔑 Мій XORKey</h1>
-            <div class="form-group">
-                <label for="decryptPassword">Введіть ваш пароль для розшифрування:</label>
-                <input type="password" id="decryptPassword" autocomplete="off">
-            </div>
-            <button onclick="decryptAndShowXORKey()">Показати XORKey</button>
-            
-            <div id="xorKeyDisplay" style="display:none; margin-top:20px;">
-                <div class="security-info">
-                    <strong>Ваш головний XORKey:</strong><br>
-                    <textarea id="xorKeyValue" readonly style="width:100%; height:80px; margin-top:10px; font-family:monospace; font-size:12px;"></textarea>
-                </div>
-                <button onclick="copyXORKeyToClipboard()" style="margin-top:10px;">Копіювати в буфер</button>
-            </div>
-            
-            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
-            
-            <div class="security-info">
-                <strong>Безпека:</strong><br>
-                • XORKey зберігається в зашифрованому вигляді<br>
-                • Для розшифрування потрібен ваш пароль<br>
-                • Не передавайте цей ключ сторонім особам
-            </div>
-        </div>     
-        
-        <!-- Форма зміни паролю -->
-        <div id="changePasswordForm">
-            <h1>🔑 Зміна паролю</h1>
-            <div class="form-group">
-                <label for="currentPassword">Поточний пароль:</label>
-                <input type="password" id="currentPassword" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="newPassword">Новий пароль:</label>
-                <input type="password" id="newPassword" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="confirmPassword">Підтвердіть новий пароль:</label>
-                <input type="password" id="confirmPassword" autocomplete="off">
-            </div>
-            <button onclick="changePassword()">Змінити пароль</button>
-            <button onclick="returnToMainMenu()" class="back-button">Повернутися</button>
-            
-            <div class="security-info">
-                <strong>Вимоги до паролю:</strong><br>
-                • Мінімум 8 символів<br>
-                • Великі та малі літери<br>
-                • Цифри та спеціальні символи
-            </div>
-        </div>
+          </td>
+          <td rowspan="2">
+            <select class="table-select" id="soak_bunker" tabindex="10">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="1а">1а</option>
+              <option value="2а">2а</option>
+              <option value="3а">3а</option>
+              <option value="4а">4а</option>
+              <option value="5а">5а</option>
+              <option value="6а">6а</option>
+            </select>
+          </td>
+          <td>
+            <select class="table-select" id="soak_sample1" tabindex="36">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="soak_mass1"
+              tabindex="51"
+              value="1865"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="soak_dried1"
+              tabindex="66"
+              value=""
+            />
+          </td>
+          <td rowspan="2">
+            <span class="table-text number" id="soak_moisture"></span>
+          </td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+          <td rowspan="2"></td>
+        </tr>
+        <tr class="product-group-2 product-row" data-product="soak">
+          <td>
+            <select class="table-select" id="soak_sample2" tabindex="37">
+              <option value=""></option>
+              <option value="1">1</option>
+              <option value="4a">4a</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10a">10a</option>
+              <option value="18a">18a</option>
+              <option value="1a">1a</option>
+              <option value="2a">2a</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+            </select>
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="soak_mass2"
+              tabindex="52"
+              value="1872"
+            />
+          </td>
+          <td>
+            <input
+              type="number"
+              class="table-input number"
+              id="soak_dried2"
+              tabindex="67"
+              value=""
+            />
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="journal-footer">
+    <div class="journal-notes">
+      <strong>* Залишок на ситі №43 для В/С та №35 для 1/С</strong><br />
+      <strong>** Прохід через сито №43 для 1/С та №27 для Висівок</strong>
+    </div>
+    <button
+      class="save-btn"
+      onclick="saveJournalDataWithProductionFlow()"
+      tabindex="120"
+    >
+      Зберегти
+    </button>
+  </div>
+</div>
+
+
+  <!-- {{ЖУРНАЛ_ВОЛОГОСТІ_ГОТОВА_ПРОДУКЦІЯ}} -->
+  <!-- {{ЖУРНАЛ_ОПЕРАТИВНО_ЯКІСНОГО_КОНТРОЛЮ}} -->
+  <!-- {{ЗВЕДЕНИЙ_ЖУРНАЛ}} -->
+</div>
+
     </div>
 </body>
+<script>
+function monitorContainerSize(containerId) {
+    var element = document.getElementById(containerId);
+    
+    if (!element) {
+      console.log("Елемент з ID '" + containerId + "' не знайдено");
+      return;
+    }
+    
+    function logSize() {
+      var width = element.offsetWidth;
+      var height = element.offsetHeight;
+      console.log(containerId + " - Ширина: " + width + "px, Висота: " + height + "px");
+    }
+    
+    // Перший виклик відразу
+    logSize();
+    
+    // Повторювати кожні 8 секунд
+    setInterval(logSize, 20000);
+  }
+
+  // monitorContainerSize("body");
+
+</script>
+<!-- <script language="JavaScript"> verifyIntegrity() </script> // Закоментовано на час розробки -->
 </html>
