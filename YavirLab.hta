@@ -33,9 +33,7 @@ pos = InStr(path, "?")
 If pos > 0 Then path = Left(path, pos - 1)
 path = fso.GetParentFolderName(path)
 dbFolder = path & "\yavirlabdb"
-If Not fso.FolderExists(dbFolder) Then
-fso.CreateFolder dbFolder
-End If
+If Not fso.FolderExists(dbFolder) Then fso.CreateFolder dbFolder
 GetTSVPath = dbFolder
 End Function
 Function GetUsersFilePath()
@@ -55,14 +53,12 @@ Dim file
 Set file = fso.CreateTextFile(usersFile, True, True)
 file.WriteLine "ID" & vbTab & "Username" & vbTab & "PasswordHash" & vbTab & "Salt" & vbTab & "Role" & vbTab & "XORKey" & vbTab & "CreatedDate" & vbTab & "LastLogin"
 file.Close
-Set file = Nothing
 End If
 settingsFile = GetSettingsFilePath()
 If Not fso.FileExists(settingsFile) Then
 Set file = fso.CreateTextFile(settingsFile, True, True)
 file.WriteLine "UserID" & vbTab & "SettingsData" & vbTab & "UpdatedDate"
 file.Close
-Set file = Nothing
 End If
 If Err.Number <> 0 Then
 MsgBox "Помилка створення TSV файлів: " & Err.Description, vbCritical
@@ -79,9 +75,7 @@ usersFile = GetUsersFilePath()
 On Error Resume Next
 If fso.FileExists(usersFile) Then
 Set file = fso.OpenTextFile(usersFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-file.ReadLine
-End If
+If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
@@ -95,7 +89,6 @@ End If
 End If
 Loop
 file.Close
-Set file = Nothing
 End If
 On Error GoTo 0
 End Function
@@ -108,27 +101,20 @@ usersFile = GetUsersFilePath()
 On Error Resume Next
 If fso.FileExists(usersFile) Then
 Set file = fso.OpenTextFile(usersFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-file.ReadLine
-End If
+If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
 fields = Split(line, vbTab)
 If UBound(fields) >= 7 Then
 If Trim(fields(1)) = username Then
-getUserDataString = Trim(fields(0)) & "," & _
-Trim(fields(2)) & "," & _
-Trim(fields(3)) & "," & _
-Trim(fields(4)) & "," & _
-Trim(fields(5))
+getUserDataString = Trim(fields(0)) & "," & Trim(fields(2)) & "," & Trim(fields(3)) & "," & Trim(fields(4)) & "," & Trim(fields(5))
 Exit Do
 End If
 End If
 End If
 Loop
 file.Close
-Set file = Nothing
 End If
 On Error GoTo 0
 End Function
@@ -143,9 +129,7 @@ usersFile = GetUsersFilePath()
 On Error Resume Next
 If fso.FileExists(usersFile) Then
 Set file = fso.OpenTextFile(usersFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-file.ReadLine
-End If
+If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
@@ -153,14 +137,11 @@ fields = Split(line, vbTab)
 If UBound(fields) >= 0 Then
 Dim currentID
 currentID = CInt(Trim(fields(0)))
-If currentID > maxID Then
-maxID = currentID
-End If
+If currentID > maxID Then maxID = currentID
 End If
 End If
 Loop
 file.Close
-Set file = Nothing
 End If
 GetNextUserID = maxID + 1
 On Error GoTo 0
@@ -178,10 +159,7 @@ If xorkey = "" Then xorkey = "-"
 Set file = fso.OpenTextFile(usersFile, 8, True, -1)
 file.WriteLine userID & vbTab & username & vbTab & hash & vbTab & salt & vbTab & role & vbTab & xorkey & vbTab & currentDate & vbTab & "-"
 file.Close
-Set file = Nothing
-If Err.Number <> 0 Then
-MsgBox "Помилка створення користувача: " & Err.Description, vbCritical
-End If
+If Err.Number <> 0 Then MsgBox "Помилка створення користувача: " & Err.Description, vbCritical
 On Error GoTo 0
 End Sub
 Sub updateLastLogin(username)
@@ -195,25 +173,19 @@ On Error Resume Next
 If fso.FileExists(usersFile) Then
 Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
 Set file = fso.OpenTextFile(usersFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-tempFile.WriteLine file.ReadLine
-End If
+If Not file.AtEndOfStream Then tempFile.WriteLine file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
 fields = Split(line, vbTab)
 If UBound(fields) >= 7 Then
-If Trim(fields(1)) = username Then
-fields(7) = currentDate
-End If
+If Trim(fields(1)) = username Then fields(7) = currentDate
 tempFile.WriteLine Join(fields, vbTab)
 End If
 End If
 Loop
 file.Close
 tempFile.Close
-Set file = Nothing
-Set tempFile = Nothing
 fso.DeleteFile usersFile
 fso.MoveFile tempFilePath, usersFile
 End If
@@ -229,9 +201,7 @@ userList = ""
 On Error Resume Next
 If fso.FileExists(usersFile) Then
 Set file = fso.OpenTextFile(usersFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-file.ReadLine
-End If
+If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
@@ -240,18 +210,12 @@ If UBound(fields) >= 7 Then
 If userList <> "" Then userList = userList & "|"
 Dim lastLogin
 lastLogin = Trim(fields(7))
-If lastLogin = "-" Or lastLogin = "" Then
-lastLogin = "Ніколи"
-End If
-userList = userList & Trim(fields(0)) & "," & _
-Trim(fields(1)) & "," & _
-Trim(fields(4)) & "," & _
-lastLogin
+If lastLogin = "-" Or lastLogin = "" Then lastLogin = "Ніколи"
+userList = userList & Trim(fields(0)) & "," & Trim(fields(1)) & "," & Trim(fields(4)) & "," & lastLogin
 End If
 End If
 Loop
 file.Close
-Set file = Nothing
 getAllUsers = userList
 End If
 On Error GoTo 0
@@ -259,7 +223,7 @@ End Function
 Sub deleteUser(userID)
 Dim fso,usersFile,tempFile, file, tempFilePath, line, fields
 If Not CreateTSVFilesIfNotExists() Then Exit Sub
-If userID = 1 Then Exit Sub ' Не можна видалити адміністратора
+If userID = 1 Then Exit Sub
 Set fso = CreateObject("Scripting.FileSystemObject")
 usersFile = GetUsersFilePath()
 tempFilePath = GetTSVPath() & "\users_temp.tsv"
@@ -267,24 +231,18 @@ On Error Resume Next
 If fso.FileExists(usersFile) Then
 Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
 Set file = fso.OpenTextFile(usersFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-tempFile.WriteLine file.ReadLine
-End If
+If Not file.AtEndOfStream Then tempFile.WriteLine file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
 fields = Split(line, vbTab)
 If UBound(fields) >= 0 Then
-If CInt(Trim(fields(0))) <> CInt(userID) Then
-tempFile.WriteLine line
-End If
+If CInt(Trim(fields(0))) <> CInt(userID) Then tempFile.WriteLine line
 End If
 End If
 Loop
 file.Close
 tempFile.Close
-Set file = Nothing
-Set tempFile = Nothing
 fso.DeleteFile usersFile
 fso.MoveFile tempFilePath, usersFile
 End If
@@ -300,9 +258,7 @@ On Error Resume Next
 If fso.FileExists(usersFile) Then
 Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
 Set file = fso.OpenTextFile(usersFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-tempFile.WriteLine file.ReadLine
-End If
+If Not file.AtEndOfStream Then tempFile.WriteLine file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
@@ -311,7 +267,7 @@ If UBound(fields) >= 7 Then
 If Trim(fields(1)) = username Then
 fields(2) = newHash
 fields(3) = newSalt
-fields(5) = newEncryptedXORKey ' XOR ключ (позиція 5)
+fields(5) = newEncryptedXORKey
 End If
 tempFile.WriteLine Join(fields, vbTab)
 End If
@@ -319,14 +275,10 @@ End If
 Loop
 file.Close
 tempFile.Close
-Set file = Nothing
-Set tempFile = Nothing
 fso.DeleteFile usersFile
 fso.MoveFile tempFilePath, usersFile
 End If
-If Err.Number <> 0 Then
-MsgBox "Помилка зміни паролю з XOR: " & Err.Description, vbCritical
-End If
+If Err.Number <> 0 Then MsgBox "Помилка зміни паролю з XOR: " & Err.Description, vbCritical
 On Error GoTo 0
 End Sub
 Function ReadHTAFile()
@@ -342,7 +294,6 @@ If fso.FileExists(path) Then
 Set file = fso.OpenTextFile(path, 1, False, 0)
 content = file.ReadAll
 file.Close
-Set file = Nothing
 content = Replace(content, vbCrLf, vbLf)
 content = Replace(content, vbCr, vbLf)
 ReadHTAFile = content
@@ -355,7 +306,6 @@ If fso.FileExists(path) Then
 Set file = fso.OpenTextFile(path, 1, False, -1)
 content = file.ReadAll
 file.Close
-Set file = Nothing
 content = Replace(content, vbCrLf, vbLf)
 content = Replace(content, vbCr, vbLf)
 ReadHTAFile = content
@@ -363,7 +313,6 @@ Else
 ReadHTAFile = ""
 End If
 End If
-Set fso = Nothing
 On Error GoTo 0
 End Function
 Function TestDatabaseConnection()
@@ -380,24 +329,17 @@ End If
 If fso.FileExists(usersFile) Then
 Dim file,line
 Set file = fso.OpenTextFile(usersFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-file.ReadLine
-End If
+If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
-If line <> "" Then
-userCount = userCount + 1
-End If
+If line <> "" Then userCount = userCount + 1
 Loop
 file.Close
-Set file = Nothing
 TestDatabaseConnection = "TSV база працює. Користувачів: " & userCount
 Else
 TestDatabaseConnection = "TSV файли не знайдено"
 End If
-If Err.Number <> 0 Then
-TestDatabaseConnection = "Помилка роботи з TSV: " & Err.Description
-End If
+If Err.Number <> 0 Then TestDatabaseConnection = "Помилка роботи з TSV: " & Err.Description
 On Error GoTo 0
 End Function
 Function GetUserSettings(userID)
@@ -408,9 +350,7 @@ settingsFile = GetSettingsFilePath()
 On Error Resume Next
 If fso.FileExists(settingsFile) Then
 Set file = fso.OpenTextFile(settingsFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-file.ReadLine
-End If
+If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
@@ -424,7 +364,6 @@ End If
 End If
 Loop
 file.Close
-Set file = Nothing
 End If
 On Error GoTo 0
 End Function
@@ -439,9 +378,7 @@ On Error Resume Next
 If fso.FileExists(settingsFile) Then
 Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
 Set file = fso.OpenTextFile(settingsFile, 1, False, -1)
-If Not file.AtEndOfStream Then
-tempFile.WriteLine file.ReadLine
-End If
+If Not file.AtEndOfStream Then tempFile.WriteLine file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
@@ -456,36 +393,127 @@ End If
 End If
 End If
 Loop
-If Not userFound Then
-tempFile.WriteLine userID & vbTab & settingsData & vbTab & currentDate
-End If
+If Not userFound Then tempFile.WriteLine userID & vbTab & settingsData & vbTab & currentDate
 file.Close
 tempFile.Close
-Set file = Nothing
-Set tempFile = Nothing
 fso.DeleteFile settingsFile
 fso.MoveFile tempFilePath, settingsFile
 End If
-If Err.Number <> 0 Then
-MsgBox "Помилка збереження налаштувань: " & Err.Description, vbCritical
-End If
+If Err.Number <> 0 Then MsgBox "Помилка збереження налаштувань: " & Err.Description, vbCritical
 On Error GoTo 0
 End Sub
+Function GetStructureFilePath()
+GetStructureFilePath = GetTSVPath() & "\ProductionFlowDB\structure.tsv"
+End Function
+Sub UpdateStructureFile(key, relativePath)
+On Error Resume Next
+Dim fso,structureFile
+Set fso = CreateObject("Scripting.FileSystemObject")
+Set structureFile = fso.OpenTextFile(GetStructureFilePath(), 8, True, -1) ' 8=Append, True=Create
+structureFile.WriteLine key & vbTab & relativePath
+structureFile.Close
+On Error GoTo 0
+End Sub
+Function LoadStructureFile()
+On Error Resume Next
+Dim fso,structureFile,dict, line, parts
+Set fso = CreateObject("Scripting.FileSystemObject")
+Set dict = CreateObject("Scripting.Dictionary")
+If fso.FileExists(GetStructureFilePath()) Then
+Set structureFile = fso.OpenTextFile(GetStructureFilePath(), 1, False, -1)
+Do Until structureFile.AtEndOfStream
+line = Trim(structureFile.ReadLine())
+If line <> "" Then
+parts = Split(line, vbTab)
+If UBound(parts) = 1 Then
+If Not dict.Exists(Trim(parts(0))) Then
+dict.Add Trim(parts(0)), Trim(parts(1))
+End If
+End If
+End If
+Loop
+structureFile.Close
+End If
+Set LoadStructureFile = dict
+On Error GoTo 0
+End Function
+Function GetProductionFlowDbPathForDate(theDate)
+On Error Resume Next
+Dim yearPart,monthPart,dbFolder, filePath
+yearPart = Year(theDate)
+monthPart = Month(theDate)
+If monthPart < 10 Then monthPart = "0" & monthPart
+dbFolder = GetTSVPath() & "\ProductionFlowDB"
+filePath = dbFolder & "\" & yearPart & "\" & monthPart & ".tsv"
+GetProductionFlowDbPathForDate = filePath
+On Error GoTo 0
+End Function
+Function CreateProductionFlowFileForDateIfNotExists(theDate)
+On Error Resume Next
+CreateProductionFlowFileForDateIfNotExists = True
+Dim fso,filePath,yearFolderPath, dbFolderPath, structureDict, dateKey, relativePath
+Set fso = CreateObject("Scripting.FileSystemObject")
+filePath = GetProductionFlowDbPathForDate(theDate)
+Dim yearPart,monthPart
+yearPart = Year(theDate)
+monthPart = Right("0" & Month(theDate), 2)
+dateKey = yearPart & "-" & monthPart
+relativePath = yearPart & "\" & monthPart & ".tsv"
+Set structureDict = LoadStructureFile()
+If structureDict.Exists(dateKey) Then Exit Function
+yearFolderPath = fso.GetParentFolderName(filePath)
+dbFolderPath = fso.GetParentFolderName(yearFolderPath)
+If Not fso.FolderExists(dbFolderPath) Then fso.CreateFolder dbFolderPath
+If Not fso.FolderExists(yearFolderPath) Then fso.CreateFolder yearFolderPath
+If Not fso.FileExists(filePath) Then
+Dim file
+Set file = fso.CreateTextFile(filePath, True, True)
+file.WriteLine "Date" & vbTab & "ProductionFlow" & vbTab & "VerifiedProductionFlow_1" & vbTab & "VerifiedProductionFlow_2" & vbTab & "PFUpdatedDate_1" & vbTab & "User_1" & vbTab & "PFUpdatedDate_2" & vbTab & "User_2" & vbTab & "VPFUpdatedDate_1" & vbTab & "Moderator_1" & vbTab & "VPFUpdatedDate_2" & vbTab & "Moderator_2"
+file.Close
+Call UpdateStructureFile(dateKey, relativePath)
+End If
+If Err.Number <> 0 Then
+MsgBox "Помилка створення файлу ProductionFlowDB: " & Err.Description, vbCritical
+CreateProductionFlowFileForDateIfNotExists = False
+End If
+On Error GoTo 0
+End Function
+Function GetAllProductionFlowFiles()
+On Error Resume Next
+Dim structureDict,relativePaths,fullPathsList, dbFolder, relativePath, fullPath, result
+Set fullPathsList = CreateObject("System.Collections.ArrayList")
+dbFolder = GetTSVPath() & "\ProductionFlowDB"
+Set structureDict = LoadStructureFile()
+relativePaths = structureDict.Items()
+If IsArray(relativePaths) Then
+For Each relativePath In relativePaths
+fullPath = dbFolder & "\" & relativePath
+fullPathsList.Add fullPath
+Next
+End If
+If fullPathsList.Count > 0 Then
+result = fullPathsList.ToArray()
+Else
+result = Array() ' Повертаємо порожній масив
+End If
+GetAllProductionFlowFiles = result
+On Error GoTo 0
+End Function
 Function GetProductionFlowData(analysisDate)
 Dim fso,filePath,file, line, fields
 GetProductionFlowData = ""
-If Not CreateProductionFlowFileForDateIfNotExists(analysisDate) Then Exit Function
+Call CreateProductionFlowFileForDateIfNotExists(analysisDate)
 Set fso = CreateObject("Scripting.FileSystemObject")
 filePath = GetProductionFlowDbPathForDate(analysisDate)
 On Error Resume Next
 If fso.FileExists(filePath) Then
-Set file = fso.OpenTextFile(filePath, 1, False, -1) ' 1 = ForReading, -1 = TristateTrue (Unicode)
-If Not file.AtEndOfStream Then file.ReadLine ' Пропускаємо заголовок
+Set file = fso.OpenTextFile(filePath, 1, False, -1)
+If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
 fields = Split(line, vbTab)
-If UBound(fields) >= 6 Then
+If UBound(fields) >= 1 Then
 If Trim(fields(0)) = analysisDate Then
 GetProductionFlowData = Trim(fields(1))
 Exit Do
@@ -494,132 +522,75 @@ End If
 End If
 Loop
 file.Close
-Set file = Nothing
 End If
-Set fso = Nothing
 On Error GoTo 0
 End Function
 Function GetVerifiedProductionFlowData(analysisDate, shift)
-Dim fso,filePath,file, line, fields, userId, moderatorId
-GetVerifiedProductionFlowData = "" ' За замовчуванням
-If Not CreateProductionFlowFileForDateIfNotExists(analysisDate) Then Exit Function
-Set fso = CreateObject("Scripting.FileSystemObject")
+Dim fso,filePath,file, line, fields, userId, moderatorId, verifiedData
+GetVerifiedProductionFlowData = ""
 filePath = GetProductionFlowDbPathForDate(analysisDate)
+Set fso = CreateObject("Scripting.FileSystemObject")
+If Not fso.FileExists(filePath) Then Exit Function
 On Error Resume Next
-If fso.FileExists(filePath) Then
 Set file = fso.OpenTextFile(filePath, 1, False, -1)
 If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
 fields = Split(line, vbTab)
-If UBound(fields) >= 10 Then
+If UBound(fields) >= 11 Then
 If Trim(fields(0)) = analysisDate Then
 If CInt(shift) = 1 Then
-userId = Trim(fields(4)) ' User_1
-moderatorId = Trim(fields(8)) ' Moderator_1
+verifiedData = Trim(fields(2))
+userId = Trim(fields(5))
+moderatorId = Trim(fields(9))
 Else
-userId = Trim(fields(6)) ' User_2
-moderatorId = Trim(fields(10)) ' Moderator_2
+verifiedData = Trim(fields(3))
+userId = Trim(fields(7))
+moderatorId = Trim(fields(11))
 End If
-GetVerifiedProductionFlowData = Trim(fields(2)) & "|||" & userId & "|||" & moderatorId
+GetVerifiedProductionFlowData = verifiedData & "|||" & userId & "|||" & moderatorId
 Exit Do
 End If
 End If
 End If
 Loop
 file.Close
-Set file = Nothing
-End If
-Set fso = Nothing
 On Error GoTo 0
 End Function
-Sub SaveProductionFlowData(analysisDate, encryptedProductionFlow, updatedDate, userID, shift)
-Dim fso,filePath,tempFilePath, file, tempFile, line, fields, recordFound
-If Not CreateProductionFlowFileForDateIfNotExists(analysisDate) Then Exit Sub
-Set fso = CreateObject("Scripting.FileSystemObject")
+Function IsDataVerifiedForDate(analysisDate, shift)
+Dim fso,filePath,file, line, fields, columnIndex
+IsDataVerifiedForDate = False
 filePath = GetProductionFlowDbPathForDate(analysisDate)
-tempFilePath = fso.GetParentFolderName(filePath) & "\prod_temp.tsv"
-recordFound = False
-On Error Resume Next
-If fso.FileExists(filePath) Then
-Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
-Set file = fso.OpenTextFile(filePath, 1, False, -1)
-If Not file.AtEndOfStream Then tempFile.WriteLine file.ReadLine
-Do Until file.AtEndOfStream
-line = Trim(file.ReadLine)
-If line <> "" Then
-fields = Split(line, vbTab)
-If UBound(fields) >= 10 Then
-If Trim(fields(0)) = analysisDate Then
-recordFound = True
-If CInt(shift) = 1 Then
-tempFile.WriteLine analysisDate & vbTab & encryptedProductionFlow & vbTab & Trim(fields(2)) & vbTab & updatedDate & vbTab & userID & vbTab & Trim(fields(5)) & vbTab & Trim(fields(6)) & vbTab & Trim(fields(7)) & vbTab & Trim(fields(8)) & vbTab & Trim(fields(9)) & vbTab & Trim(fields(10))
-Else
-tempFile.WriteLine analysisDate & vbTab & encryptedProductionFlow & vbTab & Trim(fields(2)) & vbTab & Trim(fields(3)) & vbTab & Trim(fields(4)) & vbTab & updatedDate & vbTab & userID & vbTab & Trim(fields(7)) & vbTab & Trim(fields(8)) & vbTab & Trim(fields(9)) & vbTab & Trim(fields(10))
-End If
-Else
-tempFile.WriteLine line
-End If
-End If
-End If
-Loop
-If Not recordFound Then
-If CInt(shift) = 1 Then
-tempFile.WriteLine analysisDate & vbTab & encryptedProductionFlow & vbTab & "" & vbTab & updatedDate & vbTab & userID & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & ""
-Else
-tempFile.WriteLine analysisDate & vbTab & encryptedProductionFlow & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & updatedDate & vbTab & userID & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & ""
-End If
-End If
-file.Close
-tempFile.Close
-fso.DeleteFile filePath, True
-fso.MoveFile tempFilePath, filePath
-End If
-If Err.Number <> 0 Then MsgBox "Помилка збереження ProductionFlow: " & Err.Description, vbCritical
-Set fso = Nothing
-On Error GoTo 0
-End Sub
-Function GetProductionFlowStats()
-Dim fso,allFiles,filePath, file, line, recordCount
-GetProductionFlowStats = ""
-recordCount = 0
 Set fso = CreateObject("Scripting.FileSystemObject")
+If Not fso.FileExists(filePath) Then Exit Function
+If CInt(shift) = 1 Then columnIndex = 8 Else columnIndex = 10 ' VPFUpdatedDate_1 or VPFUpdatedDate_2
 On Error Resume Next
-allFiles = GetAllProductionFlowFiles() ' Отримуємо всі файли
-If IsNull(allFiles) Then
-GetProductionFlowStats = "ProductionFlowDB працює. Записів: 0"
-Exit Function
-End If
-For Each filePath In allFiles
-If fso.FileExists(filePath) Then
 Set file = fso.OpenTextFile(filePath, 1, False, -1)
 If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
-If line <> "" Then recordCount = recordCount + 1
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) >= columnIndex Then
+If Trim(fields(0)) = analysisDate Then
+If Trim(fields(columnIndex)) <> "" Then IsDataVerifiedForDate = True
+Exit Do
+End If
+End If
+End If
 Loop
 file.Close
-Set file = Nothing
-End If
-Next
-If Err.Number <> 0 Then
-GetProductionFlowStats = "Помилка роботи з ProductionFlowDB: " & Err.Description
-Else
-GetProductionFlowStats = "ProductionFlowDB працює. Записів: " & recordCount
-End If
-Set fso = Nothing
 On Error GoTo 0
 End Function
-Sub SaveVerifiedProductionFlowData(analysisDate, encryptedVerifiedData, updatedDate, moderatorID, shift)
+Sub SaveProductionFlowData(analysisDate, encryptedProductionFlow, updatedDate, userID, shift)
 Dim fso,filePath,tempFilePath, file, tempFile, line, fields, recordFound
-If Not CreateProductionFlowFileForDateIfNotExists(analysisDate) Then Exit Sub
+Call CreateProductionFlowFileForDateIfNotExists(analysisDate)
 Set fso = CreateObject("Scripting.FileSystemObject")
 filePath = GetProductionFlowDbPathForDate(analysisDate)
-tempFilePath = fso.GetParentFolderName(filePath) & "\verified_temp.tsv"
+tempFilePath = GetTSVPath() & "\prod_temp.tsv"
 recordFound = False
 On Error Resume Next
-If fso.FileExists(filePath) Then
 Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
 Set file = fso.OpenTextFile(filePath, 1, False, -1)
 If Not file.AtEndOfStream Then tempFile.WriteLine file.ReadLine
@@ -627,55 +598,123 @@ Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
 fields = Split(line, vbTab)
-If UBound(fields) >= 10 Then
+If UBound(fields) < 11 Then
+Dim tempFields(11)
+For i = 0 To UBound(fields) : tempFields(i) = fields(i) : Next
+For i = UBound(fields) + 1 To 11 : tempFields(i) = "" : Next
+fields = tempFields
+End If
 If Trim(fields(0)) = analysisDate Then
 recordFound = True
+fields(1) = encryptedProductionFlow
 If CInt(shift) = 1 Then
-tempFile.WriteLine analysisDate & vbTab & Trim(fields(1)) & vbTab & encryptedVerifiedData & vbTab & Trim(fields(3)) & vbTab & Trim(fields(4)) & vbTab & Trim(fields(5)) & vbTab & Trim(fields(6)) & vbTab & updatedDate & vbTab & moderatorID & vbTab & Trim(fields(9)) & vbTab & Trim(fields(10))
+fields(4) = updatedDate
+fields(5) = userID
 Else
-tempFile.WriteLine analysisDate & vbTab & Trim(fields(1)) & vbTab & encryptedVerifiedData & vbTab & Trim(fields(3)) & vbTab & Trim(fields(4)) & vbTab & Trim(fields(5)) & vbTab & Trim(fields(6)) & vbTab & Trim(fields(7)) & vbTab & Trim(fields(8)) & vbTab & updatedDate & vbTab & moderatorID
+fields(6) = updatedDate
+fields(7) = userID
 End If
+tempFile.WriteLine Join(fields, vbTab)
 Else
 tempFile.WriteLine line
 End If
 End If
-End If
 Loop
 If Not recordFound Then
+Dim newFields(11)
+For i = 0 to 11 : newFields(i) = "" : Next
+newFields(0) = analysisDate
+newFields(1) = encryptedProductionFlow
 If CInt(shift) = 1 Then
-tempFile.WriteLine analysisDate & vbTab & "" & vbTab & encryptedVerifiedData & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & updatedDate & vbTab & moderatorID & vbTab & "" & vbTab & ""
+newFields(4) = updatedDate
+newFields(5) = userID
 Else
-tempFile.WriteLine analysisDate & vbTab & "" & vbTab & encryptedVerifiedData & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & "" & vbTab & updatedDate & vbTab & moderatorID
+newFields(6) = updatedDate
+newFields(7) = userID
 End If
+tempFile.WriteLine Join(newFields, vbTab)
 End If
 file.Close
 tempFile.Close
 fso.DeleteFile filePath, True
 fso.MoveFile tempFilePath, filePath
+If Err.Number <> 0 Then MsgBox "Помилка збереження ProductionFlow: " & Err.Description, vbCritical
+On Error GoTo 0
+End Sub
+Sub SaveVerifiedProductionFlowData(analysisDate, encryptedVerifiedData, updatedDate, moderatorID, shift)
+Dim fso,filePath,tempFilePath, file, tempFile, line, fields, recordFound
+Call CreateProductionFlowFileForDateIfNotExists(analysisDate)
+Set fso = CreateObject("Scripting.FileSystemObject")
+filePath = GetProductionFlowDbPathForDate(analysisDate)
+tempFilePath = GetTSVPath() & "\verified_temp.tsv"
+recordFound = False
+On Error Resume Next
+Set tempFile = fso.CreateTextFile(tempFilePath, True, True)
+Set file = fso.OpenTextFile(filePath, 1, False, -1)
+If Not file.AtEndOfStream Then tempFile.WriteLine file.ReadLine
+Do Until file.AtEndOfStream
+line = Trim(file.ReadLine)
+If line <> "" Then
+fields = Split(line, vbTab)
+If UBound(fields) < 11 Then
+Dim tempFields(11)
+For i = 0 To UBound(fields) : tempFields(i) = fields(i) : Next
+For i = UBound(fields) + 1 To 11 : tempFields(i) = "" : Next
+fields = tempFields
 End If
+If Trim(fields(0)) = analysisDate Then
+recordFound = True
+If CInt(shift) = 1 Then
+fields(2) = encryptedVerifiedData
+fields(8) = updatedDate
+fields(9) = moderatorID
+Else
+fields(3) = encryptedVerifiedData
+fields(10) = updatedDate
+fields(11) = moderatorID
+End If
+tempFile.WriteLine Join(fields, vbTab)
+Else
+tempFile.WriteLine line
+End If
+End If
+Loop
+If Not recordFound Then
+Dim newFields(11)
+For i = 0 to 11 : newFields(i) = "" : Next
+newFields(0) = analysisDate
+If CInt(shift) = 1 Then
+newFields(2) = encryptedVerifiedData
+newFields(8) = updatedDate
+newFields(9) = moderatorID
+Else
+newFields(3) = encryptedVerifiedData
+newFields(10) = updatedDate
+newFields(11) = moderatorID
+End If
+tempFile.WriteLine Join(newFields, vbTab)
+End If
+file.Close
+tempFile.Close
+fso.DeleteFile filePath, True
+fso.MoveFile tempFilePath, filePath
 If Err.Number <> 0 Then MsgBox "Помилка збереження VerifiedProductionFlow: " & Err.Description, vbCritical
-Set fso = Nothing
 On Error GoTo 0
 End Sub
 Function GetDatesWithData(baseColumnName)
-Dim fso,allFiles,filePath, file, line, fields, datesList, dateValue, formattedDate
-Dim colIndex1,colIndex2 ' Індекси для 1-ї та 2-ї зміни
+Dim fso,allFiles,filePath, file, line, fields, datesWithData, dateValue, formattedDate
+Dim colIndex1,colIndex2,separator
+datesWithData = ""
+separator = ","
 Set fso = CreateObject("Scripting.FileSystemObject")
-Set datesList = CreateObject("System.Collections.ArrayList")
 Select Case LCase(baseColumnName)
-Case "pfupdateddate"
-colIndex1 = 3 ' PFUpdatedDate_1
-colIndex2 = 5 ' PFUpdatedDate_2
-Case "vpfupdateddate"
-colIndex1 = 7 ' VPFUpdatedDate_1
-colIndex2 = 9 ' VPFUpdatedDate_2
-Case Else
-GetDatesWithData = ""
-Exit Function
+Case "pfupdateddate" : colIndex1 = 4 : colIndex2 = 6
+Case "vpfupdateddate" : colIndex1 = 8 : colIndex2 = 10
+Case Else : GetDatesWithData = "" : Exit Function
 End Select
-On Error Resume Next
 allFiles = GetAllProductionFlowFiles()
-If Not IsNull(allFiles) Then
+On Error Resume Next
+If IsArray(allFiles) Then
 For Each filePath In allFiles
 If fso.FileExists(filePath) Then
 Set file = fso.OpenTextFile(filePath, 1, False, -1)
@@ -693,23 +732,19 @@ y = CStr(dateParts(0)): m = CStr(dateParts(1)): d = CStr(dateParts(2))
 If Len(m) = 1 Then m = "0" & m
 If Len(d) = 1 Then d = "0" & d
 formattedDate = y & "-" & m & "-" & d
-If Not datesList.Contains(formattedDate) Then datesList.Add formattedDate
+If InStr(separator & datesWithData & separator, separator & formattedDate & separator) = 0 Then
+If datesWithData <> "" Then datesWithData = datesWithData & separator
+datesWithData = datesWithData & formattedDate
+End If
 End If
 End If
 End If
 Loop
 file.Close
-Set file = Nothing
 End If
 Next
 End If
-If Err.Number <> 0 Then
-GetDatesWithData = "Error: " & Err.Description
-Else
-GetDatesWithData = Join(datesList.ToArray(), ",")
-End If
-Set fso = Nothing
-Set datesList = Nothing
+If Err.Number <> 0 Then GetDatesWithData = "Error: " & Err.Description Else GetDatesWithData = datesWithData
 On Error GoTo 0
 End Function
 Function GetAllVerifiedProductionFlowData()
@@ -717,9 +752,9 @@ Dim fso,allFiles,filePath, file, line, fields, allData, rowSeparator
 allData = ""
 rowSeparator = "|||ROW|||"
 Set fso = CreateObject("Scripting.FileSystemObject")
-On Error Resume Next
 allFiles = GetAllProductionFlowFiles()
-If Not IsNull(allFiles) Then
+On Error Resume Next
+If IsArray(allFiles) Then
 For Each filePath In allFiles
 If fso.FileExists(filePath) Then
 Set file = fso.OpenTextFile(filePath, 1, False, -1)
@@ -728,157 +763,51 @@ Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
 If line <> "" Then
 fields = Split(line, vbTab)
-If UBound(fields) >= 6 And Trim(fields(2)) <> "" Then
+If UBound(fields) >= 11 Then
+Dim dateValue
+dateValue = Trim(fields(0))
+If Trim(fields(8)) <> "" And Trim(fields(2)) <> "" Then
 If allData <> "" Then allData = allData & rowSeparator
-allData = allData & Trim(fields(0)) & "|||" & Trim(fields(2)) & "|||" & Trim(fields(5)) & "|||" & Trim(fields(6))
+allData = allData & dateValue & "|||" & Trim(fields(2)) & "|||" & Trim(fields(5)) & "|||" & Trim(fields(9))
+End If
+If Trim(fields(10)) <> "" And Trim(fields(3)) <> "" Then
+If allData <> "" Then allData = allData & rowSeparator
+allData = allData & dateValue & "|||" & Trim(fields(3)) & "|||" & Trim(fields(7)) & "|||" & Trim(fields(11))
+End If
 End If
 End If
 Loop
 file.Close
-Set file = Nothing
 End If
 Next
 End If
 GetAllVerifiedProductionFlowData = allData
-Set fso = Nothing
 On Error GoTo 0
 End Function
-Function GetStructureFilePath()
-GetStructureFilePath = GetTSVPath() & "\ProductionFlowDB\structure.tsv"
-End Function
-Sub UpdateStructureFile(key, filePath)
-On Error Resume Next
-Dim fso,structureFile
+Function GetProductionFlowStats()
+Dim fso,allFiles,filePath, file, line, recordCount
+GetProductionFlowStats = ""
+recordCount = 0
 Set fso = CreateObject("Scripting.FileSystemObject")
-Set structureFile = fso.OpenTextFile(GetStructureFilePath(), 8, True, -1)
-structureFile.WriteLine key & vbTab & filePath
-structureFile.Close
-Set fso = Nothing
-On Error GoTo 0
-End Sub
-Function LoadStructureFile()
+allFiles = GetAllProductionFlowFiles()
 On Error Resume Next
-Dim fso,structureFile,dict, line, parts
-Set fso = CreateObject("Scripting.FileSystemObject")
-Set dict = CreateObject("Scripting.Dictionary")
-If fso.FileExists(GetStructureFilePath()) Then
-Set structureFile = fso.OpenTextFile(GetStructureFilePath(), 1, False, -1) ' 1 = ForReading
-Do Until structureFile.AtEndOfStream
-line = Trim(structureFile.ReadLine())
-If line <> "" Then
-parts = Split(line, vbTab)
-If UBound(parts) = 1 Then
-If Not dict.Exists(Trim(parts(0))) Then
-dict.Add Trim(parts(0)), Trim(parts(1))
-End If
-End If
-End If
-Loop
-structureFile.Close
-End If
-Set LoadStructureFile = dict
-Set fso = Nothing
-On Error GoTo 0
-End Function
-Function GetProductionFlowDbPathForDate(theDate)
-On Error Resume Next
-Dim yearPart,monthPart,dbFolder, filePath, fso
-Set fso = CreateObject("Scripting.FileSystemObject")
-yearPart = Year(theDate)
-monthPart = Month(theDate)
-If monthPart < 10 Then monthPart = "0" & monthPart ' Додаємо ведучий нуль
-dbFolder = GetTSVPath() & "\ProductionFlowDB"
-filePath = dbFolder & "\" & yearPart & "\" & monthPart & ".tsv"
-GetProductionFlowDbPathForDate = filePath
-On Error GoTo 0
-End Function
-Function CreateProductionFlowFileForDateIfNotExists(theDate)
-On Error Resume Next
-CreateProductionFlowFileForDateIfNotExists = True
-Dim fso,filePath,yearFolderPath, dbFolderPath, structureDict, dateKey, relativePath
-Set fso = CreateObject("Scripting.FileSystemObject")
-filePath = GetProductionFlowDbPathForDate(theDate)
-Dim yearPart,monthPart
-yearPart = Year(theDate)
-monthPart = Right("0" & Month(theDate), 2)
-dateKey = yearPart & "-" & monthPart
-relativePath = yearPart & "\" & monthPart & ".tsv" ' Напр., "2025\09.tsv"
-Set structureDict = LoadStructureFile()
-If structureDict.Exists(dateKey) Then
-Set fso = Nothing
-Set structureDict = Nothing
-Exit Function ' Файл вже існує і зареєстрований, нічого не робимо
-End If
-yearFolderPath = fso.GetParentFolderName(filePath)
-dbFolderPath = fso.GetParentFolderName(yearFolderPath)
-If Not fso.FolderExists(dbFolderPath) Then fso.CreateFolder dbFolderPath
-If Not fso.FolderExists(yearFolderPath) Then fso.CreateFolder yearFolderPath
-If Not fso.FileExists(filePath) Then
-Dim file
-Set file = fso.CreateTextFile(filePath, True, True) ' Unicode
-file.WriteLine "Date" & vbTab & "ProductionFlow" & vbTab & "VerifiedProductionFlow" & vbTab & "PFUpdatedDate_1" & vbTab & "User_1" & vbTab & "PFUpdatedDate_2" & vbTab & "User_2" & vbTab & "VPFUpdatedDate_1" & vbTab & "Moderator_1" & vbTab & "VPFUpdatedDate_2" & vbTab & "Moderator_2"
-file.Close
-Set file = Nothing
-Call UpdateStructureFile(dateKey, relativePath)
-End If
-If Err.Number <> 0 Then
-MsgBox "Помилка створення файлу ProductionFlowDB: " & Err.Description, vbCritical
-CreateProductionFlowFileForDateIfNotExists = False
-End If
-Set fso = Nothing
-Set structureDict = Nothing
-On Error GoTo 0
-End Function
-Function GetAllProductionFlowFiles()
-On Error Resume Next
-Dim structureDict,relativePaths,fullPathsList, dbFolder, relativePath, fullPath
-Set fullPathsList = CreateObject("System.Collections.ArrayList")
-dbFolder = GetTSVPath() & "\ProductionFlowDB"
-Set structureDict = LoadStructureFile()
-relativePaths = structureDict.Items() ' Отримуємо масив відносних шляхів
-If Not IsNull(relativePaths) Then
-For Each relativePath In relativePaths
-fullPath = dbFolder & "\" & relativePath
-fullPathsList.Add fullPath
-Next
-End If
-GetAllProductionFlowFiles = fullPathsList.ToArray()
-Set structureDict = Nothing
-Set fullPathsList = Nothing
-On Error GoTo 0
-End Function
-Function IsDataVerifiedForDate(analysisDate, shift)
-Dim fso,filePath,file, line, fields, columnIndex
-IsDataVerifiedForDate = False
-Set fso = CreateObject("Scripting.FileSystemObject")
-filePath = GetProductionFlowDbPathForDate(analysisDate)
-If CInt(shift) = 1 Then
-columnIndex = 7 ' VPFUpdatedDate_1
-Else
-columnIndex = 9 ' VPFUpdatedDate_2
-End If
-On Error Resume Next
+If IsArray(allFiles) Then
+For Each filePath In allFiles
 If fso.FileExists(filePath) Then
 Set file = fso.OpenTextFile(filePath, 1, False, -1)
 If Not file.AtEndOfStream Then file.ReadLine
 Do Until file.AtEndOfStream
 line = Trim(file.ReadLine)
-If line <> "" Then
-fields = Split(line, vbTab)
-If UBound(fields) >= columnIndex Then
-If Trim(fields(0)) = analysisDate Then
-If Trim(fields(columnIndex)) <> "" Then
-IsDataVerifiedForDate = True
-End If
-Exit Do
-End If
-End If
-End If
+If line <> "" Then recordCount = recordCount + 1
 Loop
 file.Close
-Set file = Nothing
 End If
-Set fso = Nothing
+Next
+GetProductionFlowStats = "ProductionFlowDB працює. Записів: " & recordCount
+Else
+GetProductionFlowStats = "ProductionFlowDB (тека) не знайдено або порожня"
+End If
+If Err.Number <> 0 Then GetProductionFlowStats = "Помилка роботи з ProductionFlowDB: " & Err.Description
 On Error GoTo 0
 End Function
 Sub Window_OnLoad
@@ -3704,12 +3633,17 @@ table td.actions {
   <h1>🔐 Вхід в систему</h1>
   <div class="form-group">
     <label for="username">Ім'я користувача:</label>
-    <input type="text" id="username" autocomplete="off" value="" />
+    <input type="text" id="username" autocomplete="off" value="Liza" />
   </div>
   <div class="form-group">
     <label for="password">Пароль:</label>
     <div class="password-wrapper">
-      <input type="password" id="password" autocomplete="off" value="" />
+      <input
+        type="password"
+        id="password"
+        autocomplete="off"
+        value="Qwerty1!"
+      />
       <span
         class="password-toggle-icon"
         onclick="togglePasswordVisibility('password', this)"
