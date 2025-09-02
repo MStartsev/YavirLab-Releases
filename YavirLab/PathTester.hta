@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Network Path Tester</title>
+<meta http-equiv="X-UA-Compatible" content="IE=10">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<HTA:APPLICATION ID="PathTest" APPLICATIONNAME="PathTester" BORDER="thin" BORDERSTYLE="normal" CAPTION="yes" SCROLL="yes" SINGLEINSTANCE="yes" SYSMENU="yes">
+
+<style>
+    body { font-family: Segoe UI, sans-serif; font-size: 14px; margin: 10px; background-color: #f0f0f0; }
+    #log { border: 1px solid #ccc; background-color: #fff; padding: 10px; height: 400px; overflow-y: auto; white-space: pre-wrap; font-family: Consolas, monospace; font-size: 12px; }
+    .ok { color: green; }
+    .error { color: red; }
+    .info { color: blue; }
+    .header { color: #334155; font-weight: bold; margin-top: 10px; border-bottom: 1px solid #ccc; padding-bottom: 4px; }
+    button { padding: 10px 20px; font-size: 14px; }
+</style>
+
+<script language="VBScript">
+    ' === ГОЛОВНИЙ СКРИПТ ТЕСТУВАННЯ ===
+
+    Dim FSO
+    Set FSO = CreateObject("Scripting.FileSystemObject")
+
+    Sub Log(message, style)
+        Dim logDiv, entry
+        Set logDiv = document.getElementById("log")
+        Set entry = document.createElement("div")
+        entry.className = style
+        entry.innerText = CStr(Now()) & ": " & message
+        logDiv.appendChild(entry)
+        logDiv.scrollTop = logDiv.scrollHeight
+    End Sub
+
+    ' --- ВАРІАНТИ ОТРИМАННЯ ШЛЯХУ ---
+
+    Function GetParentPath_V1()
+        On Error Resume Next
+        Dim path
+        path = Replace(document.location, "file:///", "")
+        path = Replace(path, "/", "\")
+        path = Unescape(path)
+        GetParentPath_V1 = FSO.GetParentFolderName(path)
+        If Err.Number <> 0 Then
+            GetParentPath_V1 = "ERROR: " & Err.Description
+        End If
+        On Error GoTo 0
+    End Function
+
+    Function GetParentPath_V2()
+        On Error Resume Next
+        Dim rawPath, path
+        rawPath = CStr(document.location)
+        If InStr(rawPath, "file:////") = 1 Then
+            path = Replace(rawPath, "file:////", "\\")
+        Else
+            path = Replace(rawPath, "file:///", "")
+        End If
+        path = Replace(path, "/", "\")
+        path = Unescape(path)
+        GetParentPath_V2 = FSO.GetParentFolderName(path)
+        If Err.Number <> 0 Then
+            GetParentPath_V2 = "ERROR: " & Err.Description
+        End If
+        On Error GoTo 0
+    End Function
+
+    Function GetParentPath_V3()
+        Dim shell, scriptPath
+        Set shell = CreateObject("WScript.Shell")
+        On Error Resume Next
+        scriptPath = shell.CurrentDirectory
+        If Err.Number <> 0 Then
+            scriptPath = "ERROR: WScript.Shell.CurrentDirectory not available."
+        End If
+        On Error GoTo 0
+        GetParentPath_V3 = scriptPath
+    End Function
+
+    ' --- ПРОЦЕДУРА ТЕСТУВАННЯ ---
+
+    Sub TestPath(parentPath, testName)
+        Log "--- Testing: " & testName & " ---", "header"
+        Log "Parent Path Found: " & parentPath, "info"
+
+        If InStr(parentPath, "ERROR:") > 0 Then
+            Log "Failed to get parent path.", "error"
+            Exit Sub
+        End If
+
+        Dim testFolder, testFile, fileObj, content
+        testFolder = parentPath & "\_TestFolder"
+        testFile = testFolder & "\test.txt"
+
+        ' 1. Створення теки
+        On Error Resume Next
+        FSO.CreateFolder(testFolder)
+        If Err.Number = 0 Then
+            Log "OK: Folder created at " & testFolder, "ok"
+        Else
+            Log "ERROR: Could not create folder. Error: " & Err.Description, "error"
+            Exit Sub
+        End If
+        On Error GoTo 0
+
+        ' 2. Створення та запис у файл
+        On Error Resume Next
+        Set fileObj = FSO.CreateTextFile(testFile, True)
+        fileObj.WriteLine("Test successful for " & testName)
+        fileObj.Close
+        If Err.Number = 0 Then
+            Log "OK: File created and written to " & testFile, "ok"
+        Else
+            Log "ERROR: Could not create/write to file. Error: " & Err.Description, "error"
+            FSO.DeleteFolder testFolder ' Cleanup
+            Exit Sub
+        End If
+        On Error GoTo 0
+
+        ' 3. Читання з файлу
+        On Error Resume Next
+        Set fileObj = FSO.OpenTextFile(testFile, 1)
+        content = fileObj.ReadAll
+        fileObj.Close
+        If Err.Number = 0 Then
+            Log "OK: File read successfully. Content: '" & Trim(content) & "'", "ok"
+        Else
+            Log "ERROR: Could not read from file. Error: " & Err.Description, "error"
+        End If
+        On Error GoTo 0
+        
+        ' 4. Видалення
+        On Error Resume Next
+        FSO.DeleteFolder testFolder, True
+        If Err.Number = 0 Then
+            Log "OK: Cleanup successful (folder and file deleted).", "ok"
+        Else
+            Log "ERROR: Cleanup failed. Error: " & Err.Description, "error"
+        End If
+        On Error GoTo 0
+
+    End Sub
+
+    Sub RunAllTests()
+        document.getElementById("log").innerHTML = ""
+        Log "Starting tests...", "info"
+        Log "Current Location (document.location): " & document.location, "info"
+        
+        ' *** ВИПРАВЛЕНО: Додано ключове слово Call та дужки ***
+        Call TestPath(GetParentPath_V1(), "Variant 1 (Simple Replace)")
+        Call TestPath(GetParentPath_V2(), "Variant 2 (UNC-Aware Replace)")
+        Call TestPath(GetParentPath_V3(), "Variant 3 (WScript.Shell)")
+
+        Log "--- Tests finished ---", "header"
+    End Sub
+
+</script>
+</head>
+<body>
+    <h1>Тестування доступу до мережевого шляху</h1>
+    <p>Додаток автоматично перевірить три варіанти отримання шляху та спробує виконати операції з файлами. Результати будуть показані нижче.</p>
+    <button onclick="VBScript:RunAllTests()">Запустити тести</button>
+    <div id="log"></div>
+</body>
+</html>
